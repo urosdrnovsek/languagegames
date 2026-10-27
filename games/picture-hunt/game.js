@@ -14,6 +14,7 @@
     pic: 'glasses',
     rounds: 1,
     progress: false,
+    score: { id: 'picture-hunt', better: 'low', format: LG.formatTime },
     onStart() {
       stopTimer();
     },
@@ -53,9 +54,11 @@
         timer.classList.toggle('low', left < 30000);
         if (left === 0) timeUp();
       }
-      const interval = setInterval(tick, 250);
+      // Calm mode: no countdown at all.
+      const interval = ctx.calm ? null : setInterval(tick, 250);
       stopTimer = () => clearInterval(interval);
-      tick();
+      if (ctx.calm) timer.hidden = true;
+      else tick();
 
       // ---- Word list. Tapping a word reads it aloud as a hint. ----
       const list = LG.el('div', 'word-list');
@@ -87,6 +90,7 @@
         }
         found.add(w.pic);
         tile.classList.add('found');
+        LG.markCorrect(w.pic);
         tile.disabled = true;
         chips[w.pic].classList.add('found');
         LG.sfx.good();
@@ -98,9 +102,10 @@
         over = true;
         stopTimer();
         const share = left / (SECONDS * 1000);
-        const stars = share > 0.5 ? 3 : share > 0.25 ? 2 : 1;
+        const stars = ctx.calm || share > 0.5 ? 3 : share > 0.25 ? 2 : 1;
         LG.confetti(30);
-        setTimeout(() => ctx.end({ won: true, stars: stars, text: LG.t('huntWon') }), 1200);
+        const used = SECONDS * 1000 - left;
+        setTimeout(() => ctx.end({ won: true, stars: stars, text: LG.t('huntWon'), score: ctx.calm ? undefined : used }), 1200);
       }
 
       function timeUp() {

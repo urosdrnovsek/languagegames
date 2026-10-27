@@ -35,6 +35,7 @@
           if (ctx.isLocked() || b.disabled) return;
           if (opt === w) {
             b.classList.add('right');
+            LG.markCorrect(w.pic);
             choices.querySelectorAll('button').forEach((x) => (x.disabled = true));
             ctx.complete(LG.speak(LG.praise() + ' ' + w.word + '.'));
           } else {

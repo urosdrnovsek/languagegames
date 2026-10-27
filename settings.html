@@ -44,6 +44,13 @@
     .topic .label small { color: var(--ink-soft); }
     .topics-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-weight: 700; }
     .topics-few { margin: 10px 0 0; padding: 8px 12px; border: 3px solid var(--star); border-radius: 12px; background: var(--tile); }
+    #codeOut { margin-top: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+    #codeOut[hidden] { display: none; }
+    #codeOut p { margin: 0; }
+    .note { margin: 10px 0 0; color: var(--ink-soft); }
+    .players { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+    .player-row { display: flex; align-items: center; gap: 10px; padding: 4px 4px 4px 4px; border: 3px solid var(--ink); border-radius: 14px; font-weight: 700; }
+    .player-row span.n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .gate-input { width: 140px; font-size: 2rem; text-align: center; padding: 6px; border: 3px solid var(--ink); border-radius: 14px; font-family: inherit; margin: 0 auto 10px; display: block; }
     .gate-error { color: var(--bad); min-height: 1.4em; }
   </style>
@@ -61,6 +68,16 @@
       <p class="topics-few" id="topicsFew" hidden></p>
     </section>
     <section class="box">
+      <h2 id="challengeHeading"></h2>
+      <p id="challengeHelp"></p>
+      <button type="button" class="small-btn" id="makeCode"></button>
+      <div id="codeOut" hidden>
+        <div class="bingo-code"><b id="codeText"></b></div>
+        <p id="challengeLink"></p>
+        <div class="link-row"><code id="codeLink"></code><button type="button" class="small-btn" id="copyLink"></button></div>
+      </div>
+    </section>
+    <section class="box">
       <h2 id="fontHeading"></h2>
       <p id="fontHelp"></p>
       <div class="fonts" id="fonts" role="radiogroup"></div>
@@ -75,6 +92,11 @@
       <label class="switch"><input type="checkbox" id="spacing"> <span id="spacingLabel"></span></label>
     </section>
     <section class="box">
+      <h2 id="calmHeading"></h2>
+      <label class="switch"><input type="checkbox" id="calm"> <span id="calmLabel"></span></label>
+      <p id="calmHelp" class="note"></p>
+    </section>
+    <section class="box">
       <h2 id="previewHeading"></h2>
       <div class="preview" id="preview"></div>
     </section>
@@ -82,6 +104,11 @@
       <h2 id="linkHeading"></h2>
       <p id="linkHelp"></p>
       <div class="link-row"><code id="query"></code><button type="button" class="small-btn" id="copy"></button></div>
+    </section>
+    <section class="box">
+      <h2 id="playersHeading"></h2>
+      <div class="players" id="players"></div>
+      <button type="button" class="small-btn secondary" id="resetProgress"></button>
     </section>
     <div><button type="button" class="small-btn secondary" id="reset"></button></div>
   </main>
@@ -118,9 +145,12 @@
       document.body.prepend(bar);
       document.title = LG.t('teacherSettings') + ' · ' + LG.t('appTitle');
 
-      ['topicsHeading', 'topicsHelp', 'fontHeading', 'fontHelp', 'colorsHeading', 'colorsHelp', 'spacingHeading', 'spacingLabel', 'previewHeading', 'linkHeading', 'linkHelp']
+      ['challengeHeading', 'challengeHelp', 'challengeLink', 'calmHeading', 'calmLabel', 'calmHelp', 'playersHeading', 'topicsHeading', 'topicsHelp', 'fontHeading', 'fontHelp', 'colorsHeading', 'colorsHelp', 'spacingHeading', 'spacingLabel', 'previewHeading', 'linkHeading', 'linkHelp']
         .forEach((k) => ($(k).textContent = LG.t(k)));
       $('copy').textContent = LG.t('copy');
+      $('copyLink').textContent = LG.t('copy');
+      $('makeCode').textContent = LG.t('makeCode');
+      $('resetProgress').textContent = LG.t('resetProgress');
       $('allTopics').textContent = LG.t('allTopics');
       $('reset').textContent = LG.t('reset');
 
@@ -229,8 +259,49 @@
         if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => {});
       });
 
+      // ---- Class challenge, calm mode, players ----
+      $('makeCode').addEventListener('click', () => {
+        const code = LG.makeCode(current.topics, Math.floor(Math.random() * 16384));
+        const url = new URL('index.html', location.href);
+        url.search = 'lang=' + LG.lang + '&challenge=' + code;
+        $('codeText').textContent = code;
+        $('codeLink').textContent = url.href;
+        $('codeOut').hidden = false;
+      });
+      $('copyLink').addEventListener('click', () => {
+        if (navigator.clipboard) navigator.clipboard.writeText($('codeLink').textContent).then(() => {
+          $('copyLink').textContent = LG.t('copied');
+          setTimeout(() => ($('copyLink').textContent = LG.t('copy')), 1500);
+        }, () => {});
+      });
+      $('calm').checked = current.calm;
+      $('calm').addEventListener('change', (e) => update({ calm: e.target.checked }));
+      function drawPlayers() {
+        const box = $('players');
+        box.innerHTML = '';
+        const list = LG.players();
+        if (!list.length) box.appendChild(LG.el('p', 'note', LG.t('noPlayers')));
+        list.forEach((p) => {
+          const row = LG.el('div', 'player-row', LG.avatarHtml(p) + '<span class="n"></span>');
+          row.querySelector('.n').textContent = p.name || '–';
+          const del = LG.el('button', 'small-btn secondary', LG.t('removePlayer'));
+          del.type = 'button';
+          del.addEventListener('click', () => {
+            LG.removePlayer(p.id);
+            drawPlayers();
+          });
+          row.appendChild(del);
+          box.appendChild(row);
+        });
+      }
+      drawPlayers();
+      $('resetProgress').addEventListener('click', () => {
+        if (confirm(LG.t('resetConfirm'))) LG.resetProgress();
+      });
+
       $('reset').addEventListener('click', () => {
-        update({ font: 'default', colors: [], spacing: false, topics: [] });
+        $('calm').checked = false;
+        update({ font: 'default', colors: [], spacing: false, topics: [], calm: false });
         document.querySelectorAll('.topic input').forEach((i) => (i.checked = false));
         document.querySelector('input[name=font][value=default]').checked = true;
         document.querySelectorAll('.letter-toggle input').forEach((i) => (i.checked = false));

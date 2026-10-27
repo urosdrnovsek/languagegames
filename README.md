@@ -9,10 +9,21 @@ internet connection beyond loading the page, and no build step.
 - **Read and Match** (`games/picture-word/`): read three words and pick the one for the picture. Later rounds use words with the same first letter, so the child has to read the whole word.
 - **Build the Word** (`games/build-word/`): tap letters to spell the pictured word. Words get longer as the game goes on, and from round 5 there is an extra letter that doesn't belong.
 - **Picture Hunt** (`games/picture-hunt/`): read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. Stars depend on the time left.
+- **Memory Pairs** (`games/memory/`): turn over two cards at a time to match each picture with its word.
+- **Odd One Out** (`games/odd-one-out/`): three pictures from one topic and one from a different kind of topic; tap the odd one.
+- **Balloon Pop** (`games/balloon-pop/`): guess the word's letters before five balloons pop (a gentle hangman).
+- **Word Search** (`games/word-search/`): pictured words hidden left-to-right or top-to-bottom in a letter grid; slide over a word or tap its first and last letter.
+- **Beat the Clock** (`games/beat-clock/`): 60 seconds to match as many pictures and words as possible; three in a row adds 3 seconds. With `?daily=1` it is the **Daily Challenge**: the same words for everyone today.
+- **Word Rain** (`games/word-rain/`): pictures fall; tap the one for the word at the bottom before it lands. Three hearts, and it speeds up.
+- **Tug of War** (`games/tug-of-war/`): two players on one tablet, sitting opposite; the first right answer pulls the rope.
+- **Word Bingo** (`games/bingo/`): the teacher's screen calls words, each child's device shows its own 3 × 3 picture card from the same 24-word deck. No network needed.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
+- **Sticker Album** (`album.html`): a word's sticker is won after answering it right 3 times in any game; one page per topic.
+- **Scores** (`scores.html`): personal bests and the device leaderboard for the scored games.
 - **Teacher settings** (`settings.html`, the gear on the game list): word
-  topics (only animals, only fruit…), reading fonts, coloured letters for
-  b, d, p, q and g, and wider letter spacing.
+  topics (only animals, only fruit…), class challenge codes, reading fonts,
+  coloured letters for b, d, p, q and g, wider letter spacing, calm mode,
+  and the players on the device.
   A quick sum keeps children from changing them by accident.
 
 The round-based games have 8 rounds drawn at random from a bank of 413 pictured words in
@@ -22,8 +33,24 @@ sports, feelings), so every play-through is different. German nouns keep their c
 feelings) match the person in the picture: *Ärztin*, *enfermero*, *vesela*.
 
 No ads, no tracking, no accounts, no cookies, and nothing is sent anywhere.
-The only things stored are the chosen language, the sound on/off setting and
-the teacher settings, in the browser's local storage.
+Everything stays in the browser's local storage on that device: the chosen
+language, the sound setting, the teacher settings, and players (an animal
+avatar with an optional nickname), their scores and stickers.
+
+## Players, scores and challenges
+
+- **Players**: children pick "who is playing" with the avatar button; scores
+  and stickers are kept per player on that device. Teachers can remove
+  players or delete all scores in the settings.
+- **Class challenge**: in the settings, a teacher makes a code such as
+  `K7QM-2XAB` for the chosen topics. Children enter it under "Class
+  challenge" on the game list (or open the shared link), and every game then
+  uses the same words in the same order on every device, so scores can be
+  compared fairly. The code holds the topics, a seed and a check digit, so
+  most typos are rejected. Nothing is sent over the network.
+- **Daily challenge**: Beat the Clock with today's date as the seed, all topics.
+- **Calm mode**: hides the race games, Tug of War and the scores, and removes
+  the Picture Hunt timer, for children who find competition stressful.
 
 ## Running it
 
@@ -59,6 +86,9 @@ URL options:
 | `colors` | any of `bdpqg`, e.g. `bdpq` | Gives these letters their own colour. |
 | `spacing` | `1` | Wider spacing between letters. |
 | `topics` | comma-separated topic ids, e.g. `fruit,vegetables` | Only words from these topics. |
+| `challenge` | a class challenge code, e.g. `K7QM-2XAB` | Starts that challenge (the same words on every device). |
+| `calm` | `1` | Calm mode: no countdowns, records or leaderboards. |
+| `daily` | `1` | On Beat the Clock: the Daily Challenge. |
 
 Topic ids: `farm`, `wild`, `water`, `bugs`, `fruit`, `vegetables`, `food`,
 `clothes`, `body`, `family`, `jobs`, `home`, `household`, `toys`, `music`,
@@ -123,9 +153,12 @@ index.html            game list
 words.html            Word Book
 voice-test.html       shows which speech voices a browser has
 settings.html         teacher settings
+album.html            sticker album
+scores.html           personal bests and device leaderboard
 games/*/index.html    one page per game
 games/*/game.js       game rules
-shared/engine.js      language, text, speech, sounds, game shell
+shared/engine.js      language, text, speech, sounds, players, scores,
+                      stickers, challenge codes, timers, game shell
 shared/pictures.js    all pictures (SVG)
 shared/words.js       word bank (all five languages)
 shared/styles.css     shared styles

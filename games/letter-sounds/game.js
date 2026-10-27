@@ -33,6 +33,7 @@
           if (ctx.isLocked() || b.disabled) return;
           if (letter === first) {
             b.classList.add('right');
+            LG.markCorrect(w.pic);
             blank.innerHTML = LG.fmt(first);
             choices.querySelectorAll('button').forEach((x) => (x.disabled = true));
             ctx.complete(LG.speak(LG.praise() + ' ' + LG.t('letterCorrect', { word: w.word, letter: LG.letterName(first) })));

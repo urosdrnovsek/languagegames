@@ -86,6 +86,7 @@
         const wrong = filled.map((t, s) => letters[t] !== target[s]);
         if (!wrong.includes(true)) {
           slots.forEach((b) => b.classList.add('right'));
+          LG.markCorrect(w.pic);
           tiles.forEach((b) => (b.disabled = true));
           ctx.complete(LG.speak(LG.praise() + ' ' + w.word + '.'));
           return;

@@ -7,43 +7,48 @@
   <meta name="description" content="Free reading games for children aged 5 to 7, in English, Slovenian, German, French and Spanish.">
   <link rel="stylesheet" href="shared/styles.css">
   <style>
-    .hub { width: 100%; max-width: 980px; margin: 0 auto; padding: 8px 16px 32px; }
-    .hub-head { text-align: center; margin: 4px 0 22px; }
+    .hub { width: 100%; max-width: 1040px; margin: 0 auto; padding: 8px 16px 32px; }
+    .hub-head { text-align: center; margin: 4px 0 18px; }
     .hub-head h1 { margin: 0; font-size: clamp(2rem, 8vw, 3.2rem); }
     .hub-head p { margin: 4px 0 0; font-size: 1.2rem; color: var(--ink-soft); }
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+    .section { margin: 22px 0 0; }
+    .section h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 1.5rem; }
+    .section h2::after { content: ''; flex: 1; height: 4px; border-radius: 2px; background: rgba(47, 42, 40, 0.15); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; }
     .card {
       display: flex; flex-direction: column; align-items: center; text-align: center;
-      background: var(--card); border: 4px solid var(--ink); border-radius: 28px;
-      box-shadow: 0 7px 0 var(--ink); padding: 20px 18px 22px; text-decoration: none;
-      transition: transform 0.12s;
+      background: var(--card); border: 4px solid var(--ink); border-radius: 24px;
+      box-shadow: 0 6px 0 var(--ink); padding: 14px 12px 16px; text-decoration: none;
+      transition: transform 0.12s; font: inherit; cursor: pointer; color: inherit;
     }
     .card:hover { transform: translateY(-3px); }
-    .card:active { transform: translateY(4px); box-shadow: 0 3px 0 var(--ink); }
-    .card .art { width: 120px; height: 120px; }
+    .card:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ink); }
+    .card .art { width: 84px; height: 84px; }
     .card .art svg { width: 100%; height: 100%; }
-    .card h2 { margin: 10px 0 4px; font-size: 1.6rem; }
-    .card p { margin: 0 0 16px; color: var(--ink-soft); font-size: 1.05rem; flex: 1; }
-    .card .go { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff;
-      border: 3px solid var(--ink); border-radius: 999px; padding: 8px 22px; font-weight: 700; font-size: 1.2rem; }
-    .card .go svg { width: 20px; height: 20px; }
-    .card.book .go { background: var(--good); }
+    .card h3 { margin: 8px 0 4px; font-size: 1.3rem; }
+    .card p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+    .card.race { background: #fff4e6; }
+    .card.together { background: #e7f5ff; }
+    .card.me { background: #ebfbee; }
     .strip { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0 10px; }
     .strip div { width: 54px; height: 54px; }
     .strip svg { width: 100%; height: 100%; }
     .foot { text-align: center; color: var(--ink-soft); margin-top: 8px; }
-    .hub-top { display: flex; justify-content: flex-end; gap: 8px; padding: 12px 16px 0; }
+    .hub-top { display: flex; justify-content: flex-end; align-items: center; gap: 8px; padding: 12px 16px 0; }
+    .hub-top .player-chip { margin: 0 auto 0 0; }
+    @media (max-width: 420px) { .cards { grid-template-columns: 1fr 1fr; gap: 12px; } .card .art { width: 64px; height: 64px; } .card p { display: none; } }
   </style>
 </head>
 <body>
   <div class="hub-top" id="tools"></div>
+  <div id="banner"></div>
   <main class="hub">
     <header class="hub-head">
       <h1 id="title"></h1>
       <p id="subtitle"></p>
     </header>
     <div id="voice"></div>
-    <div class="cards" id="cards"></div>
+    <div id="sections"></div>
     <div class="strip" id="strip" aria-hidden="true"></div>
     <p class="foot" id="foot"></p>
   </main>
@@ -53,6 +58,7 @@
   <script src="shared/engine.js"></script>
   <script>
     (function () {
+      const calm = LG.settings.calm;
       document.title = LG.t('appTitle');
       document.getElementById('title').textContent = LG.t('appTitle');
       document.getElementById('subtitle').textContent = LG.t('hubSubtitle');
@@ -60,31 +66,102 @@
       teacher.href = LG.link('settings.html');
       teacher.setAttribute('aria-label', LG.t('forTeachers'));
       teacher.title = LG.t('forTeachers');
-      document.getElementById('tools').append(teacher, LG.langSwitch(), LG.soundButton());
+      document.getElementById('tools').append(LG.playerChip(), teacher, LG.langSwitch(), LG.soundButton());
       document.getElementById('voice').appendChild(LG.voiceNotice());
+      const showBanner = () => {
+        const b = LG.challengeBanner();
+        document.getElementById('banner').replaceChildren(...(b ? [b] : []));
+      };
+      showBanner();
 
-      const games = [
-        { path: 'games/letter-sounds/index.html', title: 'letterSounds', desc: 'letterSoundsDesc', pic: 'apple' },
-        { path: 'games/picture-word/index.html', title: 'pictureWord', desc: 'pictureWordDesc', pic: 'cat' },
-        { path: 'games/build-word/index.html', title: 'buildWord', desc: 'buildWordDesc', pic: 'sun' },
-        { path: 'games/picture-hunt/index.html', title: 'pictureHunt', desc: 'pictureHuntDesc', pic: 'glasses' },
-        { path: 'words.html', title: 'wordBook', desc: 'wordBookDesc', pic: 'book', cls: 'book' },
+      const g = (id, title, pic, extra) => Object.assign({ path: 'games/' + id + '/index.html', title: title, desc: title + 'Desc', pic: pic }, extra || {});
+      const sections = [
+        ['sectionLearn', '', [
+          g('letter-sounds', 'letterSounds', 'apple'),
+          g('picture-word', 'pictureWord', 'cat'),
+          g('build-word', 'buildWord', 'sun'),
+          { path: 'words.html', title: 'wordBook', desc: 'wordBookDesc', pic: 'book' },
+        ]],
+        ['sectionPlay', '', [
+          g('memory', 'memory', 'cherry'),
+          g('odd-one-out', 'oddOne', 'banana'),
+          g('balloon-pop', 'balloon', 'balloon'),
+          g('word-search', 'wordSearch', 'glasses'),
+          g('picture-hunt', 'pictureHunt', 'map'),
+        ]],
+        ['sectionRace', 'race', [
+          g('beat-clock', 'beatClock', 'clock'),
+          g('word-rain', 'wordRain', 'cloud'),
+          { path: 'games/beat-clock/index.html', query: 'daily=1', title: 'dailyChallenge', desc: 'dailyDesc', pic: 'calendar' },
+        ], calm],
+        ['sectionTogether', 'together', [
+          g('tug-of-war', 'tug', 'rope', { hide: calm }),
+          g('bingo', 'bingo', 'flag'),
+          { action: enterCode, title: 'classChallenge', desc: 'classChallengeDesc', pic: 'trophy' },
+        ]],
+        ['sectionMe', 'me', [
+          { path: 'album.html', title: 'stickers', desc: 'stickersDesc', pic: 'star' },
+          { path: 'scores.html', title: 'scores', desc: 'scoresDesc', pic: 'crown', hide: calm },
+        ]],
       ];
-      const cards = document.getElementById('cards');
-      games.forEach((g) => {
-        const a = LG.el('a', 'card ' + (g.cls || ''));
-        a.href = LG.link(g.path);
-        a.innerHTML = '<div class="art">' + LG.picture(g.pic) + '</div>';
-        a.append(LG.el('h2', '', LG.t(g.title)), LG.el('p', '', LG.t(g.desc)));
-        a.appendChild(LG.el('span', 'go', LG.ICONS.play + '<span>' + LG.t('play') + '</span>'));
-        cards.appendChild(a);
+      const box = document.getElementById('sections');
+      sections.forEach(([heading, cls, items, hidden]) => {
+        if (hidden) return;
+        const sec = LG.el('section', 'section');
+        sec.appendChild(LG.el('h2', '', LG.t(heading)));
+        const cards = sec.appendChild(LG.el('div', 'cards'));
+        items.filter((it) => !it.hide).forEach((it) => {
+          const card = LG.el(it.action ? 'button' : 'a', 'card ' + cls);
+          if (it.action) {
+            card.type = 'button';
+            card.addEventListener('click', it.action);
+          } else {
+            card.href = LG.link(it.path) + (it.query ? '&' + it.query : '');
+          }
+          card.innerHTML = '<div class="art">' + LG.picture(LG.PICTURES[it.pic] ? it.pic : 'star') + '</div>';
+          card.append(LG.el('h3', '', LG.t(it.title)), LG.el('p', '', LG.t(it.desc)));
+          cards.appendChild(card);
+        });
+        box.appendChild(sec);
       });
+
+      // Class challenge: the code from the teacher makes every game use the
+      // same words on every device, until the challenge is ended.
+      function enterCode() {
+        const o = LG.el('div', 'overlay');
+        const panel = LG.el('form', 'panel');
+        const input = LG.el('input', 'name-input code-input');
+        input.placeholder = 'XXXX-XXXX';
+        input.autocomplete = 'off';
+        input.setAttribute('aria-label', LG.t('enterCode'));
+        const error = LG.el('p', 'gate-error');
+        const go = LG.el('button', 'big-btn', '<span>' + LG.t('join') + '</span>');
+        go.type = 'submit';
+        const close = LG.el('button', 'big-btn secondary', '<span>' + LG.t('allGames') + '</span>');
+        close.type = 'button';
+        close.addEventListener('click', () => o.remove());
+        panel.append(LG.el('div', 'panel-pic', LG.picture('trophy') || LG.picture('crown')), LG.el('h2', '', LG.t('classChallenge')), LG.el('p', '', LG.t('classChallengeDesc')), input, error, go);
+        panel.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!LG.startChallenge(input.value)) {
+            error.textContent = LG.t('wrongCode');
+            LG.shake(panel);
+            return;
+          }
+          o.remove();
+          showBanner();
+          LG.toast('<span>' + LG.t('challengeOn') + '</span>');
+        });
+        o.appendChild(panel);
+        document.body.appendChild(o);
+        input.focus();
+      }
 
       const strip = document.getElementById('strip');
       LG.sample(LG.words(LG.lang), 10).forEach((w) => strip.appendChild(LG.el('div', '', LG.picture(w.pic))));
 
       const foot = document.getElementById('foot');
-      foot.textContent = LG.t('wordsCount', { n: LG.words(LG.lang).length }) + ' · ' + LG.t('privacy') + ' · ';
+      foot.textContent = LG.t('wordsCount', { n: LG.words(LG.lang, { allTopics: true }).length }) + ' · ' + LG.t('privacy') + ' · ';
       const teacherLink = LG.el('a', '', LG.t('forTeachers'));
       teacherLink.href = LG.link('settings.html');
       foot.appendChild(teacherLink);
