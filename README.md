@@ -84,3 +84,8 @@ shared/pictures.js    all pictures (SVG)
 shared/words.js       word bank (English + Slovenian)
 shared/styles.css     shared styles
 ```
+
+## License
+
+[MIT](LICENSE): free to use, copy, change and publish, including the
+pictures and word lists, as long as the copyright notice is kept.
