@@ -1,7 +1,8 @@
 # Language Games
 
 Free reading and vocabulary games for children aged 5–7, in **English**,
-**Slovenian**, **German**, **French** and **Spanish**.
+**Slovenian**, **German**, **French**, **Spanish**, **Croatian**, **Slovak**
+and **Romanian**.
 
 **Play online:** https://urosdrnovsek.github.io/languagegames/
 
@@ -14,7 +15,7 @@ phones, computers and interactive whiteboards.
 - **20 games** for learning letters and words, practising, racing the clock
   and playing as a class, including moving games with rockets, frogs, fish,
   moles, trains and bubbles.
-- **414 pictured words in 26 topics**, all in five languages. The teacher can
+- **414 pictured words in 26 topics**, all in eight languages. The teacher can
   limit the games to some topics, for example only fruit and vegetables.
 - **Words read aloud** with the device's own speech voices.
 - **Reading support** for teachers to switch on: four reading fonts
@@ -289,7 +290,7 @@ python3 -m http.server 8000
 ## Browsers
 
 Tested with automated play-throughs in Chromium (Chrome, Edge) and WebKit,
-the engine of Safari on iPad and iPhone: every page in all five languages,
+the engine of Safari on iPad and iPhone: every page in the languages,
 the games played to the end, the reading fonts, class challenges and the
 Live Classroom. Real touch screens, speech voices and cameras still need a
 check on the devices themselves.
@@ -313,7 +314,7 @@ URL options:
 
 | Option | Values | Effect |
 |---|---|---|
-| `lang` | `en`, `sl`, `de`, `fr`, `es` | Language. Without it, the game uses the last choice, then the browser language. |
+| `lang` | `en`, `sl`, `de`, `fr`, `es`, `hr`, `sk`, `ro` | Language. Without it, the game uses the last choice, then the browser language. |
 | `home` | `0` | Hides the button back to the game list (use it when embedding a single game). |
 | `font` | `andika`, `opendyslexic`, `lexend`, `atkinson` | Reading font. |
 | `colors` | any of `bdpqg`, e.g. `bdpq` | Gives these letters their own colour. |
@@ -346,13 +347,18 @@ files there. A device only downloads a font once it's chosen.
 
 Comic Neue was considered but left out: it lacks č, š and ž, so Slovenian
 words would mix two fonts.
+Atkinson Hyperlegible lacks the rare Slovak ĺ (only in *obdĺžnik*), which
+then shows in the device's own font.
 
 ## Speech
 
 Words are read aloud with the browser's built-in speech voices
 (`speechSynthesis`). English, German, French and Spanish voices exist on
-almost every phone, tablet and computer. Slovenian voices are much rarer:
-Windows usually has one, but iPhones, iPads and most Android phones don't.
+almost every phone, tablet and computer. Croatian, Slovak and Romanian voices
+come with iPads and iPhones and are available for Windows and Android, though
+a device may need the voice downloaded in its speech settings. Slovenian
+voices are much rarer: Windows usually has one, but iPhones, iPads and most
+Android phones don't.
 On Linux, browsers need `speech-dispatcher` and a voice engine such as
 `espeak-ng` installed. `voice-test.html` shows which voices a browser has. When there is no voice for the chosen language, the
 games stay silent rather than read Slovenian with an English accent, and a
@@ -362,11 +368,14 @@ note on the start screen says so. Every game can be played without sound.
 
 1. Draw the picture in `shared/pictures.js` (`P.name = '...svg shapes...'`, 100×100 viewBox).
 2. Add a row to the table in `shared/words.js`:
-   `name | word | beseda | Wort | mot | palabra` (en, sl, de, fr, es),
+   `name | word | beseda | Wort | mot | palabra | riječ | slovo | cuvânt`
+   (en, sl, de, fr, es, hr, sk, ro),
    and add the picture name to its topic in `TOPIC_WORDS`.
 
 The First Letter game automatically skips words whose first letter doesn't
-match their first sound (*sheep*, *Schaf*, *chat*, *huevo*…), using the rules
+match their first sound (*sheep*, *Schaf*, *chat*, *huevo*, *ceapă*…), or start
+with a two-letter letter of their alphabet (Slovak *ch*, *dz*, *dž*; Croatian
+*dž*, *lj*, *nj*), using the rules
 in `SKIP_FIRST`. Add exceptions the rules miss to `SKIP_FIRST_WORDS`.
 
 All games and the Word Book pick up new entries automatically. Build the Word
@@ -375,7 +384,8 @@ only uses single words of up to 5 letters.
 ## Adding a language
 
 1. In `shared/words.js`: add the code to `LG.LANGS`, a column to the table,
-   and entries in `SKIP_FIRST` and `LG.ALPHABET`.
+   and entries in `SKIP_FIRST` and `LG.ALPHABET` (and in `LG.LETTER_NAMES`
+   if the voice should name single letters differently).
 2. In `shared/engine.js`: add the game text to `TEXT`, the voice to
    `SPEECH_LANG`, and the name to `LANG_NAMES`.
 
@@ -397,7 +407,7 @@ games/*/game.js       game rules
 shared/engine.js      language, text, speech, sounds, players, scores,
                       stickers, challenge codes, timers, game shell
 shared/pictures.js    all pictures (SVG)
-shared/words.js       word bank (all five languages)
+shared/words.js       word bank (all eight languages)
 shared/styles.css     shared styles
 shared/fonts/         bundled reading fonts and their licenses
 shared/vendor/        bundled QR code libraries and their licenses

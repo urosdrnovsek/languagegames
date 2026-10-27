@@ -41,14 +41,9 @@
       const points = (n) => LG.t('pointsN', { n: n });
       const d = new Date();
       const today = 'daily-' + (d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate());
-      const boards = [
-        [today, 'dailyChallenge', 'calendar', 'high', points],
-        ['beat-clock', 'beatClock', 'clock', 'high', points],
-        ['word-rain', 'wordRain', 'cloud', 'high', points],
-        ['memory', 'memory', 'cherry', 'low', LG.formatTime],
-        ['word-search', 'wordSearch', 'glasses', 'low', LG.formatTime],
-        ['picture-hunt', 'pictureHunt', 'map', 'low', LG.formatTime],
-      ];
+      // The Daily Challenge, then every scored game.
+      const boards = [[today, 'dailyChallenge', 'calendar', 'high', points]].concat(
+        LG.SCORE_GAMES.map((g) => [g.id, g.title, g.pic, g.better, (n) => LG.formatScore(g.id, n)]));
       box.appendChild(LG.el('p', '', LG.t('scoresDesc')));
       const me = LG.currentPlayer();
       boards.forEach(([id, title, pic, better, format]) => {

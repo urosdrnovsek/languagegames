@@ -16,6 +16,9 @@
   <p>Tap a button. If you hear nothing, copy the report below and send it.</p>
   <button id="en" type="button">Speak English</button>
   <button id="sl" type="button">Speak Slovenian</button>
+  <button id="hr" type="button">Speak Croatian</button>
+  <button id="sk" type="button">Speak Slovak</button>
+  <button id="ro" type="button">Speak Romanian</button>
   <button id="any" type="button">Speak (default voice)</button>
   <button id="copy" type="button">Copy report</button>
   <pre id="out"></pre>
@@ -57,6 +60,9 @@
     }
     document.getElementById('en').onclick = () => speak('Hello! This is a cat.', 'en-US');
     document.getElementById('sl').onclick = () => speak('Živijo! To je muca.', 'sl-SI');
+    document.getElementById('hr').onclick = () => speak('Bok! Ovo je mačka.', 'hr-HR');
+    document.getElementById('sk').onclick = () => speak('Ahoj! Toto je mačka.', 'sk-SK');
+    document.getElementById('ro').onclick = () => speak('Bună! Aceasta este o pisică.', 'ro-RO');
     document.getElementById('any').onclick = () => speak('Hello');
     document.getElementById('copy').onclick = () => {
       navigator.clipboard && navigator.clipboard.writeText(out.textContent).then(() => log('(copied)'), () => log('(copy failed, select the text instead)'));
