@@ -338,6 +338,66 @@
     sweater | sweater | pulover | Pullover | pull | jersey
     sandals | sandals | sandali | Sandalen | sandales | sandalias
     belt | belt | pas | Gürtel | ceinture | cinturón
+    rooster | rooster | petelin | Hahn | coq | gallo
+    wolf | wolf | volk | Wolf | loup | lobo
+    deer | deer | jelen | Hirsch | cerf | ciervo
+    kangaroo | kangaroo | kenguru | Känguru | kangourou | canguro
+    rhino | rhino | nosorog | Nashorn | rhinocéros | rinoceronte
+    swan | swan | labod | Schwan | cygne | cisne
+    seahorse | seahorse | morski konjiček | Seepferdchen | hippocampe | caballito de mar
+    raspberry | raspberry | malina | Himbeere | framboise | frambuesa
+    mango | mango | mango | Mango | mangue | mango
+    radish | radish | redkvica | Radieschen | radis | rábano
+    cabbage | cabbage | zelje | Kohl | chou | col
+    jam | jam | marmelada | Marmelade | confiture | mermelada
+    butter | butter | maslo | Butter | beurre | mantequilla
+    yoghurt | yoghurt | jogurt | Joghurt | yaourt | yogur
+    popcorn | popcorn | pokovka | Popcorn | pop-corn | palomitas
+    tea | tea | čaj | Tee | thé | té
+    burger | burger | hamburger | Hamburger | hamburger | hamburguesa
+    tie | tie | kravata | Krawatte | cravate | corbata
+    bag | bag | torbica | Tasche | sac | bolso
+    neck | neck | vrat | Hals | cou | cuello
+    tongue | tongue | jezik | Zunge | langue | lengua
+    elbow | elbow | komolec | Ellbogen | coude | codo
+    man | man | moški | Mann | homme | hombre
+    woman | woman | ženska | Frau | femme | mujer
+    children | children | otroci | Kinder | enfants | niños
+    dentist | dentist | zobozdravnica | Zahnärztin | dentiste | dentista
+    postman | postman | poštar | Postbote | facteur | cartero
+    baker | baker | pek | Bäcker | boulanger | panadero
+    painter | painter | slikarka | Malerin | peintre | pintora
+    singer | singer | pevka | Sängerin | chanteuse | cantante
+    stairs | stairs | stopnice | Treppe | escalier | escaleras
+    shower | shower | tuš | Dusche | douche | ducha
+    fridge | fridge | hladilnik | Kühlschrank | frigo | nevera
+    toilet | toilet | stranišče | Toilette | toilettes | inodoro
+    bubbles | bubbles | mehurčki | Seifenblasen | bulles | pompas
+    top | spinning top | vrtavka | Kreisel | toupie | peonza
+    accordion | accordion | harmonika | Akkordeon | accordéon | acordeón
+    microphone | microphone | mikrofon | Mikrofon | micro | micrófono
+    headphones | headphones | slušalke | Kopfhörer | casque | auriculares
+    notebook | notebook | zvezek | Heft | cahier | cuaderno
+    map | map | zemljevid | Karte | carte | mapa
+    sharpener | sharpener | šilček | Spitzer | taille-crayon | sacapuntas
+    motorbike | motorbike | motor | Motorrad | moto | moto
+    taxi | taxi | taksi | Taxi | taxi | taxi
+    bridge | bridge | most | Brücke | pont | puente
+    tent | tent | šotor | Zelt | tente | tienda de campaña
+    garden | garden | vrt | Garten | jardin | jardín
+    earth | Earth | Zemlja | Erde | Terre | Tierra
+    snow | snow | sneg | Schnee | neige | nieve
+    forest | forest | gozd | Wald | forêt | bosque
+    river | river | reka | Fluss | rivière | río
+    grass | grass | trava | Gras | herbe | hierba
+    island | island | otok | Insel | île | isla
+    birthday | birthday | rojstni dan | Geburtstag | anniversaire | cumpleaños
+    skateboard | skateboard | rolka | Skateboard | skate | monopatín
+    dancing | dancing | ples | Tanzen | danse | baile
+    volleyball | volleyball | odbojka | Volleyball | volley | voleibol
+    hungry | hungry | lačen | hungrig | affamé | hambriento
+    sick | sick | bolna | krank | malade | enferma
+    shy | shy | sramežljiva | schüchtern | timide | tímida
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -353,32 +413,32 @@
   // curricula. Each picture belongs to one topic; teachers can limit the
   // games to some topics in the settings.
   const TOPIC_WORDS = {
-    farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse donkey goose turkey hamster',
-    wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog owl bat bird parrot flamingo penguin snake turtle dinosaur',
-    water: 'fish whale crab octopus shark dolphin starfish jellyfish seal frog',
+    farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse donkey goose turkey hamster rooster',
+    wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog owl bat bird parrot flamingo penguin snake turtle dinosaur wolf deer kangaroo rhino',
+    water: 'fish whale crab octopus shark dolphin starfish jellyfish seal frog swan seahorse',
     bugs: 'bee butterfly ladybug spider snail ant worm caterpillar grasshopper dragonfly fly beetle',
-    fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut',
-    vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli peas pumpkin lettuce garlic beans',
-    food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut water juice rice pasta sausage pancake',
-    clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown skirt pyjamas shorts sweater sandals belt',
-    body: 'eye ear nose mouth tooth hand foot leg head hair arm finger knee tummy eyebrow',
-    family: 'mother father baby grandma grandpa brother sister boy girl',
-    home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock',
+    fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut raspberry mango',
+    vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli peas pumpkin lettuce garlic beans radish cabbage',
+    food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut water juice rice pasta sausage pancake jam butter yoghurt popcorn tea burger',
+    clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown skirt pyjamas shorts sweater sandals belt tie bag',
+    body: 'eye ear nose mouth tooth hand foot leg head hair arm finger knee tummy eyebrow neck tongue elbow',
+    family: 'mother father baby grandma grandpa brother sister boy girl man woman children',
+    home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock stairs shower fridge toilet',
     household: 'cup spoon fork plate bottle pot soap towel toothbrush comb broom bucket basket box candle key umbrella ladder hammer',
-    toys: 'ball balloon kite teddy doll robot gift puzzle blocks yoyo rope slide swing',
-    music: 'drum guitar bell piano violin trumpet flute xylophone harp',
-    school: 'book pencil scissors backpack brush desk ruler eraser crayon glue paper board',
-    transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine',
-    jobs: 'doctor nurse firefighter police farmer cook builder pilot vet teacher',
-    places: 'schoolhouse shop park hospital farmhouse beach zoo playground library castle flag',
-    sky: 'sun moon cloud rainbow snowflake snowman lightning planet rain wind storm fog',
-    nature: 'fire mountain tree flower leaf wave rock cactus volcano shell feather nest',
+    toys: 'ball balloon kite teddy doll robot gift puzzle blocks yoyo rope slide swing bubbles top',
+    music: 'drum guitar bell piano violin trumpet flute xylophone harp accordion microphone headphones',
+    school: 'book pencil scissors backpack brush desk ruler eraser crayon glue paper board notebook map sharpener',
+    transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine motorbike taxi',
+    jobs: 'doctor nurse firefighter police farmer cook builder pilot vet teacher dentist postman baker painter singer',
+    places: 'schoolhouse shop park hospital farmhouse beach zoo playground library castle flag bridge tent garden',
+    sky: 'sun moon cloud rainbow snowflake snowman lightning planet rain wind storm fog earth snow',
+    nature: 'fire mountain tree flower leaf wave rock cactus volcano shell feather nest forest river grass island',
     colours: 'red blue yellow green colorOrange purple pink brown black white grey',
     numbers: 'one two three four five six seven eight nine ten',
     shapes: 'circle square triangle rectangle oval diamond heart star',
-    sports: 'football swimming tennis skates skis sledge basketball running',
-    feelings: 'happy sad angry scared tired surprised',
-    seasons: 'spring summer autumn winter day night',
+    sports: 'football swimming tennis skates skis sledge basketball running skateboard dancing volleyball',
+    feelings: 'happy sad angry scared tired surprised hungry sick shy',
+    seasons: 'spring summer autumn winter day night birthday',
   };
   // Topic order and the picture that stands for each topic.
   LG.TOPICS = [

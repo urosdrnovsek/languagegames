@@ -15,7 +15,7 @@ internet connection beyond loading the page, and no build step.
   b, d, p, q and g, and wider letter spacing.
   A quick sum keeps children from changing them by accident.
 
-The round-based games have 8 rounds drawn at random from a bank of 331 pictured words in
+The round-based games have 8 rounds drawn at random from a bank of 391 pictured words in
 26 topics (animals, food, clothes, body, family, jobs, home, school, toys,
 music, transport, places, weather, nature, seasons, colours, numbers, shapes,
 sports, feelings), so every play-through is different. German nouns keep their capital letter. Words for people (jobs, family,
