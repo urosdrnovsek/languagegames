@@ -1005,6 +1005,17 @@
     eye(24, 58, 3) +
     '<path d="M34 80 v6 M44 80 v6 M66 80 v6 M76 80 v6" stroke-width="4"/>';
 
+  P.mole =
+    '<path d="M22 70 Q20 28 50 24 Q80 28 78 70 Z" fill="#6d5a4f"/>' +
+    '<ellipse cx="50" cy="56" rx="17" ry="14" fill="#a68a7a" stroke="none"/>' +
+    eye(40, 44, 2.6) + eye(60, 44, 2.6) +
+    '<ellipse cx="50" cy="54" rx="8" ry="6" fill="#ff8fab"/>' +
+    '<path d="M38 56 L24 52 M38 59 L24 60 M62 56 L76 52 M62 59 L76 60" stroke-width="1.8"/>' +
+    '<path d="M44 64 q6 5 12 0" fill="none" stroke-width="2.4"/>' +
+    '<path d="M6 92 Q8 70 30 70 Q50 64 70 70 Q92 70 94 92 Z" fill="#a0612b"/>' +
+    '<path d="M20 74 q5 -8 13 -3 l-2 6 z M80 74 q-5 -8 -13 -3 l2 6 z" fill="#ffc9c9" stroke-width="2.4"/>' +
+    '<circle cx="24" cy="84" r="2" fill="#7a4a26" stroke="none"/><circle cx="62" cy="86" r="2.5" fill="#7a4a26" stroke="none"/><circle cx="44" cy="80" r="1.8" fill="#7a4a26" stroke="none"/>';
+
   P.goat =
     '<path d="M38 26 Q28 12 18 14 Q28 18 32 30 Z M62 26 Q72 12 82 14 Q72 18 68 30 Z" fill="#ced4da"/>' +
     '<ellipse cx="20" cy="40" rx="12" ry="5" fill="#fff" transform="rotate(20 20 40)"/>' +

@@ -11,9 +11,10 @@ phones, computers and interactive whiteboards.
 
 ## At a glance
 
-- **13 games** for learning letters and words, practising, racing the clock
-  and playing as a class.
-- **413 pictured words in 26 topics**, all in five languages. The teacher can
+- **20 games** for learning letters and words, practising, racing the clock
+  and playing as a class, including moving games with rockets, frogs, fish,
+  moles, trains and bubbles.
+- **414 pictured words in 26 topics**, all in five languages. The teacher can
   limit the games to some topics, for example only fruit and vegetables.
 - **Words read aloud** with the device's own speech voices.
 - **Reading support** for teachers to switch on: four reading fonts
@@ -38,6 +39,9 @@ phones, computers and interactive whiteboards.
 | **First Letter** (`games/letter-sounds/`) | See a picture, hear the word, tap the letter it starts with. Words whose first letter doesn't match the first sound (*sheep*, *Schaf*, *chat*) are skipped. |
 | **Read and Match** (`games/picture-word/`) | Read three words and pick the one for the picture. Later rounds use words with the same first letter, so the whole word has to be read. |
 | **Build the Word** (`games/build-word/`) | Tap letters to spell the pictured word. Words get longer, and from round 5 there is one extra letter that doesn't belong. |
+| **Letter Train** (`games/letter-train/`) | The train has an empty wagon for each letter of the pictured word. Letter blocks roll past on the track; tap the next letter to load it, and the full train drives off. The first rounds show faint letters in the wagons. |
+| **Bubbles** (`games/bubbles/`) | Letters float up in bubbles. Pop the letters of the pictured word in the right order. |
+| **Conveyor Belt** (`games/conveyor-belt/`) | Pictures ride along a factory belt. Pick one up (it says its word) and drag it into the box with its first letter, or tap the picture and then the box. Two boxes, then three. |
 | **Word Book** (`words.html`) | Every picture and word, by topic. Tap one to hear it. |
 
 **Play**
@@ -49,6 +53,8 @@ phones, computers and interactive whiteboards.
 | **Balloon Pop** (`games/balloon-pop/`) | Guess the word's letters before five balloons pop (a gentle hangman). |
 | **Word Search** (`games/word-search/`) | Find the pictured words hidden left-to-right or top-to-bottom in a letter grid. Slide over a word, or tap its first and last letter. |
 | **Picture Hunt** (`games/picture-hunt/`) | Read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. |
+| **Frog Jump** (`games/frog-jump/`) | Lily pads with words float along the river. Hop on the pad with the word for the picture; five hops cross the river. A wrong pad sinks and the frog swims back one pad. Three crossings, each a little faster. |
+| **Fishing** (`games/fishing/`) | Fish swim slowly across the pond, each with a picture. Read the word and tap the right fish to catch it; eight fish fill the bucket. No timer and nothing to lose, so it also suits calm mode. |
 
 **Race** (hidden in calm mode)
 
@@ -56,6 +62,8 @@ phones, computers and interactive whiteboards.
 |---|---|
 | **Beat the Clock** (`games/beat-clock/`) | 60 seconds to match as many pictures and words as possible. Three in a row adds 3 seconds. |
 | **Word Rain** (`games/word-rain/`) | Pictures fall; tap the one for the word at the bottom before it lands. Three hearts, and it speeds up. |
+| **Rocket Race** (`games/rocket-race/`) | Read three words and tap the one for the picture. Ten right answers fly the rocket to the Moon; a wrong one adds 2 seconds. A ghost rocket flies at the pace of your best time. |
+| **Whack-a-Mole** (`games/whack-a-mole/`) | Moles pop up from nine holes holding pictures. Tap the one for the word before it hides. 60 seconds, and the moles get quicker. |
 | **Daily Challenge** | Beat the Clock with the same words for everyone today (`?daily=1`). |
 
 **Play together**
@@ -72,7 +80,7 @@ different. Every game can be played without sound.
 
 ## Words and pictures
 
-The word bank has 413 pictured words in 26 topics: farm animals, wild
+The word bank has 414 pictured words in 26 topics: farm animals, wild
 animals, water animals, bugs, fruit, vegetables, food, clothes, body, family,
 jobs, home, household, toys, music, school, transport, places, sky and
 weather, nature, seasons, colours, numbers, shapes, sports and feelings.
@@ -94,8 +102,9 @@ quick sum keeps children from changing them by accident.
 - **Coloured letters**: b, d, p, q and g each get their own colour, for
   children who mix them up.
 - **Letter spacing**: wider spacing between letters.
-- **Calm mode**: hides the race games, Tug of War and the scores, and removes
-  the Picture Hunt timer, for children who find competition stressful.
+- **Calm mode**: hides the race games, Tug of War and the scores, removes
+  the Picture Hunt timer, slows down the moving games and stops the Frog Jump
+  frog from swimming back after a wrong pad, for children who find competition stressful.
 - **Class challenge codes** and the **players** on the device.
 
 The settings page also shows the URL options for the current settings, ready
@@ -109,7 +118,8 @@ to copy into a link or an embedded game.
 - **Sticker Album** (`album.html`): a word's sticker is won after answering it
   right 3 times in any game, with one album page per topic.
 - **Scores** (`scores.html`): personal bests and the device leaderboard for
-  Beat the Clock, Word Rain, Memory Pairs, Word Search and Picture Hunt.
+  Beat the Clock, Word Rain, Rocket Race, Whack-a-Mole, Memory Pairs, Word
+  Search and Picture Hunt.
 
 Everything is stored in the browser's local storage on that device only.
 
@@ -137,7 +147,8 @@ the network.
 ### Class Scoreboard (works anywhere, offline)
 
 1. On the board, open **Class Scoreboard** (game list → Play together), pick a
-   game (Beat the Clock, Word Rain, Memory Pairs, Word Search or Picture Hunt)
+   game (Beat the Clock, Word Rain, Rocket Race, Whack-a-Mole, Memory Pairs,
+   Word Search or Picture Hunt)
    and make the challenge. The topics come from the teacher settings.
 2. Children enter the code under **Class Challenge**, or scan the QR code with
    the iPad camera, and play. Everyone gets the same words.
@@ -219,8 +230,8 @@ browser. From now on a double-click on the launcher is enough.
 2. The board opens at `http://localhost:8000/live/board.html`. If it doesn't,
    type that address in the computer's browser. (If port 8000 is taken, the
    program uses the next free one and shows the address in its window.)
-3. **Choose a game** (Beat the Clock, Word Rain, Memory Pairs, Word Search or
-   Picture Hunt) and press **Join the class game**. The board shows a QR code
+3. **Choose a game** (Beat the Clock, Word Rain, Rocket Race, Whack-a-Mole,
+   Memory Pairs, Word Search or Picture Hunt) and press **Join the class game**. The board shows a QR code
    and an address such as `http://192.168.1.23:8000/live/join.html`.
 4. **The children join**: they scan the QR code with the iPad camera (or type
    the address in Safari), choose their animal and name if they want, and
@@ -228,8 +239,9 @@ browser. From now on a double-click on the launcher is enough.
    avatar to remove someone who joined by mistake.
 5. Press **Start the game**. Every iPad starts the same game with the same
    words, and the board shows a live leaderboard: the most points first for
-   Beat the Clock and Word Rain, and finished-and-fastest first for the
-   others. The iPads tell the children to look at the board when they finish.
+   Beat the Clock, Word Rain and Whack-a-Mole, and finished-and-fastest first
+   for the others. In **Rocket Race** the board shows every child's rocket
+   flying up to the Moon, with the time when it lands. The iPads tell the children to look at the board when they finish.
    A child who joins late still gets into the game.
 6. Press **End the game** to show the podium and the results.
 7. **Another round**: press **New game** and choose a game again. The children

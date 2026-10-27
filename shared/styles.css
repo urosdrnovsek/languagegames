@@ -134,7 +134,9 @@
 .wide-spacing .word-btn,
 .wide-spacing .word-chip,
 .wide-spacing .word-line,
-.wide-spacing .word-card span { letter-spacing: 0.14em; word-spacing: 0.2em; }
+.wide-spacing .word-card span,
+.wide-spacing .pad > span,
+.wide-spacing .rain-word { letter-spacing: 0.14em; word-spacing: 0.2em; }
 
 * { box-sizing: border-box; }
 
@@ -713,3 +715,136 @@ span.slot { display: inline-grid; place-items: center; }
 .team-words { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-width: 260px; max-width: 620px; }
 .team-words .word-btn { min-width: 0; width: 100%; font-size: clamp(1.6rem, 4vw, 2.8rem); }
 .team-pics { grid-template-columns: repeat(4, 1fr); max-width: 760px; }
+
+/* ---------- Shared by the moving games ---------- */
+
+.pic-card.small { padding: 8px; border-radius: 22px; }
+.pic-card.small .pic { width: clamp(76px, 14vh, 126px); }
+.pic-card.small .listen-btn { width: 44px; height: 44px; right: -12px; bottom: -12px; }
+
+/* ---------- Rocket Race ---------- */
+
+.stage.rocket-stage { justify-content: flex-start; gap: 10px; max-width: 900px; }
+.rocket-stage .game-head { position: relative; }
+.rocket-play { display: flex; gap: 18px; width: 100%; flex: 1; align-items: stretch; }
+.space { position: relative; flex: 0 0 132px; min-height: 360px; border: 4px solid var(--ink); border-radius: 24px; background: linear-gradient(#1b1f3b, #364fc7 75%, #748ffc); overflow: hidden; }
+.space-moon { position: absolute; top: 8px; left: 50%; width: 72px; height: 72px; margin-left: -36px; }
+.space-moon svg, .space-rocket svg { width: 100%; height: 100%; display: block; }
+.space .star { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff; opacity: 0.8; }
+.space .s1 { left: 18%; top: 34%; } .space .s2 { left: 76%; top: 48%; } .space .s3 { left: 30%; top: 66%; } .space .s4 { left: 64%; top: 22%; }
+.space-rocket { position: absolute; left: 58%; width: 56px; height: 56px; margin-left: -28px; bottom: calc(8px + var(--p, 0) * (100% - 150px)); transition: bottom 0.6s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.space-rocket.ghost { left: 26%; width: 44px; height: 44px; margin-left: -22px; opacity: 0.35; transition: bottom 0.25s linear; }
+.space-rocket.boost svg { animation: pop 0.45s ease; }
+.space-rocket.landed svg { animation: pulse 0.6s ease 2; }
+.rocket-ask { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; min-width: 0; }
+.rocket-ask .pic-card .pic { width: clamp(110px, 26vh, 200px); }
+.rocket-ask .word-btn { padding: 8px 22px; }
+.penalty { position: absolute; right: 8px; top: 100%; color: var(--bad); font-weight: 800; font-size: 1.4rem; animation: float-up 1s ease forwards; }
+@media (max-width: 600px) {
+  .rocket-play { flex-direction: column; gap: 12px; }
+  .space { flex: 0 0 104px; min-height: 104px; }
+  .space-moon { top: 50%; left: auto; right: 8px; width: 60px; height: 60px; margin: -30px 0 0; }
+  .space-rocket, .space-rocket.ghost { bottom: auto; top: 50%; margin: -28px 0 0; left: calc(8px + var(--p, 0) * (100% - 136px)); rotate: 90deg; transition: left 0.6s cubic-bezier(0.3, 1.4, 0.5, 1); }
+  .space-rocket.ghost { top: 20%; margin: -22px 0 0; transition: left 0.25s linear; }
+}
+
+/* ---------- Frog Jump ---------- */
+
+.stage.frog-stage { justify-content: flex-start; gap: 12px; max-width: 900px; }
+.pond { position: relative; width: 100%; flex: 1; min-height: 380px; border: 4px solid var(--ink); border-radius: 24px; overflow: hidden; background: repeating-linear-gradient(180deg, #74c0fc 0 26px, #6cb8f4 26px 52px); touch-action: manipulation; }
+.bank { position: absolute; left: 0; right: 0; height: max(44px, 11%); background: #8ce99a; }
+.bank.far { top: 0; border-bottom: 4px solid var(--ink); background: radial-gradient(circle at 20% 50%, #ffd43b 0 5px, transparent 6px), radial-gradient(circle at 70% 40%, #ff8fab 0 5px, transparent 6px), #8ce99a; }
+.bank.near { bottom: 0; border-top: 4px solid var(--ink); }
+.pad { position: absolute; left: 0; top: 0; display: grid; place-items: center; padding: 0 6px; border: 3px solid var(--ink); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #8ce99a, #40c057); color: var(--ink); will-change: transform; transition: opacity 0.4s, scale 0.6s; }
+.pad > span { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; padding: 2px 8px; border-radius: 12px; background: rgba(255, 255, 255, 0.92); font-weight: 700; }
+.pad.landed > span { background: var(--good-bg); color: var(--good); }
+.pad.fade { opacity: 0; }
+.pad.sink { opacity: 0; scale: 0.4; }
+.pad.sink > span { background: var(--bad-bg); }
+.frog { position: absolute; z-index: 2; pointer-events: none; transition: left 0.35s ease, top 0.35s ease; }
+.frog svg { width: 100%; height: 100%; display: block; }
+.frog.jump svg { animation: frog-hop 0.35s ease; }
+.frog.splash svg { animation: frog-splash 0.7s ease; }
+@keyframes frog-hop { 50% { scale: 1.35; } }
+@keyframes frog-splash { 30% { opacity: 0.3; scale: 0.7; } }
+
+/* ---------- Fishing ---------- */
+
+.stage.fish-stage { justify-content: flex-start; gap: 10px; max-width: 900px; }
+.fish-stage .rain-word { flex: 1; min-width: 0; }
+.bucket svg { width: 32px; height: 32px; }
+.fish-pond { position: relative; width: 100%; flex: 1; min-height: 380px; border: 4px solid var(--ink); border-radius: 24px; overflow: hidden; background: linear-gradient(#a5d8ff, #4dabf7 60%, #339af0); touch-action: manipulation; }
+.fishy { position: absolute; left: 0; top: 0; padding: 0; border: 0; background: none; will-change: transform; }
+.fishy .fish-body { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fishy.right-way .fish-body { scale: -1 1; }
+.fish-pic { position: absolute; left: 34%; top: 24%; width: 36%; height: 56%; pointer-events: none; }
+.fishy.right-way .fish-pic { left: 30%; }
+.fish-pic svg { width: 100%; height: 100%; display: block; }
+.fishy.hooked { opacity: 0; transition: transform 0.7s ease-in, opacity 0.4s 0.5s; }
+.fish-line { position: absolute; top: 0; width: 3px; margin-left: -1px; background: var(--ink); transition: height 0.35s ease; }
+
+/* ---------- Whack-a-Mole ---------- */
+
+.stage.mole-stage { justify-content: flex-start; gap: 12px; }
+.mole-field { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 2vw, 16px); width: 100%; max-width: min(560px, 62vh); padding: 14px; border: 4px solid var(--ink); border-radius: 24px; background: #8ce99a; touch-action: manipulation; transition: filter 0.2s; }
+.mole-field.dizzy { filter: grayscale(0.7); }
+.hole { position: relative; aspect-ratio: 1 / 1.2; overflow: hidden; border-radius: 0 0 40% 40%; }
+.hole::before { content: ''; position: absolute; left: 8%; right: 8%; bottom: 2%; height: 24%; border: 3px solid var(--ink); border-radius: 50%; background: #5c3d1e; }
+.mole { position: absolute; left: 4%; right: 4%; bottom: 0; height: 100%; padding: 0; border: 0; background: none; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; transform: translateY(105%); transition: transform 0.2s ease-out; }
+.hole.up .mole { transform: translateY(0); }
+.mole-sign { position: relative; z-index: 1; display: block; width: 54%; aspect-ratio: 1; margin-bottom: -17%; flex: none; padding: 4px; border: 3px solid var(--ink); border-radius: 12px; background: #fff; }
+.mole-body { display: block; width: 88%; aspect-ratio: 1; flex: none; }
+.mole-sign svg, .mole-body svg { width: 100%; height: 100%; display: block; }
+.mole.bonk .mole-sign { background: var(--good-bg); border-color: var(--good); }
+.mole.bonk .mole-body { animation: pulse 0.3s ease; }
+
+/* ---------- Conveyor Belt ---------- */
+
+.stage.belt-stage { max-width: 900px; }
+.factory { position: relative; width: 100%; display: flex; flex-direction: column; gap: clamp(36px, 9vh, 80px); padding: 110px 0 10px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.belt { height: 46px; border: 4px solid var(--ink); border-radius: 24px; background: repeating-linear-gradient(90deg, #868e96 0 18px, #adb5bd 18px 36px); animation: belt-run 0.9s linear infinite; }
+@keyframes belt-run { to { background-position: 36px 0; } }
+.belt-item { position: absolute; left: 0; top: 0; z-index: 2; padding: 6px; border: 3px solid var(--ink); border-radius: 16px; background: var(--card); box-shadow: 0 4px 0 var(--ink); will-change: transform; touch-action: none; }
+.belt-item svg { width: 100%; height: 100%; display: block; pointer-events: none; }
+.belt-item.held { z-index: 3; box-shadow: 0 10px 0 var(--ink); }
+.belt-item.selected { outline: 5px solid var(--accent); outline-offset: 2px; }
+.belt-item.into-box { scale: 0.4; transition: transform 0.4s ease, scale 0.4s ease; }
+.sort-boxes { display: flex; justify-content: center; gap: clamp(10px, 3vw, 24px); }
+.sort-box { flex: 1; max-width: 220px; min-height: 150px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; border: 4px solid var(--ink); border-radius: 10px 10px 24px 24px; background: #e8c496; box-shadow: 0 6px 0 var(--ink); }
+.sort-box b { font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1; }
+.sort-box .sorted { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px; }
+.sort-box .sorted i { width: 30px; height: 30px; }
+.sort-box .sorted svg { width: 100%; height: 100%; }
+.sort-box.over { background: #ffe8cc; outline: 5px solid var(--accent); }
+
+/* ---------- Letter Train ---------- */
+
+.stage.train-stage { max-width: 900px; }
+.rail { width: 100%; display: flex; flex-direction: column; gap: 24px; overflow: hidden; }
+.train-row { display: flex; align-items: flex-end; justify-content: center; gap: 6px; padding-bottom: 4px; border-bottom: 8px solid #868e96; animation: roll-in 0.9s ease-out; transition: translate 1.3s ease-in; }
+.train-row.leave { translate: -120vw 0; }
+@keyframes roll-in { from { translate: 100vw 0; } }
+.engine { flex: none; width: clamp(90px, 20vw, 130px); }
+.engine svg { width: 100%; display: block; }
+.wagon { position: relative; flex: 0 1 74px; min-width: 30px; height: clamp(54px, 13vw, 80px); margin-bottom: 14px; display: grid; place-items: center; border: 4px solid var(--ink); border-radius: 8px; background: #ffd8a8; font-size: clamp(1.6rem, 7vw, 2.6rem); font-weight: 700; }
+.wagon::before, .wagon::after { content: ''; position: absolute; bottom: -18px; width: 16px; height: 16px; border: 3px solid var(--ink); border-radius: 50%; background: #495057; }
+.wagon::before { left: 6px; }
+.wagon::after { right: 6px; }
+.wagon.hint > span { opacity: 0.28; }
+.wagon.next { outline: 5px dashed var(--accent); outline-offset: 3px; }
+.wagon.loaded { background: var(--tile); }
+.wagon.loaded > span { display: block; animation: pop 0.3s ease; }
+.letter-track { position: relative; height: calc(clamp(52px, 14vw, 72px) + 24px); border-top: 6px solid #868e96; border-bottom: 6px solid #868e96; background: #e9ecef; overflow: hidden; touch-action: manipulation; }
+.block { position: absolute; left: 0; top: 8px; width: clamp(52px, 14vw, 72px); height: clamp(52px, 14vw, 72px); padding: 0; border: 4px solid var(--ink); border-radius: 14px; background: var(--tile); box-shadow: 0 4px 0 var(--ink); font-size: clamp(1.8rem, 8vw, 2.6rem); font-weight: 700; will-change: transform; }
+.block > span { display: block; }
+
+/* ---------- Bubbles ---------- */
+
+.stage.bubble-stage { justify-content: flex-start; gap: 12px; }
+.bubble-top { display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
+.bubble-top .slot { width: clamp(44px, 12vw, 70px); height: clamp(52px, 14vw, 78px); }
+.slot.next { border-color: var(--accent); background: #edf2ff; }
+.bubble-sea { position: relative; width: 100%; flex: 1; min-height: 340px; border: 4px solid var(--ink); border-radius: 24px; overflow: hidden; background: linear-gradient(#e7f5ff, #a5d8ff 50%, #74c0fc); touch-action: manipulation; }
+.bubble { position: absolute; left: 0; top: 0; padding: 0; border: 3px solid #1c7ed6; border-radius: 50%; background: radial-gradient(circle at 32% 28%, #fff 0 11%, rgba(255, 255, 255, 0.55) 12%, rgba(208, 235, 255, 0.35) 60%, rgba(116, 192, 252, 0.5)); color: var(--ink); font-size: clamp(1.8rem, 7vw, 2.6rem); font-weight: 700; will-change: transform; transition: scale 0.25s, opacity 0.25s; }
+.bubble > span { display: block; }
+.bubble.popped { scale: 1.6; opacity: 0; }

@@ -35,6 +35,16 @@
     .live-row .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .live-list { display: flex; flex-direction: column; gap: 6px; }
     .big-msg { font-size: 1.3rem; text-align: center; }
+    /* Rocket Race: every child's rocket flies up towards the Moon. */
+    .race-space { position: relative; display: flex; justify-content: space-around; height: min(62vh, 560px); padding: 90px 8px 0; border: 4px solid var(--ink); border-radius: 20px; background: linear-gradient(#1b1f3b, #364fc7 75%, #748ffc); overflow: hidden; }
+    .race-space .moon { position: absolute; top: 6px; left: 50%; width: 80px; height: 80px; margin-left: -40px; }
+    .race-space .moon svg, .race-space .rk svg { width: 100%; height: 100%; display: block; }
+    .race-space .lane { position: relative; flex: 1; max-width: 120px; min-width: 0; }
+    .race-space .rk { position: absolute; left: 50%; width: min(76px, 100%); aspect-ratio: 1; translate: -50% 0; bottom: calc(64px + var(--p, 0) * (100% - 144px)); transition: bottom 0.6s cubic-bezier(0.3, 1.4, 0.5, 1); }
+    .race-space .rk[data-time]:not([data-time=''])::after { content: attr(data-time); position: absolute; top: -26px; left: 50%; translate: -50% 0; padding: 0 6px; border-radius: 8px; background: var(--good-bg); color: var(--good); font-weight: 800; white-space: nowrap; }
+    .race-space .who { position: absolute; bottom: 4px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; color: #fff; font-weight: 700; font-size: 0.9rem; }
+    .race-space .who .avatar { width: 34px; height: 34px; }
+    .race-space .who span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -130,6 +140,25 @@
         return list;
       }
 
+      // Rockets stay in the order the children joined, so each one is easy
+      // to follow.
+      function drawRockets(st) {
+        const space = lb.querySelector('.race-space');
+        const ids = st.players.map((p) => p.pid);
+        space.querySelectorAll('.lane').forEach((l) => !ids.includes(l.dataset.pid) && l.remove());
+        st.players.forEach((p) => {
+          let lane = space.querySelector('.lane[data-pid="' + p.pid + '"]');
+          if (!lane) {
+            lane = el('div', 'lane', '<div class="rk">' + LG.picture('rocket') + '</div><div class="who">' + LG.avatarHtml(p) + '<span></span></div>');
+            lane.dataset.pid = p.pid;
+            lane.querySelector('.who span:last-child').textContent = LG.displayName(p);
+            space.appendChild(lane);
+          }
+          lane.style.setProperty('--p', p.progress || 0);
+          lane.querySelector('.rk').dataset.time = p.done && p.score !== null ? LG.formatScore(st.session.game, p.score) : '';
+        });
+      }
+
       function draw(st) {
         if (!st.session) return setup();
         const s = st.session;
@@ -178,11 +207,13 @@
             lb.innerHTML = '';
             const box = el('section', 'box');
             box.appendChild(el('h2', '', LG.t(g.title)));
-            box.appendChild(el('div', 'live-list'));
+            box.appendChild(el('div', s.game === 'rocket-race' ? 'race-space' : 'live-list'));
+            if (s.game === 'rocket-race') box.lastChild.innerHTML = '<div class="moon">' + LG.picture('moon') + '</div>';
             const actions = el('div', 'actions');
             actions.append(btn('big-btn', LG.ICONS.trophy + '<span>' + LG.t('endGame') + '</span>', () => LG.api('end', {}).then(watch)));
             lb.append(box, actions);
           }
+          if (s.game === 'rocket-race') return drawRockets(st);
           const list = lb.querySelector('.live-list');
           const ranked = rankedPlayers(st);
           const top = Math.max(1, ...ranked.map((p) => p.score || 0));

@@ -50,6 +50,7 @@
     jellyfish | jellyfish | meduza | Qualle | méduse | medusa
     squirrel | squirrel | veverica | Eichhörnchen | écureuil | ardilla
     hedgehog | hedgehog | jež | Igel | hérisson | erizo
+    mole | mole | krt | Maulwurf | taupe | topo
     goat | goat | koza | Ziege | chèvre | cabra
     chick | chick | piščanec | Küken | poussin | pollito
     parrot | parrot | papiga | Papagei | perroquet | loro
@@ -436,7 +437,7 @@
   // games to some topics in the settings.
   const TOPIC_WORDS = {
     farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse donkey goose turkey hamster rooster',
-    wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog owl bat bird parrot flamingo penguin snake turtle dinosaur wolf deer kangaroo rhino',
+    wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog mole owl bat bird parrot flamingo penguin snake turtle dinosaur wolf deer kangaroo rhino',
     water: 'fish whale crab octopus shark dolphin starfish jellyfish seal frog swan seahorse',
     bugs: 'bee butterfly ladybug spider snail ant worm caterpillar grasshopper dragonfly fly beetle',
     fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut raspberry mango',
