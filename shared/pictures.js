@@ -427,7 +427,7 @@
     '<path d="M26 72 A16 16 0 0 1 24 40 A20 20 0 0 1 60 30 A18 18 0 0 1 84 50 A12 12 0 0 1 78 72 Z" fill="#f1f3f5"/>' +
     eye(42, 54, 3) + eye(60, 54, 3) +
     '<path d="M46 62 q5 4 10 0" fill="none" stroke-width="2"/>' +
-    '<path d="M30 84 l-2 6 M50 84 l-2 6 M70 84 l-2 6" stroke="#4dabf7" stroke-width="3"/>';
+    '';
 
   P.tree =
     '<path d="M44 88 L46 58 H54 L56 88 Z" fill="#a0673b"/>' +
@@ -1593,8 +1593,8 @@
     '<path d="M14 62 Q50 72 86 62 M20 72 Q50 80 80 72 M18 58 L32 70 M40 64 L54 76 M62 64 L74 74 M80 58 L70 70" fill="none" stroke="#7a4a26" stroke-width="2"/>';
 
   P.lightning =
-    '<path d="M20 34 Q14 18 32 16 Q38 4 54 8 Q70 2 76 16 Q90 16 86 32 Z" fill="#868e96"/>' +
-    '<path d="M54 28 L34 60 H50 L40 94 L70 52 H54 L64 28 Z" fill="#ffd43b"/>';
+    '<path d="M58 4 L24 54 H46 L32 96 L76 40 H54 L70 4 Z" fill="#ffd43b"/>' +
+    '<path d="M58 12 L36 46" stroke="#fff" stroke-width="3" opacity=".7"/>';
 
   // ---------- Body (second set) ----------
 
@@ -1862,6 +1862,279 @@
     '<path d="M8 92 L20 10 H80 L92 92" fill="none" stroke="#4dabf7" stroke-width="4"/>' +
     '<path d="M36 10 V64 M64 10 V64" stroke-width="2.5"/>' +
     '<rect x="30" y="62" width="40" height="8" rx="3" fill="#fa5252"/>';
+
+  // ---------- Jobs (the figure's gender matches the word) ----------
+
+  const STETHOSCOPE = '<path d="M-6 31 Q-8 45 0 46 Q8 45 6 31" fill="none" stroke-width="2"/><circle cx="0" cy="47" r="3" fill="#adb5bd" stroke-width="1.5"/>';
+  P.doctor = figure({ hair: 'long', hairColor: '#7a4a26', shirt: '#f8f9fa', bottom: '#4dabf7', y: 4,
+    extra: STETHOSCOPE + '<path d="M-3 30 L0 40 L3 30" fill="none" stroke-width="1.5"/>' });
+  P.nurse = figure({ hair: 'short', hairColor: '#212529', shirt: '#63e6be', bottom: '#38d9a9', skin: SKIN[2], y: 4,
+    extra: '<path d="M4 37 h6 M7 34 v6" stroke="#fa5252" stroke-width="2.5"/>' });
+  P.firefighter = figure({ hair: 'long', hairColor: '#e8590c', shirt: '#ffd43b', bottom: '#ffd43b', y: 6,
+    extra: '<path d="M-13 50 H13 M-13 44 H13" stroke="#adb5bd" stroke-width="2.5"/>' +
+      '<path d="M-13 12 Q-13 -1 0 -1 Q13 -1 13 12 Z" fill="#fa5252"/><path d="M-17 12 H17" stroke="' + INK + '" stroke-width="4"/><path d="M-17 12 H17" stroke="#fa5252" stroke-width="2"/>' +
+      '<circle cx="0" cy="6" r="3" fill="#ffd43b" stroke-width="1.5"/>' });
+  P.police = figure({ hair: 'short', hairColor: '#7a4a26', shirt: '#1c7ed6', bottom: '#1864ab', y: 6,
+    extra: '<path d="M-12 9 Q0 -1 12 9 V12 H-12 Z" fill="#1864ab"/><path d="M-13 12 Q0 16 13 12" fill="none" stroke-width="3"/>' +
+      '<circle cx="0" cy="6" r="2.2" fill="#ffd43b" stroke-width="1"/>' +
+      '<path d="M7 34 l1.3 2.7 3 .3 -2.2 2 .6 3 -2.7 -1.5 -2.7 1.5 .6 -3 -2.2 -2 3 -.3 z" fill="#ffd43b" stroke-width="1"/>' });
+  P.farmer = figure({ hair: 'pigtails', hairColor: '#e8590c', shirt: '#fa5252', bottom: '#4dabf7', y: 6,
+    extra: '<rect x="-8" y="40" width="16" height="20" fill="#4dabf7"/><path d="M-8 40 L-11 31 M8 40 L11 31" stroke="#4dabf7" stroke-width="3"/>' +
+      '<ellipse cx="0" cy="8" rx="19" ry="4" fill="#ffe066"/><path d="M-10 8 Q-10 -3 0 -3 Q10 -3 10 8 Z" fill="#ffe066"/><path d="M-10 5 H10" stroke="#fa5252" stroke-width="2"/>' });
+  P.cook = figure({ hair: 'short', hairColor: '#7a4a26', shirt: '#f8f9fa', bottom: '#495057', y: 14, s: 0.9,
+    extra: '<path d="M-9 8 V-4 Q-15 -8 -9 -13 Q-5 -19 1 -15 Q7 -19 12 -12 Q16 -6 9 -4 V8 Z" fill="#fff"/><path d="M-9 4 H9" stroke-width="2"/>' +
+      '<path d="M-10 34 L10 46" stroke="#fa5252" stroke-width="3"/>' +
+      '<path d="M19 58 V40" stroke="#a0673b" stroke-width="2.5"/><ellipse cx="19" cy="37" rx="3.5" ry="5" fill="#c98b52" stroke-width="1.5"/>' });
+  P.builder = figure({ hair: 'short', hairColor: '#495057', shirt: '#ff922b', bottom: '#495057', beard: true, y: 6,
+    extra: '<path d="M-13 46 H13" stroke="#ffd43b" stroke-width="3"/>' +
+      '<path d="M-13 11 Q-13 -1 0 -1 Q13 -1 13 11 Z" fill="#fcc419"/><path d="M-16 11 H16" stroke="' + INK + '" stroke-width="4"/><path d="M-16 11 H16" stroke="#fcc419" stroke-width="2"/>' +
+      '<path d="M18 58 L24 44" stroke="#a0673b" stroke-width="3"/><rect x="19" y="38" width="12" height="6" rx="1" fill="#868e96" stroke-width="1.5" transform="rotate(20 25 41)"/>' });
+  P.pilot = figure({ hair: 'long', hairColor: '#212529', shirt: '#364fc7', bottom: '#364fc7', skin: SKIN[1], y: 6,
+    extra: '<path d="M-12 9 Q0 -1 12 9 V12 H-12 Z" fill="#364fc7"/><path d="M-12 12 Q0 16 12 12" fill="none" stroke-width="3"/><path d="M-8 6 H8" stroke="#fcc419" stroke-width="2"/>' +
+      '<path d="M2 36 q3 -2 6 0 q3 -2 6 0 M8 36 v2" fill="none" stroke="#fcc419" stroke-width="2"/>' +
+      '<path d="M-3 30 L0 38 L3 30" fill="#fff" stroke-width="1.5"/>' });
+  P.vet = figure({ hair: 'curly', hairColor: '#7a4a26', shirt: '#d3f9d8', bottom: '#2f9e44', skin: SKIN[2], x: 40, y: 4,
+    extra: STETHOSCOPE }) +
+    '<circle cx="80" cy="74" r="12" fill="#d39b62"/><ellipse cx="70" cy="72" rx="4" ry="8" fill="#7a4a26"/><ellipse cx="90" cy="72" rx="4" ry="8" fill="#7a4a26"/>' +
+    eye(76, 72, 2) + eye(84, 72, 2) + '<ellipse cx="80" cy="78" rx="3" ry="2" fill="' + INK + '"/>';
+  P.teacher =
+    '<path d="M10 70 L6 92 M32 70 L36 92" stroke-width="3"/>' +
+    '<rect x="2" y="24" width="38" height="46" rx="3" fill="#a0673b"/><rect x="6" y="28" width="30" height="38" fill="#2f9e44"/>' +
+    '<path d="M10 38 q4 -6 7 0 q3 5 6 0 M10 50 H30 M10 58 H24" fill="none" stroke="#fff" stroke-width="2"/>' +
+    figure({ hair: 'short', hairColor: '#adb5bd', shirt: '#51cf66', bottom: '#495057', glasses: true, x: 66, y: 4,
+      extra: '<path d="M-18 58 L-30 40" stroke="#a0673b" stroke-width="2.5"/>' });
+
+  // ---------- Places ----------
+
+  P.schoolhouse =
+    '<rect x="40" y="10" width="20" height="22" fill="#ff8787"/><path d="M36 12 L50 2 L64 12 Z" fill="#fa5252"/>' +
+    '<circle cx="50" cy="22" r="6" fill="#fff"/><path d="M50 22 V18 M50 22 H53" stroke-width="1.5"/>' +
+    '<rect x="10" y="40" width="80" height="50" fill="#ff8787"/>' +
+    '<path d="M4 44 L50 26 L96 44 Z" fill="#fa5252"/>' +
+    '<path d="M42 90 V70 Q42 62 50 62 Q58 62 58 70 V90 Z" fill="#a0673b"/>' +
+    '<rect x="18" y="52" width="16" height="14" fill="#a5d8ff"/><rect x="66" y="52" width="16" height="14" fill="#a5d8ff"/>' +
+    '<path d="M26 52 V66 M74 52 V66" stroke-width="2"/>';
+  P.shop =
+    '<rect x="8" y="30" width="84" height="60" fill="#fff4e6"/>' +
+    '<path d="M4 20 H96 L92 38 H8 Z" fill="#fa5252"/>' +
+    '<path d="M18 20 L16 38 M34 20 L33 38 M50 20 V38 M66 20 L67 38 M82 20 L84 38" stroke="#fff" stroke-width="5"/>' +
+    '<path d="M4 20 H96 L92 38 H8 Z" fill="none"/>' +
+    '<rect x="14" y="46" width="40" height="30" fill="#d0ebff"/>' +
+    '<circle cx="24" cy="66" r="5" fill="#fa5252"/><circle cx="36" cy="66" r="5" fill="#ffd43b"/><circle cx="44" cy="58" r="4" fill="#51cf66"/>' +
+    '<rect x="62" y="46" width="22" height="44" fill="#4dabf7"/><circle cx="79" cy="68" r="1.8" fill="' + INK + '"/>' +
+    '<path d="M4 90 H96" stroke-width="3"/>';
+  P.park =
+    '<path d="M4 72 Q50 62 96 72 V94 H4 Z" fill="#8ce99a"/>' +
+    '<path d="M40 94 Q50 80 46 70 L54 70 Q58 80 62 94 Z" fill="#f3d9b1"/>' +
+    '<rect x="17" y="50" width="6" height="22" fill="#a0673b"/><circle cx="20" cy="40" r="14" fill="#40c057"/>' +
+    '<rect x="77" y="46" width="6" height="26" fill="#a0673b"/><circle cx="80" cy="34" r="16" fill="#51cf66"/>' +
+    '<path d="M60 64 H84 M60 70 H84 M63 70 V78 M81 70 V78 M62 60 H82" stroke="#c98b52" stroke-width="3"/>' +
+    '<circle cx="34" cy="82" r="3" fill="#ff8fab"/><circle cx="72" cy="86" r="3" fill="#ffd43b"/>';
+  P.hospital =
+    '<rect x="14" y="22" width="72" height="68" fill="#fff"/>' +
+    '<rect x="38" y="8" width="24" height="20" fill="#fff"/>' +
+    '<path d="M47 12 h6 v4 h4 v6 h-4 v4 h-6 v-4 h-4 v-6 h4 z" fill="#fa5252" stroke-width="2"/>' +
+    [24, 46, 68].map((x) => '<rect x="' + x + '" y="34" width="10" height="10" fill="#a5d8ff"/><rect x="' + x + '" y="52" width="10" height="10" fill="#a5d8ff"/>').join('') +
+    '<rect x="42" y="70" width="16" height="20" fill="#4dabf7"/><path d="M50 70 V90" stroke-width="2"/>';
+  P.farmhouse =
+    '<rect x="70" y="20" width="20" height="70" rx="10" fill="#adb5bd"/><path d="M70 30 Q80 14 90 30" fill="#868e96"/>' +
+    '<path d="M8 46 L36 22 L64 46 V90 H8 Z" fill="#fa5252"/>' +
+    '<path d="M8 46 L36 22 L64 46" fill="none" stroke="#fff" stroke-width="4"/>' +
+    '<rect x="22" y="60" width="28" height="30" fill="#c92a2a"/>' +
+    '<path d="M22 60 L50 90 M50 60 L22 90" stroke="#fff" stroke-width="3"/><rect x="22" y="60" width="28" height="30" fill="none"/>' +
+    '<rect x="30" y="36" width="12" height="10" fill="#fff"/>' +
+    '<path d="M4 90 H96" stroke-width="3"/>';
+  P.beach =
+    '<circle cx="80" cy="18" r="10" fill="#ffd43b"/>' +
+    '<path d="M4 44 H96 V64 H4 Z" fill="#4dabf7" stroke="none"/>' +
+    '<path d="M4 50 q8 -4 16 0 q8 4 16 0 q8 -4 16 0 q8 4 16 0 q8 -4 16 0 q8 4 12 0" fill="none" stroke="#fff" stroke-width="2.5"/>' +
+    '<path d="M4 64 Q50 56 96 64 V94 H4 Z" fill="#ffe8a3"/>' +
+    '<path d="M30 90 L38 40" stroke-width="3"/>' +
+    '<path d="M16 44 Q36 20 58 36 Z" fill="#fa5252"/><path d="M27 37 Q36 26 46 32" fill="none" stroke="#fff" stroke-width="3"/>' +
+    '<path d="M64 78 H80 L78 90 H66 Z" fill="#4dabf7"/><path d="M66 78 Q72 70 78 78" fill="none" stroke-width="2"/>';
+  P.zoo =
+    '<path d="M10 90 V30 M90 90 V30" stroke="' + INK + '" stroke-width="10"/><path d="M10 90 V30 M90 90 V30" stroke="#51cf66" stroke-width="6"/>' +
+    '<path d="M4 34 Q50 4 96 34 L96 42 Q50 14 4 42 Z" fill="#51cf66"/>' +
+    '<path d="M30 30 L28 26 M70 30 L72 26" stroke-width="2"/>' +
+    '<circle cx="50" cy="56" r="12" fill="#fcc419"/>' + ring(10, 50, 56, 13, (x, y) => '<circle cx="' + x + '" cy="' + y + '" r="5" fill="#e8590c"/>') +
+    '<circle cx="50" cy="56" r="10" fill="#fcc419" stroke="none"/>' + eye(46, 54, 1.8) + eye(54, 54, 1.8) +
+    '<path d="M48 60 h4 l-2 2 z" fill="#7a4a26" stroke-width="1"/>' +
+    [24, 36, 64, 76].map((x) => '<path d="M' + x + ' 42 V90" stroke-width="3"/>').join('') +
+    '<path d="M14 90 H86" stroke-width="3"/>';
+  P.playground =
+    '<path d="M4 78 Q50 70 96 78 V94 H4 Z" fill="#ffe8a3"/>' +
+    '<path d="M8 76 L46 54" stroke="' + INK + '" stroke-width="7"/><path d="M8 76 L46 54" stroke="#fa5252" stroke-width="3"/>' +
+    '<path d="M27 66 L22 78 H32 Z" fill="#4dabf7"/>' +
+    '<circle cx="12" cy="70" r="4" fill="#ffd8a8"/><circle cx="43" cy="51" r="4" fill="#ffd8a8"/>' +
+    '<path d="M56 80 V30 L72 22 L88 30 V80 M56 46 H88 M56 62 H88" fill="none" stroke="' + INK + '" stroke-width="7"/>' +
+    '<path d="M56 80 V30 L72 22 L88 30 V80 M56 46 H88 M56 62 H88" fill="none" stroke="#ffd43b" stroke-width="3"/>';
+  P.library =
+    '<rect x="8" y="8" width="84" height="84" rx="3" fill="#c98b52"/>' +
+    '<path d="M8 36 H92 M8 64 H92" stroke-width="4"/>' +
+    [[14, '#fa5252', 7, 24], [22, '#4dabf7', 6, 22], [29, '#ffd43b', 8, 25], [38, '#51cf66', 6, 21], [45, '#cc5de8', 7, 24], [53, '#ff922b', 6, 20],
+      [60, '#4dabf7', 7, 25], [68, '#fa5252', 8, 22], [77, '#51cf66', 6, 24]]
+      .map((b, i) => [12, 40, 68].map((y, row) => {
+        const x = (b[0] + row * 9) % 78 + 12;
+        return x + b[2] < 90 ? '<rect x="' + x + '" y="' + (y + 24 - b[3]) + '" width="' + b[2] + '" height="' + b[3] + '" fill="' + [b[1], '#ffd43b', '#4dabf7'][(i + row) % 3 === 0 ? 0 : (i + row) % 3] + '" stroke-width="2"/>' : '';
+      }).join(''))
+      .join('');
+
+  // ---------- Music ----------
+
+  P.piano =
+    '<rect x="10" y="14" width="80" height="50" rx="4" fill="#495057"/>' +
+    '<rect x="16" y="20" width="68" height="12" rx="2" fill="#343a40"/>' +
+    '<rect x="10" y="48" width="80" height="22" fill="#fff"/>' +
+    [20, 30, 40, 50, 60, 70, 80].map((x) => '<path d="M' + x + ' 48 V70" stroke-width="2"/>').join('') +
+    [17, 27, 47, 57, 67].map((x) => '<rect x="' + (x + 0.5) + '" y="48" width="5" height="13" fill="' + INK + '" stroke="none"/>').join('') +
+    '<path d="M16 70 V90 M84 70 V90" stroke-width="6"/>';
+  P.violin =
+    '<path d="M86 14 L14 84" stroke="#a0673b" stroke-width="3"/><path d="M88 12 L84 16" stroke-width="5"/>' +
+    '<g transform="rotate(30 46 56)">' +
+    '<rect x="42" y="4" width="8" height="36" fill="#7a4a26"/><circle cx="46" cy="6" r="5" fill="#7a4a26"/>' +
+    '<path d="M46 34 C30 34 28 46 34 52 C28 58 28 78 46 80 C64 78 64 58 58 52 C64 46 62 34 46 34 Z" fill="#e8590c"/>' +
+    '<path d="M40 52 q-3 5 0 10 M52 52 q3 5 0 10" fill="none" stroke-width="2"/>' +
+    '<rect x="42" y="68" width="8" height="4" fill="' + INK + '"/>' +
+    '<path d="M44.5 8 V70 M47.5 8 V70" stroke="#fff" stroke-width="0.8"/>' +
+    '</g>';
+  P.trumpet =
+    '<path d="M10 46 H22 M10 42 V50" stroke-width="4"/>' +
+    '<rect x="22" y="40" width="46" height="12" rx="4" fill="#fcc419"/>' +
+    '<path d="M68 40 L92 26 V66 L68 52 Z" fill="#fcc419"/>' +
+    '<ellipse cx="92" cy="46" rx="4" ry="20" fill="#f59f00"/>' +
+    '<path d="M30 52 Q30 70 46 70 Q60 70 60 52" fill="none" stroke="' + INK + '" stroke-width="9"/><path d="M30 52 Q30 70 46 70 Q60 70 60 52" fill="none" stroke="#fcc419" stroke-width="4"/>' +
+    [36, 44, 52].map((x) => '<rect x="' + (x - 2.5) + '" y="28" width="5" height="12" rx="2" fill="#f59f00"/><circle cx="' + x + '" cy="27" r="3.5" fill="#fff"/>').join('');
+  P.flute =
+    '<g transform="rotate(-25 50 50)">' +
+    '<rect x="4" y="44" width="92" height="12" rx="6" fill="#ced4da"/>' +
+    [20, 34, 44, 54, 64, 74].map((x, i) => '<circle cx="' + x + '" cy="50" r="' + (i ? 3 : 4) + '" fill="' + INK + '" stroke="none"/>').join('') +
+    '<path d="M10 47 H90" stroke="#fff" stroke-width="2" opacity=".7"/>' +
+    '</g>';
+  P.xylophone =
+    '<path d="M10 40 L90 30 M10 82 L90 70" stroke="#a0673b" stroke-width="5"/>' +
+    [['#fa5252', 14, 50], ['#ff922b', 26, 46], ['#ffd43b', 38, 42], ['#51cf66', 50, 38], ['#4dabf7', 62, 34], ['#845ef7', 74, 30]]
+      .map((b) => '<rect x="' + b[1] + '" y="' + (86 - b[2] - 30 + (b[1] - 14) / 6) + '" width="10" height="' + b[2] + '" rx="3" fill="' + b[0] + '"/>')
+      .join('') +
+    '<path d="M60 18 L86 4 M70 22 L94 12" stroke-width="3"/><circle cx="60" cy="18" r="4" fill="#fa5252"/><circle cx="70" cy="22" r="4" fill="#fa5252"/>';
+  P.harp =
+    '<path d="M22 90 L26 10 Q50 6 60 22 Q72 40 86 44 L84 90 Z" fill="none" stroke="' + INK + '" stroke-width="9"/>' +
+    '<path d="M22 90 L26 10 Q50 6 60 22 Q72 40 86 44 L84 90 Z" fill="none" stroke="#fcc419" stroke-width="5"/>' +
+    [34, 44, 54, 64, 74].map((x, i) => '<path d="M' + x + ' ' + [12, 15, 24, 36, 42][i] + ' V88" stroke="#fff4e6" stroke-width="2"/><path d="M' + x + ' ' + [12, 15, 24, 36, 42][i] + ' V88" stroke="' + INK + '" stroke-width="0.8"/>').join('') +
+    '<path d="M18 90 H90" stroke-width="5"/>';
+
+  // ---------- Weather ----------
+
+  P.rain =
+    '<path d="M22 54 A15 15 0 0 1 20 24 A18 18 0 0 1 54 14 A17 17 0 0 1 78 32 A12 12 0 0 1 74 54 Z" fill="#868e96"/>' +
+    [[26, 60], [46, 64], [66, 60], [36, 78], [56, 82], [76, 76]].map((p) => '<path d="M' + p[0] + ' ' + p[1] + ' q-7 10 0 13 q7 -3 0 -13 z" fill="#4dabf7" stroke-width="2"/>').join('');
+  P.wind =
+    '<path d="M8 34 H58 Q70 34 70 24 Q70 14 60 14 Q52 14 52 22" fill="none" stroke="#74c0fc" stroke-width="6"/>' +
+    '<path d="M8 52 H78 Q90 52 90 62 Q90 72 80 72 Q72 72 72 64" fill="none" stroke="#74c0fc" stroke-width="6"/>' +
+    '<path d="M8 70 H44" fill="none" stroke="#74c0fc" stroke-width="6"/>' +
+    '<path d="M50 84 Q58 76 66 84 Q58 90 50 84 Z" fill="#ff922b"/><path d="M76 20 Q84 12 90 20 Q84 26 76 20 Z" fill="#51cf66"/>';
+  P.storm =
+    '<path d="M20 50 A15 15 0 0 1 18 20 A18 18 0 0 1 52 10 A17 17 0 0 1 76 28 A12 12 0 0 1 72 50 Z" fill="#495057"/>' +
+    '<path d="M48 46 L36 70 H48 L40 94 L64 62 H52 L60 46 Z" fill="#ffd43b"/>' +
+    '<path d="M24 58 l-4 10 M30 72 l-4 10 M74 58 l-4 10 M80 72 l-4 10" stroke="#4dabf7" stroke-width="3"/>';
+  P.fog =
+    '<rect x="24" y="44" width="10" height="40" fill="#a0673b" opacity=".6"/><circle cx="29" cy="36" r="18" fill="#51cf66" opacity=".6"/>' +
+    '<path d="M60 84 L74 50 L88 84 Z" fill="#748ffc" opacity=".55"/>' +
+    [28, 46, 64, 82].map((y, i) => '<path d="M' + (i % 2 ? 14 : 6) + ' ' + y + ' H' + (i % 2 ? 94 : 86) + '" stroke="#ced4da" stroke-width="9"/>').join('');
+
+  // ---------- Vegetables, bugs and farm animals (more) ----------
+
+  P.peas =
+    '<path d="M10 56 Q30 30 90 34 Q78 70 10 56 Z" fill="#51cf66"/>' +
+    [26, 40, 54, 68].map((x, i) => '<circle cx="' + x + '" cy="' + (50 - i * 1.5) + '" r="7" fill="#8ce99a"/>').join('') +
+    '<path d="M10 56 Q46 64 90 34" fill="none" stroke="#2b8a3e" stroke-width="3"/>' +
+    '<path d="M88 34 Q92 24 86 18" fill="none" stroke="#2b8a3e" stroke-width="3"/>';
+  P.pumpkin =
+    '<path d="M50 26 Q50 14 58 10" fill="none" stroke="#2b8a3e" stroke-width="6"/>' +
+    '<ellipse cx="30" cy="58" rx="20" ry="28" fill="#ff922b"/><ellipse cx="70" cy="58" rx="20" ry="28" fill="#ff922b"/>' +
+    '<ellipse cx="50" cy="58" rx="18" ry="30" fill="#ff922b"/>' +
+    '<path d="M58 14 Q70 10 74 20 Q66 22 58 14 Z" fill="#51cf66"/>';
+  P.lettuce =
+    '<circle cx="50" cy="56" r="34" fill="#8ce99a"/>' +
+    '<path d="M18 50 Q30 30 50 40 Q70 30 82 50 Q70 46 60 58 Q50 46 40 58 Q30 46 18 50 Z" fill="#51cf66"/>' +
+    '<path d="M50 40 V88 M50 60 L34 74 M50 60 L66 74 M50 74 L40 84 M50 74 L60 84" fill="none" stroke="#d8f5a2" stroke-width="3"/>' +
+    '<circle cx="50" cy="56" r="34" fill="none"/>';
+  P.garlic =
+    '<path d="M50 10 Q46 20 48 28 H52 Q54 20 50 10 Z" fill="#f1f3f5"/>' +
+    '<path d="M48 28 C30 34 16 50 22 70 C26 84 40 88 50 88 C60 88 74 84 78 70 C84 50 70 34 52 28 Z" fill="#f8f9fa"/>' +
+    '<path d="M50 30 Q36 54 42 88 M50 30 Q64 54 58 88" fill="none" stroke="#dee2e6" stroke-width="3"/>' +
+    '<path d="M38 88 l-2 6 M50 88 v6 M62 88 l2 6" stroke="#c98b52" stroke-width="2"/>';
+  P.beans =
+    [[30, 36, -20, '#a0673b'], [62, 30, 15, '#c92a2a'], [38, 66, 10, '#c92a2a'], [70, 62, -25, '#a0673b']]
+      .map((b) => '<g transform="rotate(' + b[2] + ' ' + b[0] + ' ' + b[1] + ')"><path d="M' + (b[0] - 18) + ' ' + b[1] + ' Q' + (b[0] - 18) + ' ' + (b[1] - 14) + ' ' + b[0] + ' ' + (b[1] - 12) + ' Q' + (b[0] + 18) + ' ' + (b[1] - 12) + ' ' + (b[0] + 18) + ' ' + b[1] + ' Q' + (b[0] + 16) + ' ' + (b[1] + 12) + ' ' + b[0] + ' ' + (b[1] + 8) + ' Q' + b[0] + ' ' + (b[1] + 2) + ' ' + (b[0] - 6) + ' ' + (b[1] + 8) + ' Q' + (b[0] - 18) + ' ' + (b[1] + 12) + ' ' + (b[0] - 18) + ' ' + b[1] + ' Z" fill="' + b[3] + '"/>' +
+        '<path d="M' + (b[0] - 10) + ' ' + (b[1] - 6) + ' q6 -3 12 -2" fill="none" stroke="#fff" stroke-width="2" opacity=".6"/></g>')
+      .join('');
+  P.caterpillar =
+    [82, 68, 54, 40, 26].map((x, i) => '<circle cx="' + x + '" cy="' + (60 + (i % 2 ? -4 : 4)) + '" r="12" fill="' + (i % 2 ? '#8ce99a' : '#51cf66') + '"/>').join('') +
+    [82, 68, 54, 40].map((x, i) => '<path d="M' + x + ' ' + (72 + (i % 2 ? -4 : 4)) + ' v6" stroke-width="3"/>').join('') +
+    '<circle cx="14" cy="50" r="13" fill="#51cf66"/>' + eye(10, 47, 2.8) + eye(19, 47, 2.8) +
+    '<path d="M10 55 q4 3 8 0" fill="none" stroke-width="2"/>' +
+    '<path d="M8 38 L4 28 M18 38 L22 28" stroke-width="2.5"/><circle cx="4" cy="27" r="2.5" fill="#fa5252"/><circle cx="22" cy="27" r="2.5" fill="#fa5252"/>';
+  P.grasshopper =
+    '<path d="M54 56 L74 28 L90 74 M30 62 L24 80 M44 62 L44 80" fill="none" stroke="' + INK + '" stroke-width="7"/>' +
+    '<path d="M54 56 L74 28 L90 74 M30 62 L24 80 M44 62 L44 80" fill="none" stroke="#40c057" stroke-width="3"/>' +
+    '<ellipse cx="52" cy="56" rx="30" ry="11" fill="#69db7c"/>' +
+    '<path d="M40 50 Q60 38 82 54" fill="#40c057"/>' +
+    '<circle cx="22" cy="50" r="11" fill="#69db7c"/>' + eye(18, 47, 3) +
+    '<path d="M20 40 Q16 22 4 16 M24 40 Q26 22 36 12" fill="none" stroke-width="2"/>';
+  P.dragonfly =
+    '<ellipse cx="30" cy="34" rx="22" ry="8" fill="#a5d8ff" opacity=".9" transform="rotate(-15 30 34)"/>' +
+    '<ellipse cx="70" cy="34" rx="22" ry="8" fill="#a5d8ff" opacity=".9" transform="rotate(15 70 34)"/>' +
+    '<ellipse cx="32" cy="48" rx="18" ry="6" fill="#a5d8ff" opacity=".9" transform="rotate(12 32 48)"/>' +
+    '<ellipse cx="68" cy="48" rx="18" ry="6" fill="#a5d8ff" opacity=".9" transform="rotate(-12 68 48)"/>' +
+    '<rect x="46" y="38" width="8" height="52" rx="4" fill="#20c997"/>' +
+    '<circle cx="50" cy="28" r="9" fill="#20c997"/>' + eye(45, 26, 3) + eye(55, 26, 3);
+  P.fly =
+    '<ellipse cx="34" cy="34" rx="16" ry="10" fill="#d0ebff" opacity=".9" transform="rotate(-35 34 34)"/>' +
+    '<ellipse cx="66" cy="34" rx="16" ry="10" fill="#d0ebff" opacity=".9" transform="rotate(35 66 34)"/>' +
+    '<path d="M38 62 L24 72 M38 56 L22 56 M40 68 L32 82 M62 62 L76 72 M62 56 L78 56 M60 68 L68 82" stroke-width="2.5"/>' +
+    '<ellipse cx="50" cy="60" rx="14" ry="18" fill="#495057"/>' +
+    '<circle cx="50" cy="38" r="10" fill="#495057"/>' +
+    '<circle cx="44" cy="36" r="5" fill="#fa5252"/><circle cx="56" cy="36" r="5" fill="#fa5252"/>';
+  P.beetle =
+    '<path d="M30 46 L16 40 M30 58 L14 60 M32 70 L18 80 M70 46 L84 40 M70 58 L86 60 M68 70 L82 80" stroke-width="3"/>' +
+    '<path d="M42 22 Q36 12 30 12 M58 22 Q64 12 70 12" fill="none" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="28" r="10" fill="#343a40"/>' +
+    '<ellipse cx="50" cy="60" rx="24" ry="28" fill="#2b8a3e"/>' +
+    '<path d="M50 34 V88" stroke-width="3"/>' +
+    '<path d="M36 48 q4 -6 8 -6" fill="none" stroke="#8ce99a" stroke-width="3"/>';
+  P.donkey =
+    '<path d="M30 30 L20 2 L40 22 Z M70 30 L80 2 L60 22 Z" fill="#868e96"/>' +
+    '<path d="M28 34 L27 10 L37 24 Z M72 34 L73 10 L63 24 Z" fill="#ffc2d1" stroke="none"/>' +
+    '<path d="M30 30 Q50 16 70 30 L66 70 Q50 88 34 70 Z" fill="#adb5bd"/>' +
+    '<path d="M44 22 Q50 14 56 22 Q52 28 50 24 Q48 28 44 22 Z" fill="#495057"/>' +
+    eye(39, 44, 4) + eye(61, 44, 4) +
+    '<ellipse cx="50" cy="74" rx="17" ry="13" fill="#e9ecef"/>' +
+    '<ellipse cx="43" cy="74" rx="2.5" ry="3.5" fill="' + INK + '" stroke="none"/><ellipse cx="57" cy="74" rx="2.5" ry="3.5" fill="' + INK + '" stroke="none"/>';
+  P.goose =
+    '<path d="M50 84 v8 M60 84 v8 M46 92 h8 M56 92 h8" stroke="#fd7e14" stroke-width="3"/>' +
+    '<path d="M22 64 Q24 48 46 48 Q72 48 84 40 Q92 60 78 74 Q64 86 44 84 Q24 82 22 64 Z" fill="#fff"/>' +
+    '<path d="M50 60 q14 12 28 2" fill="none" stroke-width="2.5"/>' +
+    limb('M34 52 Q22 40 26 22', '#fff', 8) +
+    '<circle cx="28" cy="18" r="10" fill="#fff"/>' + eye(29, 15, 2.5) +
+    '<path d="M19 17 L6 21 L19 25 Z" fill="#fd7e14"/>';
+  P.turkey =
+    [[-60, '#a0673b'], [-35, '#e8590c'], [-10, '#fcc419'], [10, '#e8590c'], [35, '#a0673b'], [60, '#fcc419']]
+      .map((f) => '<ellipse cx="50" cy="26" rx="10" ry="24" fill="' + f[1] + '" transform="rotate(' + f[0] + ' 50 56)"/>').join('') +
+    '<ellipse cx="50" cy="62" rx="20" ry="22" fill="#7a4a26"/>' +
+    '<circle cx="50" cy="40" r="10" fill="#c98b52"/>' + eye(46, 38, 2.5) + eye(54, 38, 2.5) +
+    '<path d="M46 43 L50 50 L54 43 Z" fill="#fcc419" stroke-width="2"/>' +
+    '<path d="M52 46 q4 4 2 10 q-4 -2 -4 -8" fill="#fa5252" stroke-width="2"/>' +
+    '<path d="M44 84 v8 M56 84 v8" stroke="#fd7e14" stroke-width="3"/>';
+  P.hamster =
+    '<circle cx="28" cy="30" r="9" fill="#e8a25c"/><circle cx="72" cy="30" r="9" fill="#e8a25c"/>' +
+    '<circle cx="28" cy="30" r="5" fill="#ffc2d1" stroke="none"/><circle cx="72" cy="30" r="5" fill="#ffc2d1" stroke="none"/>' +
+    '<ellipse cx="50" cy="58" rx="34" ry="30" fill="#e8a25c"/>' +
+    '<ellipse cx="50" cy="66" rx="24" ry="20" fill="#fff4e6"/>' +
+    eye(40, 48, 3.5) + eye(60, 48, 3.5) +
+    '<ellipse cx="28" cy="62" rx="10" ry="8" fill="#ffc2d1" opacity=".55" stroke="none"/><ellipse cx="72" cy="62" rx="10" ry="8" fill="#ffc2d1" opacity=".55" stroke="none"/>' +
+    '<circle cx="50" cy="56" r="3" fill="#ff6b8a"/>' +
+    '<path d="M46 62 q4 3 8 0" fill="none" stroke-width="2"/>' +
+    '<ellipse cx="42" cy="84" rx="5" ry="3" fill="#ffc2d1"/><ellipse cx="58" cy="84" rx="5" ry="3" fill="#ffc2d1"/>';
 
   LG.PICTURES = P;
   LG.picture = function (id) {

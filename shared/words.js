@@ -257,6 +257,49 @@
     rope | skipping rope | kolebnica | Springseil | corde à sauter | comba
     slide | slide | tobogan | Rutsche | toboggan | tobogán
     swing | swing | gugalnica | Schaukel | balançoire | columpio
+    doctor | doctor | zdravnica | Ärztin | médecin | doctora
+    nurse | nurse | medicinski brat | Krankenpfleger | infirmier | enfermero
+    firefighter | firefighter | gasilka | Feuerwehrfrau | pompière | bombera
+    police | police officer | policist | Polizist | policier | policía
+    farmer | farmer | kmetica | Bäuerin | fermière | granjera
+    cook | cook | kuhar | Koch | cuisinier | cocinero
+    builder | builder | zidar | Bauarbeiter | maçon | albañil
+    pilot | pilot | pilotka | Pilotin | pilote | piloto
+    vet | vet | veterinarka | Tierärztin | vétérinaire | veterinaria
+    teacher | teacher | učitelj | Lehrer | maître | maestro
+    schoolhouse | school | šola | Schule | école | escuela
+    shop | shop | trgovina | Laden | magasin | tienda
+    park | park | park | Park | parc | parque
+    hospital | hospital | bolnišnica | Krankenhaus | hôpital | hospital
+    farmhouse | farm | kmetija | Bauernhof | ferme | granja
+    beach | beach | plaža | Strand | plage | playa
+    zoo | zoo | živalski vrt | Zoo | zoo | zoo
+    playground | playground | igrišče | Spielplatz | aire de jeux | parque infantil
+    library | library | knjižnica | Bücherei | bibliothèque | biblioteca
+    piano | piano | klavir | Klavier | piano | piano
+    violin | violin | violina | Geige | violon | violín
+    trumpet | trumpet | trobenta | Trompete | trompette | trompeta
+    flute | flute | flavta | Flöte | flûte | flauta
+    xylophone | xylophone | ksilofon | Xylofon | xylophone | xilófono
+    harp | harp | harfa | Harfe | harpe | arpa
+    rain | rain | dež | Regen | pluie | lluvia
+    wind | wind | veter | Wind | vent | viento
+    storm | storm | nevihta | Gewitter | orage | tormenta
+    fog | fog | megla | Nebel | brouillard | niebla
+    peas | peas | grah | Erbsen | petits pois | guisantes
+    pumpkin | pumpkin | buča | Kürbis | citrouille | calabaza
+    lettuce | lettuce | solata | Salat | salade | lechuga
+    garlic | garlic | česen | Knoblauch | ail | ajo
+    beans | beans | fižol | Bohnen | haricots | judías
+    caterpillar | caterpillar | gosenica | Raupe | chenille | oruga
+    grasshopper | grasshopper | kobilica | Heuschrecke | sauterelle | saltamontes
+    dragonfly | dragonfly | kačji pastir | Libelle | libellule | libélula
+    fly | fly | muha | Fliege | mouche | mosca
+    beetle | beetle | hrošč | Käfer | scarabée | escarabajo
+    donkey | donkey | osel | Esel | âne | burro
+    goose | goose | gos | Gans | oie | ganso
+    turkey | turkey | puran | Truthahn | dinde | pavo
+    hamster | hamster | hrček | Hamster | hamster | hámster
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -272,32 +315,36 @@
   // curricula. Each picture belongs to one topic; teachers can limit the
   // games to some topics in the settings.
   const TOPIC_WORDS = {
-    farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse',
+    farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse donkey goose turkey hamster',
     wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog owl bat bird parrot flamingo penguin snake turtle dinosaur',
     water: 'fish whale crab octopus shark dolphin starfish jellyfish seal frog',
-    bugs: 'bee butterfly ladybug spider snail ant worm',
+    bugs: 'bee butterfly ladybug spider snail ant worm caterpillar grasshopper dragonfly fly beetle',
     fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut',
-    vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli',
+    vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli peas pumpkin lettuce garlic beans',
     food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut',
     clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown',
     body: 'eye ear nose mouth tooth hand foot leg head hair arm finger knee tummy eyebrow',
     family: 'mother father baby grandma grandpa brother sister boy girl',
     home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock',
-    household: 'cup spoon fork plate bottle pot soap towel toothbrush comb broom bucket basket box candle key umbrella ladder hammer bell',
-    toys: 'ball balloon kite drum guitar teddy doll robot gift puzzle blocks yoyo rope slide swing',
+    household: 'cup spoon fork plate bottle pot soap towel toothbrush comb broom bucket basket box candle key umbrella ladder hammer',
+    toys: 'ball balloon kite teddy doll robot gift puzzle blocks yoyo rope slide swing',
+    music: 'drum guitar bell piano violin trumpet flute xylophone harp',
     school: 'book pencil scissors backpack brush desk ruler eraser crayon glue paper board',
     transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine',
-    nature: 'sun moon star cloud rainbow snowflake snowman lightning fire mountain tree flower leaf wave rock cactus volcano planet shell feather nest',
+    jobs: 'doctor nurse firefighter police farmer cook builder pilot vet teacher',
+    places: 'schoolhouse shop park hospital farmhouse beach zoo playground library castle flag',
+    sky: 'sun moon star cloud rainbow snowflake snowman lightning planet rain wind storm fog',
+    nature: 'fire mountain tree flower leaf wave rock cactus volcano shell feather nest',
     colours: 'red blue yellow green colorOrange purple pink brown black white grey',
     numbers: 'one two three four five six seven eight nine ten',
-    other: 'heart flag castle',
+    other: 'heart',
   };
   // Topic order and the picture that stands for each topic.
   LG.TOPICS = [
     ['farm', 'cow'], ['wild', 'lion'], ['water', 'fish'], ['bugs', 'ladybug'],
     ['fruit', 'apple'], ['vegetables', 'carrot'], ['food', 'pizza'], ['clothes', 'shirt'],
-    ['body', 'hand'], ['family', 'mother'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'],
-    ['school', 'pencil'], ['transport', 'bus'], ['nature', 'tree'], ['colours', 'blue'], ['numbers', 'three'], ['other', 'heart'],
+    ['body', 'hand'], ['family', 'mother'], ['jobs', 'doctor'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'], ['music', 'guitar'],
+    ['school', 'pencil'], ['transport', 'bus'], ['places', 'schoolhouse'], ['sky', 'rainbow'], ['nature', 'tree'], ['colours', 'blue'], ['numbers', 'three'], ['other', 'heart'],
   ].map(([id, pic]) => ({ id: id, pic: pic }));
   const TOPIC_OF = {};
   Object.keys(TOPIC_WORDS).forEach((t) => TOPIC_WORDS[t].split(' ').forEach((pic) => (TOPIC_OF[pic] = t)));
