@@ -10,14 +10,17 @@ internet connection beyond loading the page, and no build step.
 - **Build the Word** (`games/build-word/`): tap letters to spell the pictured word. Words get longer as the game goes on, and from round 5 there is an extra letter that doesn't belong.
 - **Picture Hunt** (`games/picture-hunt/`): read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. Stars depend on the time left.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
+- **Teacher settings** (`settings.html`, the gear on the game list): reading
+  fonts, coloured letters for b, d, p, q and g, and wider letter spacing.
+  A quick sum keeps children from changing them by accident.
 
 The round-based games have 8 rounds drawn at random from a bank of 200 pictured words
 (animals, food, clothes, home, toys, vehicles, nature, body), so every play-through is
 different. German nouns keep their capital letter.
 
 No ads, no tracking, no accounts, no cookies, and nothing is sent anywhere.
-The only things stored are the chosen language and the sound on/off setting,
-in the browser's local storage.
+The only things stored are the chosen language, the sound on/off setting and
+the teacher settings, in the browser's local storage.
 
 ## Running it
 
@@ -49,6 +52,26 @@ URL options:
 |---|---|---|
 | `lang` | `en`, `sl`, `de`, `fr`, `es` | Language. Without it, the game uses the last choice, then the browser language. |
 | `home` | `0` | Hides the button back to the game list (use it when embedding a single game). |
+| `font` | `andika`, `opendyslexic`, `lexend`, `atkinson` | Reading font. |
+| `colors` | any of `bdpqg`, e.g. `bdpq` | Gives these letters their own colour. |
+| `spacing` | `1` | Wider spacing between letters. |
+
+URL options win over the teacher settings saved on the device. The settings
+page shows the exact options for the current settings, ready to copy.
+
+## Fonts
+
+The reading fonts are bundled in `shared/fonts/` (no Google Fonts or other
+outside requests) under the SIL Open Font License; see the `LICENSE-*.txt`
+files there. A device only downloads a font once it's chosen.
+
+- **Andika** (SIL International): designed for beginning readers, with the single-storey a and g.
+- **OpenDyslexic** (Abbie Gonzalez): weighted letter bottoms for dyslexic readers.
+- **Lexend** (Bonnie Shaver-Troup, Thomas Jockin): designed to improve reading fluency.
+- **Atkinson Hyperlegible** (Braille Institute): maximally distinct letter shapes.
+
+Comic Neue was considered but left out: it lacks č, š and ž, so Slovenian
+words would mix two fonts.
 
 ## Speech
 
@@ -87,12 +110,14 @@ only uses single words of up to 5 letters.
 index.html            game list
 words.html            Word Book
 voice-test.html       shows which speech voices a browser has
+settings.html         teacher settings
 games/*/index.html    one page per game
 games/*/game.js       game rules
 shared/engine.js      language, text, speech, sounds, game shell
 shared/pictures.js    all pictures (SVG)
 shared/words.js       word bank (all five languages)
 shared/styles.css     shared styles
+shared/fonts/         bundled reading fonts and their licenses
 ```
 
 ## License

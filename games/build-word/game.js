@@ -45,7 +45,7 @@
 
       const tileRow = LG.el('div', 'choices letters');
       const tiles = letters.map((letter, t) => {
-        const b = LG.el('button', 'tile small', letter);
+        const b = LG.el('button', 'tile small', LG.fmt(letter));
         b.type = 'button';
         b.addEventListener('click', () => place(t));
         return tileRow.appendChild(b);
@@ -54,7 +54,7 @@
       function draw() {
         slots.forEach((b, s) => {
           const t = filled[s];
-          b.textContent = t === null ? '' : letters[t];
+          b.innerHTML = t === null ? '' : LG.fmt(letters[t]);
           b.classList.toggle('filled', t !== null);
           b.setAttribute('aria-label', t === null ? String(s + 1) : letters[t]);
         });

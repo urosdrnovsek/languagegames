@@ -29,7 +29,7 @@
 
       const choices = LG.el('div', 'choices stacked');
       options.forEach((opt) => {
-        const b = LG.el('button', 'word-btn', opt.word);
+        const b = LG.el('button', 'word-btn fit', LG.fmt(opt.word));
         b.type = 'button';
         b.addEventListener('click', () => {
           if (ctx.isLocked() || b.disabled) return;

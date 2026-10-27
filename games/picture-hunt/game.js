@@ -53,7 +53,7 @@
       const list = LG.el('div', 'word-list');
       const chips = {};
       targets.forEach((w) => {
-        const chip = LG.el('button', 'word-chip', w.word);
+        const chip = LG.el('button', 'word-chip fit', LG.fmt(w.word));
         chip.type = 'button';
         chip.addEventListener('click', () => LG.speak(w.word));
         chips[w.pic] = list.appendChild(chip);

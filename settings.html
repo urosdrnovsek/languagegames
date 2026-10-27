@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Language Games</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .settings { width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 20px; }
+    .box { background: var(--card); border: 4px solid var(--ink); border-radius: 24px; box-shadow: 0 6px 0 var(--ink); padding: 18px 18px 20px; }
+    .box h2 { margin: 0 0 4px; font-size: 1.4rem; }
+    .box > p { margin: 0 0 14px; color: var(--ink-soft); }
+    .fonts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .font-card { position: relative; display: block; border: 3px solid var(--ink); border-radius: 18px; padding: 12px 14px; cursor: pointer; background: var(--card); }
+    .font-card input { position: absolute; opacity: 0; pointer-events: none; }
+    .font-card:has(input:checked) { border-color: var(--accent); background: #edf2ff; box-shadow: 0 0 0 3px var(--accent); }
+    .font-card:has(input:focus-visible) { outline: 4px solid var(--accent); outline-offset: 3px; }
+    .font-card .sample { display: block; white-space: nowrap; font-size: 1.7rem; line-height: 1.2; margin-bottom: 4px; }
+    .font-card .name { display: block; font-weight: 700; font-size: 1.1rem; }
+    .font-card .desc { display: block; color: var(--ink-soft); font-size: 0.95rem; margin-top: 2px; }
+    .letters { display: flex; flex-wrap: wrap; gap: 10px; }
+    .letter-toggle { display: inline-grid; place-items: center; width: 64px; height: 64px; border: 3px solid var(--ink); border-radius: 16px;
+      font-size: 2.2rem; font-weight: 700; background: var(--card); color: var(--ink-soft); cursor: pointer; box-shadow: 0 4px 0 var(--ink); }
+    .letter-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+    .letter-toggle:has(input:checked) { background: var(--tile); border-color: var(--ink); }
+    .letter-toggle:has(input:focus-visible) { outline: 4px solid var(--accent); outline-offset: 3px; }
+    .switch { display: flex; align-items: center; gap: 12px; font-size: 1.1rem; cursor: pointer; }
+    .switch input { width: 26px; height: 26px; accent-color: var(--accent); }
+    .preview { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .preview .choices { gap: 10px; }
+    .link-row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
+    .link-row code { flex: 1; min-width: 0; padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #f1f3f5; font-size: 1rem; overflow-wrap: anywhere; }
+    .small-btn { border: 3px solid var(--ink); border-radius: 12px; background: var(--accent); color: #fff; font-weight: 700; font-size: 1rem; padding: 8px 16px; box-shadow: 0 3px 0 var(--ink); }
+    .small-btn.secondary { background: var(--card); color: var(--ink); }
+    .gate-input { width: 140px; font-size: 2rem; text-align: center; padding: 6px; border: 3px solid var(--ink); border-radius: 14px; font-family: inherit; margin: 0 auto 10px; display: block; }
+    .gate-error { color: var(--bad); min-height: 1.4em; }
+  </style>
+</head>
+<body>
+  <main class="settings" id="settings" hidden>
+    <section class="box">
+      <h2 id="fontHeading"></h2>
+      <p id="fontHelp"></p>
+      <div class="fonts" id="fonts" role="radiogroup"></div>
+    </section>
+    <section class="box">
+      <h2 id="colorsHeading"></h2>
+      <p id="colorsHelp"></p>
+      <div class="letters" id="letters"></div>
+    </section>
+    <section class="box">
+      <h2 id="spacingHeading"></h2>
+      <label class="switch"><input type="checkbox" id="spacing"> <span id="spacingLabel"></span></label>
+    </section>
+    <section class="box">
+      <h2 id="previewHeading"></h2>
+      <div class="preview" id="preview"></div>
+    </section>
+    <section class="box">
+      <h2 id="linkHeading"></h2>
+      <p id="linkHelp"></p>
+      <div class="link-row"><code id="query"></code><button type="button" class="small-btn" id="copy"></button></div>
+    </section>
+    <div><button type="button" class="small-btn secondary" id="reset"></button></div>
+  </main>
+
+  <script src="shared/pictures.js"></script>
+  <script src="shared/words.js"></script>
+  <script src="shared/engine.js"></script>
+  <script>
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const FAMILY = { default: '', andika: "'LG Andika'", opendyslexic: "'LG OpenDyslexic'", lexend: "'LG Lexend'", atkinson: "'LG Atkinson'" };
+      const NAMES = { andika: 'Andika', opendyslexic: 'OpenDyslexic', lexend: 'Lexend', atkinson: 'Atkinson Hyperlegible' };
+
+      // This page edits what's saved on the device, not URL overrides. The
+      // page itself stays in the standard font; only the preview changes.
+      let current = LG.savedSettings();
+      LG.applySettings(current);
+      function keepPageStandard() {
+        document.documentElement.dataset.font = 'default';
+        document.documentElement.classList.remove('wide-spacing');
+      }
+      keepPageStandard();
+
+      // ---- Top bar ----
+      const bar = LG.el('header', 'topbar');
+      const home = LG.el('a', 'icon-btn', LG.ICONS.home);
+      home.href = LG.link('index.html');
+      home.setAttribute('aria-label', LG.t('allGames'));
+      bar.appendChild(home);
+      bar.appendChild(LG.el('h1', 'game-title', LG.t('teacherSettings')));
+      const tools = LG.el('div', 'tools');
+      tools.appendChild(LG.langSwitch());
+      bar.appendChild(tools);
+      document.body.prepend(bar);
+      document.title = LG.t('teacherSettings') + ' · ' + LG.t('appTitle');
+
+      ['fontHeading', 'fontHelp', 'colorsHeading', 'colorsHelp', 'spacingHeading', 'spacingLabel', 'previewHeading', 'linkHeading', 'linkHelp']
+        .forEach((k) => ($(k).textContent = LG.t(k)));
+      $('copy').textContent = LG.t('copy');
+      $('reset').textContent = LG.t('reset');
+
+      // Sample words in this language that contain the letters children mix up.
+      const samples = LG.words(LG.lang, { maxLength: 7 })
+        .filter((w) => /[bdpqg]/.test(w.word))
+        .sort((a, b) => (b.word.match(/[bdpqg]/g).length - a.word.match(/[bdpqg]/g).length) || a.letters.length - b.letters.length)
+        .slice(0, 3);
+
+      // ---- Fonts ----
+      LG.FONTS.forEach((f) => {
+        const card = LG.el('label', 'font-card');
+        const input = LG.el('input');
+        input.type = 'radio';
+        input.name = 'font';
+        input.value = f;
+        input.checked = current.font === f;
+        input.addEventListener('change', () => update({ font: f }));
+        const sample = LG.el('span', 'sample', 'a g b d p q');
+        if (FAMILY[f]) sample.style.fontFamily = FAMILY[f] + ', sans-serif';
+        else sample.style.fontFamily = "'Nunito', 'Century Gothic', 'Avenir Next', 'Trebuchet MS', system-ui, sans-serif";
+        card.append(input, sample, LG.el('span', 'name', f === 'default' ? LG.t('font_default') : NAMES[f]), LG.el('span', 'desc', LG.t('fontDesc_' + f)));
+        $('fonts').appendChild(card);
+      });
+
+      // ---- Coloured letters ----
+      LG.COLOR_LETTERS.forEach((l) => {
+        const label = LG.el('label', 'letter-toggle');
+        const input = LG.el('input');
+        input.type = 'checkbox';
+        input.value = l;
+        input.checked = current.colors.includes(l);
+        input.setAttribute('aria-label', l);
+        input.addEventListener('change', () => {
+          const colors = LG.COLOR_LETTERS.filter((x) => (x === l ? input.checked : current.colors.includes(x)));
+          update({ colors: colors });
+        });
+        label.append(input, LG.el('span', 'lc lc-' + l, l));
+        $('letters').appendChild(label);
+      });
+
+      // ---- Spacing ----
+      $('spacing').checked = current.spacing;
+      $('spacing').addEventListener('change', (e) => update({ spacing: e.target.checked }));
+
+      function update(change) {
+        current = Object.assign({}, current, change);
+        LG.saveSettings(current);
+        keepPageStandard();
+        current = LG.settings;
+        draw();
+      }
+
+      function draw() {
+        document.querySelectorAll('.letter-toggle span').forEach((s) => (s.className = current.colors.includes(s.textContent) ? 'lc lc-' + s.textContent : ''));
+        const preview = $('preview');
+        preview.innerHTML = '';
+        preview.style.fontFamily = FAMILY[current.font] ? FAMILY[current.font] + ', sans-serif' : '';
+        preview.classList.toggle('wide-spacing', current.spacing);
+        const words = LG.el('div', 'choices stacked');
+        samples.forEach((w) => words.appendChild(LG.el('div', 'word-btn fit', LG.fmt(w.word))));
+        const tiles = LG.el('div', 'choices letters');
+        LG.COLOR_LETTERS.forEach((l) => tiles.appendChild(LG.el('div', 'tile small', LG.fmt(l))));
+        preview.append(words, tiles);
+        LG.fit(preview);
+        const q = LG.settingsQuery(current);
+        $('query').textContent = q ? '&' + q : LG.t('linkNone');
+        $('copy').hidden = !q;
+      }
+
+      $('copy').addEventListener('click', () => {
+        const text = '&' + LG.settingsQuery(current);
+        const done = () => {
+          $('copy').textContent = LG.t('copied');
+          setTimeout(() => ($('copy').textContent = LG.t('copy')), 1500);
+        };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => {});
+      });
+
+      $('reset').addEventListener('click', () => {
+        update({ font: 'default', colors: [], spacing: false });
+        document.querySelector('input[name=font][value=default]').checked = true;
+        document.querySelectorAll('.letter-toggle input').forEach((i) => (i.checked = false));
+        $('spacing').checked = false;
+      });
+
+      draw();
+
+      // ---- Grown-ups check, so children don't change settings by accident ----
+      function unlock() {
+        $('settings').hidden = false;
+      }
+      let passed = false;
+      try {
+        passed = sessionStorage.getItem('lg-teacher') === '1';
+      } catch (e) {}
+      if (passed) return unlock();
+
+      const a = 3 + Math.floor(Math.random() * 7);
+      const b = 3 + Math.floor(Math.random() * 7);
+      const o = LG.el('div', 'overlay');
+      const panel = LG.el('form', 'panel');
+      const input = LG.el('input', 'gate-input');
+      input.type = 'text';
+      input.inputMode = 'numeric';
+      input.autocomplete = 'off';
+      input.setAttribute('aria-label', LG.t('gateQuestion', { a: a, b: b }));
+      const error = LG.el('p', 'gate-error');
+      const ok = LG.el('button', 'big-btn', '<span>' + LG.t('gateOk') + '</span>');
+      ok.type = 'submit';
+      panel.append(LG.el('div', 'panel-pic', LG.picture('key')), LG.el('h2', '', LG.t('gateTitle')), LG.el('p', '', LG.t('gateQuestion', { a: a, b: b })), input, error, ok);
+      panel.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (parseInt(input.value, 10) === a + b) {
+          try {
+            sessionStorage.setItem('lg-teacher', '1');
+          } catch (err) {}
+          o.remove();
+          unlock();
+        } else {
+          error.textContent = LG.t('gateWrong');
+          input.value = '';
+          LG.shake(panel);
+        }
+      });
+      o.appendChild(panel);
+      document.body.appendChild(o);
+      input.focus();
+    })();
+  </script>
+</body>
+</html>

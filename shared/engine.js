@@ -73,6 +73,31 @@
       huntFoundSome: 'You found {n} of {total}. Try again!',
       huntWon: 'You found all the pictures!',
       timeLeft: 'Time left',
+      teacherSettings: 'Teacher settings',
+      forTeachers: 'For teachers',
+      gateTitle: 'For grown-ups',
+      gateQuestion: 'What is {a} + {b}?',
+      gateOk: 'OK',
+      gateWrong: 'Not quite. Try again.',
+      fontHeading: 'Font',
+      fontHelp: 'Choose the letters children see in every game.',
+      font_default: 'Standard',
+      fontDesc_default: "The device's own rounded font.",
+      fontDesc_andika: 'Made for children learning to read, with the simple a and g they learn to write.',
+      fontDesc_opendyslexic: 'Heavier letter bottoms help keep letters from flipping and turning.',
+      fontDesc_lexend: 'Designed to make reading easier and faster.',
+      fontDesc_atkinson: 'Every letter is shaped to look as different from the others as possible.',
+      colorsHeading: 'Coloured letters',
+      colorsHelp: 'Give letters that children often mix up their own colour.',
+      spacingHeading: 'Letter spacing',
+      spacingLabel: 'Wider spacing between letters',
+      previewHeading: 'Preview',
+      linkHeading: 'Settings for websites',
+      linkHelp: 'These settings are saved on this device. To use them on a website that embeds the games, add this to the end of each game link:',
+      linkNone: 'Nothing to add: these are the standard settings.',
+      copy: 'Copy',
+      copied: 'Copied!',
+      reset: 'Back to standard settings',
       wordBook: 'Word Book',
       wordBookDesc: 'Look at all the pictures. Tap one to hear the word.',
     },
@@ -108,6 +133,31 @@
       huntFoundSome: 'Najdenih: {n} od {total}. Poskusi znova!',
       huntWon: 'Vse slike so najdene!',
       timeLeft: 'Preostali čas',
+      teacherSettings: 'Nastavitve za učitelje',
+      forTeachers: 'Za učitelje',
+      gateTitle: 'Za odrasle',
+      gateQuestion: 'Koliko je {a} + {b}?',
+      gateOk: 'V redu',
+      gateWrong: 'Ni čisto prav. Poskusite znova.',
+      fontHeading: 'Pisava',
+      fontHelp: 'Izberite pisavo, ki jo otroci vidijo v vseh igrah.',
+      font_default: 'Običajna',
+      fontDesc_default: 'Zaobljena pisava naprave.',
+      fontDesc_andika: 'Narejena za otroke, ki se učijo brati, s preprostima a in g, kakršna se učijo pisati.',
+      fontDesc_opendyslexic: 'Odebeljeni spodnji deli črk pomagajo, da se črke ne obračajo.',
+      fontDesc_lexend: 'Oblikovana tako, da je branje lažje in hitrejše.',
+      fontDesc_atkinson: 'Vsaka črka je oblikovana tako, da je čim bolj drugačna od ostalih.',
+      colorsHeading: 'Barvne črke',
+      colorsHelp: 'Črkam, ki jih otroci pogosto zamenjujejo, dodelite svojo barvo.',
+      spacingHeading: 'Razmik med črkami',
+      spacingLabel: 'Večji razmik med črkami',
+      previewHeading: 'Predogled',
+      linkHeading: 'Nastavitve za spletne strani',
+      linkHelp: 'Nastavitve so shranjene na tej napravi. Če jih želite uporabiti na spletni strani, ki vključuje igre, dodajte to na konec povezave do vsake igre:',
+      linkNone: 'Ničesar ni treba dodati: to so običajne nastavitve.',
+      copy: 'Kopiraj',
+      copied: 'Kopirano!',
+      reset: 'Nazaj na običajne nastavitve',
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
@@ -143,6 +193,31 @@
       huntFoundSome: 'Du hast {n} von {total} gefunden. Versuch es nochmal!',
       huntWon: 'Du hast alle Bilder gefunden!',
       timeLeft: 'Verbleibende Zeit',
+      teacherSettings: 'Einstellungen für Lehrkräfte',
+      forTeachers: 'Für Lehrkräfte',
+      gateTitle: 'Für Erwachsene',
+      gateQuestion: 'Wie viel ist {a} + {b}?',
+      gateOk: 'OK',
+      gateWrong: 'Nicht ganz. Versuchen Sie es noch einmal.',
+      fontHeading: 'Schrift',
+      fontHelp: 'Wählen Sie die Schrift, die Kinder in allen Spielen sehen.',
+      font_default: 'Standard',
+      fontDesc_default: 'Die runde Schrift des Geräts.',
+      fontDesc_andika: 'Für Kinder, die lesen lernen, mit dem einfachen a und g, das sie schreiben lernen.',
+      fontDesc_opendyslexic: 'Schwerere untere Buchstabenteile helfen, dass Buchstaben nicht kippen oder sich drehen.',
+      fontDesc_lexend: 'Entwickelt, um das Lesen leichter und schneller zu machen.',
+      fontDesc_atkinson: 'Jeder Buchstabe ist so gestaltet, dass er den anderen möglichst wenig ähnelt.',
+      colorsHeading: 'Farbige Buchstaben',
+      colorsHelp: 'Buchstaben, die Kinder oft verwechseln, bekommen eine eigene Farbe.',
+      spacingHeading: 'Buchstabenabstand',
+      spacingLabel: 'Größerer Abstand zwischen den Buchstaben',
+      previewHeading: 'Vorschau',
+      linkHeading: 'Einstellungen für Websites',
+      linkHelp: 'Diese Einstellungen werden auf diesem Gerät gespeichert. Um sie auf einer Website zu nutzen, die die Spiele einbindet, hängen Sie dies an jeden Spiel-Link an:',
+      linkNone: 'Nichts anzuhängen: Das sind die Standardeinstellungen.',
+      copy: 'Kopieren',
+      copied: 'Kopiert!',
+      reset: 'Zurück zu den Standardeinstellungen',
       wordBook: 'Bildwörterbuch',
       wordBookDesc: 'Schau dir alle Bilder an. Tippe auf ein Bild, um das Wort zu hören.',
     },
@@ -178,6 +253,31 @@
       huntFoundSome: 'Tu as trouvé {n} sur {total}. Essaie encore\u00a0!',
       huntWon: 'Tu as trouvé toutes les images\u00a0!',
       timeLeft: 'Temps restant',
+      teacherSettings: 'Réglages pour les enseignants',
+      forTeachers: 'Pour les enseignants',
+      gateTitle: 'Pour les adultes',
+      gateQuestion: 'Combien font {a} + {b}\u00a0?',
+      gateOk: 'OK',
+      gateWrong: 'Pas tout à fait. Réessayez.',
+      fontHeading: 'Police',
+      fontHelp: 'Choisissez la police que les enfants voient dans tous les jeux.',
+      font_default: 'Standard',
+      fontDesc_default: "La police arrondie de l'appareil.",
+      fontDesc_andika: "Conçue pour les enfants qui apprennent à lire, avec les a et g simples qu'ils apprennent à écrire.",
+      fontDesc_opendyslexic: 'Le bas des lettres, plus épais, aide à ne pas les retourner ni les inverser.',
+      fontDesc_lexend: 'Conçue pour rendre la lecture plus facile et plus rapide.',
+      fontDesc_atkinson: 'Chaque lettre est dessinée pour se distinguer le plus possible des autres.',
+      colorsHeading: 'Lettres en couleur',
+      colorsHelp: 'Donnez une couleur propre aux lettres que les enfants confondent souvent.',
+      spacingHeading: 'Espacement des lettres',
+      spacingLabel: "Plus d'espace entre les lettres",
+      previewHeading: 'Aperçu',
+      linkHeading: 'Réglages pour les sites web',
+      linkHelp: 'Ces réglages sont enregistrés sur cet appareil. Pour les utiliser sur un site qui intègre les jeux, ajoutez ceci à la fin du lien de chaque jeu\u00a0:',
+      linkNone: 'Rien à ajouter\u00a0: ce sont les réglages standard.',
+      copy: 'Copier',
+      copied: 'Copié\u00a0!',
+      reset: 'Revenir aux réglages standard',
       wordBook: 'Imagier',
       wordBookDesc: 'Regarde toutes les images. Touche une image pour entendre le mot.',
     },
@@ -213,6 +313,31 @@
       huntFoundSome: 'Encontraste {n} de {total}. ¡Inténtalo otra vez!',
       huntWon: '¡Encontraste todas las imágenes!',
       timeLeft: 'Tiempo restante',
+      teacherSettings: 'Ajustes para docentes',
+      forTeachers: 'Para docentes',
+      gateTitle: 'Para adultos',
+      gateQuestion: '¿Cuánto es {a} + {b}?',
+      gateOk: 'Aceptar',
+      gateWrong: 'No es correcto. Inténtelo de nuevo.',
+      fontHeading: 'Tipo de letra',
+      fontHelp: 'Elija el tipo de letra que ven los niños en todos los juegos.',
+      font_default: 'Estándar',
+      fontDesc_default: 'La letra redondeada del dispositivo.',
+      fontDesc_andika: 'Hecha para niños que aprenden a leer, con la a y la g sencillas que aprenden a escribir.',
+      fontDesc_opendyslexic: 'La parte inferior más gruesa de las letras ayuda a que no se volteen ni se giren.',
+      fontDesc_lexend: 'Diseñada para que leer sea más fácil y rápido.',
+      fontDesc_atkinson: 'Cada letra está dibujada para parecerse lo menos posible a las demás.',
+      colorsHeading: 'Letras de colores',
+      colorsHelp: 'Dé un color propio a las letras que los niños suelen confundir.',
+      spacingHeading: 'Espacio entre letras',
+      spacingLabel: 'Más espacio entre las letras',
+      previewHeading: 'Vista previa',
+      linkHeading: 'Ajustes para sitios web',
+      linkHelp: 'Estos ajustes se guardan en este dispositivo. Para usarlos en un sitio web que incluya los juegos, añada esto al final del enlace de cada juego:',
+      linkNone: 'No hay nada que añadir: estos son los ajustes estándar.',
+      copy: 'Copiar',
+      copied: '¡Copiado!',
+      reset: 'Volver a los ajustes estándar',
       wordBook: 'Diccionario ilustrado',
       wordBookDesc: 'Mira todas las imágenes. Toca una para oír la palabra.',
     },
@@ -229,6 +354,73 @@
 
   LG.praise = function () {
     return LG.pick(LG.t('praise'));
+  };
+
+  // ---------- Teacher settings ----------
+  //
+  // Font, coloured letters and letter spacing. Saved on the device by the
+  // settings page; a site that embeds the games can also set them in the
+  // URL (?font=andika&colors=bdpq&spacing=1), which wins over the device.
+
+  LG.FONTS = ['default', 'andika', 'opendyslexic', 'lexend', 'atkinson'];
+  LG.COLOR_LETTERS = ['b', 'd', 'p', 'q', 'g'];
+  const DEFAULT_SETTINGS = { font: 'default', colors: [], spacing: false };
+
+  function cleanSettings(raw) {
+    raw = raw || {};
+    return {
+      font: LG.FONTS.includes(raw.font) ? raw.font : 'default',
+      colors: LG.COLOR_LETTERS.filter((l) => (raw.colors || []).includes(l)),
+      spacing: raw.spacing === true,
+    };
+  }
+
+  LG.savedSettings = function () {
+    try {
+      return cleanSettings(JSON.parse(store('lg-settings') || '{}'));
+    } catch (e) {
+      return cleanSettings(DEFAULT_SETTINGS);
+    }
+  };
+
+  LG.settings = (function () {
+    const s = LG.savedSettings();
+    if (params.has('font')) s.font = cleanSettings({ font: params.get('font') }).font;
+    if (params.has('colors')) s.colors = cleanSettings({ colors: Array.from(params.get('colors')) }).colors;
+    if (params.has('spacing')) s.spacing = params.get('spacing') === '1';
+    return s;
+  })();
+
+  LG.applySettings = function (s) {
+    LG.settings = cleanSettings(s);
+    document.documentElement.dataset.font = LG.settings.font;
+    document.documentElement.classList.toggle('wide-spacing', LG.settings.spacing);
+  };
+  LG.applySettings(LG.settings);
+
+  LG.saveSettings = function (s) {
+    store('lg-settings', JSON.stringify(cleanSettings(s)));
+    LG.applySettings(s);
+  };
+
+  // URL options that reproduce the given settings ('' when all standard).
+  LG.settingsQuery = function (s) {
+    const q = [];
+    if (s.font !== 'default') q.push('font=' + s.font);
+    if (s.colors.length) q.push('colors=' + s.colors.join(''));
+    if (s.spacing) q.push('spacing=1');
+    return q.join('&');
+  };
+
+  // HTML for a word or letter, with the chosen letters wrapped in colour.
+  LG.fmt = function (text) {
+    const colors = LG.settings.colors;
+    return Array.from(String(text))
+      .map((c) => {
+        const safe = c === '<' ? '&lt;' : c === '>' ? '&gt;' : c === '&' ? '&amp;' : c;
+        return colors.includes(c) ? '<span class="lc lc-' + c + '">' + safe + '</span>' : safe;
+      })
+      .join('');
   };
 
   // ---------- Helpers ----------
@@ -252,6 +444,7 @@
   };
 
   LG.ICONS = {
+    gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.3 2h3.4l.5 2.6 1.9.8 2.2-1.5 2.4 2.4-1.5 2.2.8 1.9 2.6.5v3.4l-2.6.5-.8 1.9 1.5 2.2-2.4 2.4-2.2-1.5-1.9.8-.5 2.6h-3.4l-.5-2.6-1.9-.8-2.2 1.5-2.4-2.4 1.5-2.2-.8-1.9L2 13.7v-3.4l2.6-.5.8-1.9-1.5-2.2 2.4-2.4 2.2 1.5 1.9-.8z" fill="currentColor"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>',
     globe: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></g></svg>',
     home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg>',
     soundOn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -415,6 +608,23 @@
     setTimeout(() => box.remove(), 3000);
   };
 
+  // Shrinks the text of every .fit element (inside root) just enough to fit
+  // its box, so long words stay readable with wide fonts and spacing.
+  LG.fit = function (root) {
+    (root || document).querySelectorAll('.fit').forEach((el) => {
+      el.style.fontSize = '';
+      let size = parseFloat(getComputedStyle(el).fontSize);
+      const min = size * 0.45;
+      while (el.scrollWidth > el.clientWidth + 1 && size > min) {
+        size -= 1;
+        el.style.fontSize = size + 'px';
+      }
+    });
+  };
+  if (document.fonts) document.fonts.ready.then(() => LG.fit());
+  addEventListener('resize', () => LG.fit());
+  addEventListener('load', () => LG.fit());
+
   LG.shake = function (node) {
     node.classList.remove('shake');
     void node.offsetWidth;
@@ -568,6 +778,7 @@
       locked = false;
       stage.innerHTML = '';
       opts.round(round, ctx);
+      LG.fit(stage);
     }
 
     const ctx = {

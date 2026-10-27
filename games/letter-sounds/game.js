@@ -21,19 +21,19 @@
       const options = LG.shuffle([first].concat(LG.sample(others, 2)));
       const prompt = () => LG.speak(LG.t('letterPrompt', { word: w.word }));
 
-      const line = LG.el('div', 'word-line');
+      const line = LG.el('div', 'word-line fit');
       const blank = LG.el('span', 'blank', '&nbsp;');
-      line.append(blank, LG.el('span', '', w.letters.slice(1).join('')));
+      line.append(blank, LG.el('span', '', LG.fmt(w.letters.slice(1).join(''))));
 
       const choices = LG.el('div', 'choices');
       options.forEach((letter) => {
-        const b = LG.el('button', 'tile', letter);
+        const b = LG.el('button', 'tile', LG.fmt(letter));
         b.type = 'button';
         b.addEventListener('click', () => {
           if (ctx.isLocked() || b.disabled) return;
           if (letter === first) {
             b.classList.add('right');
-            blank.textContent = first;
+            blank.innerHTML = LG.fmt(first);
             choices.querySelectorAll('button').forEach((x) => (x.disabled = true));
             ctx.complete(LG.speak(LG.praise() + ' ' + LG.t('letterCorrect', { word: w.word, letter: LG.letterName(first) })));
           } else {

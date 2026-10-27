@@ -56,7 +56,11 @@
       document.title = LG.t('appTitle');
       document.getElementById('title').textContent = LG.t('appTitle');
       document.getElementById('subtitle').textContent = LG.t('hubSubtitle');
-      document.getElementById('tools').append(LG.langSwitch(), LG.soundButton());
+      const teacher = LG.el('a', 'icon-btn', LG.ICONS.gear);
+      teacher.href = LG.link('settings.html');
+      teacher.setAttribute('aria-label', LG.t('forTeachers'));
+      teacher.title = LG.t('forTeachers');
+      document.getElementById('tools').append(teacher, LG.langSwitch(), LG.soundButton());
       document.getElementById('voice').appendChild(LG.voiceNotice());
 
       const games = [
@@ -79,8 +83,11 @@
       const strip = document.getElementById('strip');
       LG.sample(LG.words(LG.lang), 10).forEach((w) => strip.appendChild(LG.el('div', '', LG.picture(w.pic))));
 
-      document.getElementById('foot').textContent =
-        LG.t('wordsCount', { n: LG.words(LG.lang).length }) + ' · ' + LG.t('privacy');
+      const foot = document.getElementById('foot');
+      foot.textContent = LG.t('wordsCount', { n: LG.words(LG.lang).length }) + ' · ' + LG.t('privacy') + ' · ';
+      const teacherLink = LG.el('a', '', LG.t('forTeachers'));
+      teacherLink.href = LG.link('settings.html');
+      foot.appendChild(teacherLink);
     })();
   </script>
 </body>
