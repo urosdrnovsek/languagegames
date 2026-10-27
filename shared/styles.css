@@ -73,24 +73,49 @@ svg { display: block; }
 .icon-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
 .icon-btn svg { width: 100%; height: 100%; }
 
-.lang-switch {
-  display: flex;
+.lang-switch { position: relative; }
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 48px;
+  padding: 0 12px;
   border: 3px solid var(--ink);
   border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 4px 0 var(--ink);
   background: var(--card);
-}
-.lang-switch button {
-  border: 0;
-  background: transparent;
+  box-shadow: 0 4px 0 var(--ink);
   font-weight: 700;
   font-size: 1rem;
-  min-width: 44px;
-  height: 42px;
-  padding: 0 8px;
 }
-.lang-switch button.active { background: var(--accent); color: #fff; }
+.lang-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.lang-btn svg { width: 20px; height: 20px; }
+.lang-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+  padding: 6px;
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  box-shadow: 0 6px 0 var(--ink);
+}
+.lang-menu[hidden] { display: none; }
+.lang-menu button {
+  border: 0;
+  background: transparent;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 1.1rem;
+  text-align: left;
+}
+.lang-menu button b { display: inline-block; width: 2.2em; color: var(--accent-dark); }
+.lang-menu button:hover { background: var(--bg-top); }
+.lang-menu button.active { background: var(--accent); color: #fff; }
+.lang-menu button.active b { color: #fff; }
 
 /* ---------- Progress ---------- */
 
@@ -173,7 +198,8 @@ svg { display: block; }
   font-size: clamp(2.2rem, 10vw, 3.4rem);
   background: var(--tile);
 }
-.tile.small { width: clamp(50px, 14vw, 80px); height: clamp(58px, 16vw, 88px); font-size: clamp(1.9rem, 8vw, 2.9rem); }
+.choices.letters { gap: 10px; }
+.tile.small { width: clamp(48px, 13vw, 80px); height: clamp(58px, 16vw, 88px); font-size: clamp(1.9rem, 8vw, 2.9rem); }
 
 .word-btn {
   min-width: min(260px, 100%);
@@ -302,5 +328,5 @@ button:disabled { cursor: default; }
 @media (max-width: 420px) {
   .topbar { gap: 6px; }
   .icon-btn { width: 44px; height: 44px; padding: 8px; }
-  .lang-switch button { min-width: 38px; height: 38px; font-size: 0.9rem; }
+  .lang-btn { height: 44px; padding: 0 9px; }
 }

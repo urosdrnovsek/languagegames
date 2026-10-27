@@ -1,6 +1,7 @@
 # Language Games
 
-Free reading games for children aged 5–7, in **English** and **Slovenian**.
+Free reading games for children aged 5–7, in **English**, **Slovenian**,
+**German**, **French** and **Spanish**.
 Every picture is a hand-drawn SVG, so the games need no image files, no
 internet connection beyond loading the page, and no build step.
 
@@ -9,8 +10,9 @@ internet connection beyond loading the page, and no build step.
 - **Build the Word** (`games/build-word/`): tap letters to spell the pictured word. Words get longer as the game goes on, and from round 5 there is an extra letter that doesn't belong.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
 
-Each game has 8 rounds drawn at random from a bank of 53 pictured words, so
-every play-through is different.
+Each game has 8 rounds drawn at random from a bank of 103 pictured words
+(animals, food, toys and things, nature, body), so every play-through is
+different. German nouns keep their capital letter.
 
 No ads, no tracking, no accounts, no cookies, and nothing is sent anywhere.
 The only things stored are the chosen language and the sound on/off setting,
@@ -44,44 +46,51 @@ URL options:
 
 | Option | Values | Effect |
 |---|---|---|
-| `lang` | `en`, `sl` | Language. Without it, the game uses the last choice, then the browser language. |
+| `lang` | `en`, `sl`, `de`, `fr`, `es` | Language. Without it, the game uses the last choice, then the browser language. |
 | `home` | `0` | Hides the button back to the game list (use it when embedding a single game). |
 
 ## Speech
 
 Words are read aloud with the browser's built-in speech voices
-(`speechSynthesis`). English voices exist on almost every device. Slovenian
-voices are much rarer: Windows usually has one, but iPhones, iPads and most
-Android phones don't. When there is no voice for the chosen language, the
+(`speechSynthesis`). English, German, French and Spanish voices exist on
+almost every phone, tablet and computer. Slovenian voices are much rarer:
+Windows usually has one, but iPhones, iPads and most Android phones don't.
+On Linux, browsers need `speech-dispatcher` and a voice engine such as
+`espeak-ng` installed. `voice-test.html` shows which voices a browser has. When there is no voice for the chosen language, the
 games stay silent rather than read Slovenian with an English accent, and a
 note on the start screen says so. Every game can be played without sound.
 
 ## Adding words and pictures
 
 1. Draw the picture in `shared/pictures.js` (`P.name = '...svg shapes...'`, 100×100 viewBox).
-2. Add the words to `shared/words.js`: `{ pic: 'name', en: 'word', sl: 'beseda' }`.
-   If the English word's first letter isn't its first sound (like *owl* or *cheese*),
-   add `noFirstLetter: ['en']` so the First Letter game skips it.
+2. Add a row to the table in `shared/words.js`:
+   `name | word | beseda | Wort | mot | palabra` (en, sl, de, fr, es).
+
+The First Letter game automatically skips words whose first letter doesn't
+match their first sound (*sheep*, *Schaf*, *chat*, *huevo*…), using the rules
+in `SKIP_FIRST`. Add exceptions the rules miss to `SKIP_FIRST_WORDS`.
 
 All games and the Word Book pick up new entries automatically. Build the Word
-only uses words of up to 5 letters.
+only uses single words of up to 5 letters.
 
 ## Adding a language
 
-Add the language to `LANGS`, `TEXT` and `SPEECH_LANG` in `shared/engine.js`,
-its alphabet and letter names to `shared/words.js`, a word for each picture in
-`LG.VOCAB`, and a button in `LG.langSwitch`.
+1. In `shared/words.js`: add the code to `LG.LANGS`, a column to the table,
+   and entries in `SKIP_FIRST` and `LG.ALPHABET`.
+2. In `shared/engine.js`: add the game text to `TEXT`, the voice to
+   `SPEECH_LANG`, and the name to `LANG_NAMES`.
 
 ## Files
 
 ```
 index.html            game list
 words.html            Word Book
+voice-test.html       shows which speech voices a browser has
 games/*/index.html    one page per game
 games/*/game.js       game rules
 shared/engine.js      language, text, speech, sounds, game shell
 shared/pictures.js    all pictures (SVG)
-shared/words.js       word bank (English + Slovenian)
+shared/words.js       word bank (all five languages)
 shared/styles.css     shared styles
 ```
 

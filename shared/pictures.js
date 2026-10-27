@@ -447,6 +447,418 @@
     '<path d="M14 86 L70 30" fill="none" stroke="#2b8a3e"/>' +
     '<path d="M36 64 l-4 -14 M36 64 l14 4 M52 48 l-2 -14 M52 48 l14 2" fill="none" stroke="#2b8a3e" stroke-width="2"/>';
 
+  // ---------- More animals ----------
+
+  P.rabbit =
+    '<ellipse cx="38" cy="28" rx="9" ry="22" fill="#f1f3f5" transform="rotate(-10 38 28)"/>' +
+    '<ellipse cx="62" cy="28" rx="9" ry="22" fill="#f1f3f5" transform="rotate(10 62 28)"/>' +
+    '<ellipse cx="38" cy="30" rx="4" ry="14" fill="#ffc2d1" stroke="none" transform="rotate(-10 38 30)"/>' +
+    '<ellipse cx="62" cy="30" rx="4" ry="14" fill="#ffc2d1" stroke="none" transform="rotate(10 62 30)"/>' +
+    '<circle cx="50" cy="62" r="26" fill="#f1f3f5"/>' +
+    eye(40, 56, 4) + eye(60, 56, 4) + cheeks(68, 17) +
+    '<ellipse cx="50" cy="66" rx="4" ry="3" fill="#ff6b8a"/>' +
+    '<path d="M50 69 v4 M46 73 h8 v5 h-8 z" fill="#fff" stroke-width="2"/>' +
+    '<path d="M36 68 h-14 M64 68 h14" fill="none" stroke-width="2"/>';
+
+  P.elephant =
+    '<circle cx="22" cy="48" r="20" fill="#adb5bd"/><circle cx="78" cy="48" r="20" fill="#adb5bd"/>' +
+    '<circle cx="22" cy="48" r="12" fill="#ffc2d1" stroke="none" opacity=".6"/><circle cx="78" cy="48" r="12" fill="#ffc2d1" stroke="none" opacity=".6"/>' +
+    '<path d="M50 60 Q46 80 54 86 Q62 90 64 82" fill="none" stroke="' + INK + '" stroke-width="15"/>' +
+    '<path d="M50 60 Q46 80 54 86 Q62 90 64 82" fill="none" stroke="#ced4da" stroke-width="9"/>' +
+    '<circle cx="50" cy="46" r="25" fill="#ced4da"/>' +
+    '<path d="M50 56 Q46 70 48 76" fill="none" stroke="#ced4da" stroke-width="9"/>' +
+    eye(41, 42, 4) + eye(59, 42, 4) + cheeks(54, 17) +
+    '<path d="M38 62 q-4 6 -10 6 M62 62 q4 6 10 6" fill="#fff" stroke-width="2.5"/>';
+
+  P.monkey =
+    '<circle cx="20" cy="50" r="11" fill="#a0673b"/><circle cx="80" cy="50" r="11" fill="#a0673b"/>' +
+    '<circle cx="20" cy="50" r="6" fill="#f3d2a8" stroke="none"/><circle cx="80" cy="50" r="6" fill="#f3d2a8" stroke="none"/>' +
+    '<circle cx="50" cy="50" r="30" fill="#a0673b"/>' +
+    '<circle cx="40" cy="46" r="12" fill="#f3d2a8" stroke="none"/><circle cx="60" cy="46" r="12" fill="#f3d2a8" stroke="none"/>' +
+    '<ellipse cx="50" cy="64" rx="20" ry="14" fill="#f3d2a8" stroke="none"/>' +
+    eye(41, 46, 4) + eye(59, 46, 4) +
+    '<circle cx="46" cy="60" r="1.8" fill="' + INK + '" stroke="none"/><circle cx="54" cy="60" r="1.8" fill="' + INK + '" stroke="none"/>' +
+    '<path d="M40 66 q10 9 20 0" fill="none"/>';
+
+  P.penguin =
+    '<ellipse cx="38" cy="88" rx="9" ry="4" fill="#fd7e14"/><ellipse cx="62" cy="88" rx="9" ry="4" fill="#fd7e14"/>' +
+    '<path d="M26 46 Q12 60 18 72 Q26 64 28 58 Z M74 46 Q88 60 82 72 Q74 64 72 58 Z" fill="#343a40"/>' +
+    '<ellipse cx="50" cy="54" rx="26" ry="34" fill="#343a40"/>' +
+    '<path d="M50 32 C36 32 32 44 34 56 C34 74 40 84 50 84 C60 84 66 74 66 56 C68 44 64 32 50 32 Z" fill="#fff" stroke="none"/>' +
+    '<circle cx="42" cy="40" r="5" fill="#fff" stroke="none"/><circle cx="58" cy="40" r="5" fill="#fff" stroke="none"/>' +
+    eye(42, 40, 3) + eye(58, 40, 3) + cheeks(50, 14) +
+    '<path d="M45 47 h10 l-5 6 z" fill="#fd7e14"/>';
+
+  P.turtle =
+    '<ellipse cx="28" cy="72" rx="8" ry="7" fill="#8ce99a"/><ellipse cx="66" cy="72" rx="8" ry="7" fill="#8ce99a"/>' +
+    '<path d="M12 62 l-6 4 l6 2 z" fill="#8ce99a"/>' +
+    '<circle cx="84" cy="54" r="11" fill="#8ce99a"/>' + eye(87, 51, 3) +
+    '<path d="M84 60 q4 3 8 0" fill="none" stroke-width="2"/>' +
+    '<path d="M12 66 Q14 28 46 28 Q78 28 80 66 Z" fill="#40c057"/>' +
+    '<path d="M36 38 L46 32 L56 38 L56 50 L46 56 L36 50 Z M22 56 L30 50 L36 50 M56 50 L64 52 L70 60 M46 56 L46 66 M36 50 L28 66 M56 50 L62 66" fill="#69db7c" stroke-width="2"/>' +
+    '<path d="M10 66 H82" stroke-width="4"/>';
+
+  P.butterfly =
+    '<ellipse cx="31" cy="38" rx="20" ry="17" fill="#cc5de8" transform="rotate(-15 31 38)"/>' +
+    '<ellipse cx="69" cy="38" rx="20" ry="17" fill="#cc5de8" transform="rotate(15 69 38)"/>' +
+    '<ellipse cx="36" cy="66" rx="14" ry="12" fill="#ff8fab" transform="rotate(20 36 66)"/>' +
+    '<ellipse cx="64" cy="66" rx="14" ry="12" fill="#ff8fab" transform="rotate(-20 64 66)"/>' +
+    '<circle cx="28" cy="36" r="6" fill="#ffd43b" stroke="none"/><circle cx="72" cy="36" r="6" fill="#ffd43b" stroke="none"/>' +
+    '<circle cx="35" cy="67" r="4" fill="#fff" stroke="none"/><circle cx="65" cy="67" r="4" fill="#fff" stroke="none"/>' +
+    '<path d="M48 26 Q42 14 36 12 M52 26 Q58 14 64 12" fill="none" stroke-width="2.5"/>' +
+    '<circle cx="36" cy="12" r="3" fill="' + INK + '"/><circle cx="64" cy="12" r="3" fill="' + INK + '"/>' +
+    '<ellipse cx="50" cy="52" rx="6" ry="26" fill="#495057"/>';
+
+  P.ladybug =
+    '<path d="M24 50 h-10 M22 64 h-10 M26 76 l-8 6 M76 50 h10 M78 64 h10 M74 76 l8 6" stroke-width="3"/>' +
+    '<circle cx="50" cy="30" r="14" fill="' + INK + '"/>' +
+    '<circle cx="44" cy="26" r="3.5" fill="#fff" stroke="none"/><circle cx="56" cy="26" r="3.5" fill="#fff" stroke="none"/>' +
+    '<circle cx="50" cy="58" r="29" fill="#fa5252"/>' +
+    '<path d="M50 29 V87" stroke-width="3"/>' +
+    '<circle cx="36" cy="48" r="5.5" fill="' + INK + '" stroke="none"/><circle cx="64" cy="48" r="5.5" fill="' + INK + '" stroke="none"/>' +
+    '<circle cx="34" cy="68" r="5" fill="' + INK + '" stroke="none"/><circle cx="66" cy="68" r="5" fill="' + INK + '" stroke="none"/>' +
+    '<circle cx="44" cy="80" r="3.5" fill="' + INK + '" stroke="none"/><circle cx="56" cy="80" r="3.5" fill="' + INK + '" stroke="none"/>';
+
+  P.spider =
+    '<path d="M50 4 V30" stroke-width="2"/>' +
+    '<path d="M38 52 Q22 40 12 50 M38 58 Q20 56 10 66 M40 64 Q24 70 18 84 M42 68 Q34 80 32 92 M62 52 Q78 40 88 50 M62 58 Q80 56 90 66 M60 64 Q76 70 82 84 M58 68 Q66 80 68 92" fill="none" stroke-width="4"/>' +
+    '<circle cx="50" cy="62" r="17" fill="#495057"/>' +
+    '<circle cx="50" cy="40" r="12" fill="#495057"/>' +
+    '<circle cx="45" cy="38" r="4.5" fill="#fff" stroke="none"/><circle cx="55" cy="38" r="4.5" fill="#fff" stroke="none"/>' +
+    eye(45, 38, 2.5) + eye(55, 38, 2.5) +
+    '<path d="M46 45 q4 3 8 0" fill="none" stroke="#fff" stroke-width="2"/>';
+
+  P.whale =
+    '<path d="M34 30 q-2 -10 -8 -14 M34 30 q0 -12 0 -18 M34 30 q2 -10 8 -14" fill="none" stroke="#74c0fc" stroke-width="3"/>' +
+    '<path d="M10 60 Q12 34 46 34 Q74 34 80 56 Q86 44 94 40 Q92 56 88 62 Q94 70 94 80 Q84 74 80 68 Q66 84 40 84 Q12 84 10 60 Z" fill="#4dabf7"/>' +
+    '<path d="M14 66 Q30 80 54 76 Q70 74 78 66 Q66 84 40 84 Q18 82 14 66 Z" fill="#d0ebff"/>' +
+    eye(28, 54, 4) +
+    '<path d="M18 64 q8 6 16 2" fill="none" stroke-width="2.5"/>' +
+    '<path d="M46 60 q6 8 14 6" fill="none" stroke-width="2"/>';
+
+  P.hen =
+    '<path d="M46 80 v10 M60 80 v10 M42 90 h8 M56 90 h8" stroke="#fd7e14" stroke-width="3"/>' +
+    '<path d="M74 46 Q90 30 92 46 Q94 56 82 62 Z" fill="#fff"/>' +
+    '<ellipse cx="54" cy="62" rx="28" ry="21" fill="#fff"/>' +
+    '<path d="M50 56 q10 14 24 4" fill="none" stroke-width="2.5"/>' +
+    '<circle cx="26" cy="22" r="5" fill="#fa5252"/><circle cx="33" cy="20" r="5" fill="#fa5252"/><circle cx="40" cy="24" r="4.5" fill="#fa5252"/>' +
+    '<circle cx="32" cy="38" r="14" fill="#fff"/>' +
+    '<circle cx="32" cy="46" r="10" fill="#fff" stroke="none"/>' +
+    eye(30, 35, 3.5) +
+    '<path d="M19 38 L10 42 L19 45 Z" fill="#fcc419"/>' +
+    '<path d="M22 46 q-3 8 2 9 q4 -1 2 -9" fill="#fa5252"/>';
+
+  P.fox =
+    '<path d="M20 44 L22 12 L44 30 Z" fill="#ff922b"/><path d="M80 44 L78 12 L56 30 Z" fill="#ff922b"/>' +
+    '<path d="M26 34 L27 20 L37 29 Z M74 34 L73 20 L63 29 Z" fill="' + INK + '" stroke="none"/>' +
+    '<path d="M14 40 Q50 18 86 40 Q82 66 50 86 Q18 66 14 40 Z" fill="#ff922b"/>' +
+    '<path d="M18 52 Q36 54 50 66 Q64 54 82 52 Q74 72 50 86 Q26 72 18 52 Z" fill="#fff"/>' +
+    eye(38, 48, 4) + eye(62, 48, 4) +
+    '<ellipse cx="50" cy="78" rx="6" ry="4.5" fill="' + INK + '"/>';
+
+  P.crab =
+    '<path d="M30 62 L20 46 L18 36 M70 62 L80 46 L82 36" fill="none" stroke="#fa5252" stroke-width="5"/>' +
+    '<path d="M16 46 a10 10 0 1 1 10 -12 l-8 4 z" fill="#fa5252"/><path d="M84 46 a10 10 0 1 0 -10 -12 l8 4 z" fill="#fa5252"/>' +
+    '<path d="M26 66 l-14 6 M28 72 l-12 10 M74 66 l14 6 M72 72 l12 10" fill="none" stroke-width="4"/>' +
+    '<path d="M42 50 V36 M58 50 V36" stroke-width="3"/>' +
+    '<circle cx="42" cy="32" r="6" fill="#fff"/><circle cx="58" cy="32" r="6" fill="#fff"/>' +
+    eye(42, 32, 3) + eye(58, 32, 3) +
+    '<ellipse cx="50" cy="64" rx="28" ry="18" fill="#fa5252"/>' +
+    '<path d="M42 66 q8 7 16 0" fill="none"/>' + cheeks(62, 16);
+
+  P.octopus =
+    [18, 32, 50, 68, 82].map((x, i) => {
+      const d = 'M' + (x + (50 - x) * 0.25) + ' 56 Q' + x + ' 72 ' + (x + (i % 2 ? 8 : -8)) + ' 80 Q' + (x + (i % 2 ? 14 : -14)) + ' 88 ' + (x + (i % 2 ? 6 : -6)) + ' 92';
+      return '<path d="' + d + '" fill="none" stroke="' + INK + '" stroke-width="12"/><path d="' + d + '" fill="none" stroke="#9775fa" stroke-width="7"/>';
+    }).join('') +
+    '<path d="M20 60 Q18 16 50 16 Q82 16 80 60 Q50 68 20 60 Z" fill="#9775fa"/>' +
+    eye(40, 42, 4.5) + eye(60, 42, 4.5) + cheeks(52, 18) +
+    '<path d="M44 52 q6 5 12 0" fill="none"/>' +
+    '<circle cx="64" cy="26" r="3" fill="#b197fc" stroke="none"/><circle cx="34" cy="30" r="2" fill="#b197fc" stroke="none"/>';
+
+  // ---------- More food ----------
+
+  P.orange =
+    '<circle cx="50" cy="56" r="32" fill="#ff922b"/>' +
+    '<path d="M50 24 Q50 16 54 12" fill="none" stroke="#7a4a26" stroke-width="4"/>' +
+    '<path d="M52 22 Q62 10 74 16 Q64 26 52 22 Z" fill="#51cf66"/>' +
+    '<path d="M30 44 q4 -8 12 -10" fill="none" stroke="#fff" stroke-width="4" opacity=".7"/>' +
+    '<circle cx="60" cy="56" r="1.5" fill="#e8590c" stroke="none"/><circle cx="44" cy="68" r="1.5" fill="#e8590c" stroke="none"/><circle cx="66" cy="72" r="1.5" fill="#e8590c" stroke="none"/>';
+
+  P.strawberry =
+    '<path d="M50 90 C22 76 14 46 26 34 Q50 26 74 34 C86 46 78 76 50 90 Z" fill="#fa5252"/>' +
+    [[36, 46], [50, 44], [64, 46], [30, 58], [44, 58], [58, 58], [70, 58], [38, 70], [52, 72], [62, 70], [48, 82]]
+      .map((p) => '<ellipse cx="' + p[0] + '" cy="' + p[1] + '" rx="1.6" ry="2.6" fill="#ffe066" stroke="none"/>')
+      .join('') +
+    '<path d="M28 34 L36 22 L44 30 L50 16 L56 30 L64 22 L72 34 Q50 42 28 34 Z" fill="#51cf66"/>';
+
+  P.watermelon =
+    '<path d="M8 36 A42 42 0 0 0 92 36 Z" fill="#40c057"/>' +
+    '<path d="M14 36 A36 36 0 0 0 86 36 Z" fill="#d8f5a2" stroke="none"/>' +
+    '<path d="M18 36 A32 32 0 0 0 82 36 Z" fill="#ff6b6b" stroke="none"/>' +
+    '<path d="M8 36 H92" stroke-width="3"/>' +
+    [[34, 48], [50, 52], [66, 48], [42, 62], [58, 62], [50, 74]]
+      .map((p) => '<ellipse cx="' + p[0] + '" cy="' + p[1] + '" rx="2" ry="3.2" fill="' + INK + '" stroke="none"/>')
+      .join('');
+
+  P.tomato =
+    '<ellipse cx="50" cy="58" rx="33" ry="29" fill="#fa5252"/>' +
+    '<path d="M50 32 L40 26 L44 34 L32 34 L44 38 L50 44 L56 38 L68 34 L56 34 L60 26 Z" fill="#51cf66"/>' +
+    '<path d="M50 32 V22" stroke="#2b8a3e" stroke-width="4"/>' +
+    '<path d="M28 50 q2 -8 10 -12" fill="none" stroke="#fff" stroke-width="4" opacity=".7"/>';
+
+  P.mushroom =
+    '<path d="M36 54 Q32 80 40 86 H60 Q68 80 64 54 Z" fill="#fff4e6"/>' +
+    '<path d="M10 56 Q12 16 50 16 Q88 16 90 56 Q50 64 10 56 Z" fill="#fa5252"/>' +
+    '<circle cx="34" cy="38" r="6" fill="#fff" stroke="none"/><circle cx="56" cy="28" r="5" fill="#fff" stroke="none"/>' +
+    '<circle cx="68" cy="44" r="6" fill="#fff" stroke="none"/><circle cx="48" cy="48" r="4" fill="#fff" stroke="none"/>' +
+    eye(44, 70, 3) + eye(56, 70, 3) +
+    '<path d="M47 77 q3 3 6 0" fill="none" stroke-width="2"/>';
+
+  P.icecream =
+    '<path d="M32 50 L50 92 L68 50 Z" fill="#e8a25c"/>' +
+    '<path d="M36 56 H64 M38 62 L56 76 M62 62 L44 76" fill="none" stroke="#b5651d" stroke-width="2"/>' +
+    '<circle cx="39" cy="46" r="13" fill="#ff8fab"/><circle cx="61" cy="46" r="13" fill="#8ce99a"/>' +
+    '<circle cx="50" cy="30" r="14" fill="#fff3bf"/>' +
+    '<path d="M50 16 Q50 10 56 8" fill="none" stroke="#2b8a3e" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="16" r="5" fill="#e03131"/>';
+
+  P.pizza =
+    '<path d="M50 92 L14 24 Q50 8 86 24 Z" fill="#ffd43b"/>' +
+    '<path d="M14 24 Q50 8 86 24 L81 34 Q50 20 19 34 Z" fill="#e8a25c"/>' +
+    '<circle cx="40" cy="44" r="7" fill="#e03131"/><circle cx="60" cy="48" r="7" fill="#e03131"/><circle cx="50" cy="68" r="6" fill="#e03131"/>' +
+    '<path d="M58 62 q4 -2 6 2 M36 58 q4 -2 6 2" fill="none" stroke="#2b8a3e" stroke-width="3"/>';
+
+  P.cookie =
+    '<circle cx="50" cy="50" r="35" fill="#e8a25c"/>' +
+    [[36, 34, 5], [58, 30, 4], [68, 50, 5], [40, 56, 4], [56, 66, 5], [30, 70, 3.5], [52, 46, 3]]
+      .map((p) => '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + p[2] + '" fill="#7a4a26" stroke="none"/>')
+      .join('');
+
+  P.pineapple =
+    '<path d="M50 34 L40 8 L50 18 L54 4 L58 20 L70 8 L60 34 Z" fill="#51cf66"/>' +
+    '<ellipse cx="50" cy="62" rx="24" ry="29" fill="#fcc419"/>' +
+    [[40, 44], [56, 44], [32, 58], [48, 58], [64, 58], [40, 72], [56, 72], [48, 84]]
+      .map((p) => '<path d="M' + (p[0] - 4) + ' ' + (p[1] - 3) + ' l4 3 l4 -3" fill="none" stroke="#e67700" stroke-width="2"/>')
+      .join('');
+
+  // ---------- More things ----------
+
+  P.shoe =
+    '<path d="M10 70 L12 44 Q14 38 22 40 L40 44 Q50 32 62 42 L84 56 Q92 60 90 70 Z" fill="#4dabf7"/>' +
+    '<path d="M8 70 H92 V77 Q92 81 88 81 H12 Q8 81 8 77 Z" fill="#fff"/>' +
+    '<path d="M42 48 l6 -4 M48 52 l6 -4 M54 56 l6 -4" stroke="#fff" stroke-width="3"/>' +
+    '<path d="M70 58 Q80 58 88 66" fill="none" stroke="#fff" stroke-width="3"/>';
+
+  P.shirt =
+    '<path d="M34 16 Q50 26 66 16 L88 28 L80 44 L70 40 V86 H30 V40 L20 44 L12 28 Z" fill="#4dabf7"/>' +
+    '<path d="M34 16 Q50 30 66 16" fill="none"/>' +
+    '<path d="M50 44 L54 54 L64 55 L56 62 L58 72 L50 66 L42 72 L44 62 L36 55 L46 54 Z" fill="#ffd43b" stroke-width="2"/>';
+
+  P.glasses =
+    '<path d="M14 46 L6 38 M86 46 L94 38" stroke-width="4"/>' +
+    '<path d="M44 50 Q50 44 56 50" fill="none" stroke-width="4"/>' +
+    '<circle cx="29" cy="54" r="16" fill="#d0ebff" stroke-width="5"/><circle cx="71" cy="54" r="16" fill="#d0ebff" stroke-width="5"/>' +
+    '<path d="M22 48 l6 -4 M64 48 l6 -4" stroke="#fff" stroke-width="3"/>';
+
+  P.scissors =
+    '<path d="M46 58 L72 10 Q78 14 54 60 Z" fill="#ced4da"/>' +
+    '<path d="M54 58 L28 10 Q22 14 46 60 Z" fill="#ced4da"/>' +
+    '<path d="M47 58 L38 66 M53 58 L62 66" stroke="' + INK + '" stroke-width="8"/>' +
+    '<circle cx="33" cy="75" r="12" fill="none" stroke="' + INK + '" stroke-width="10"/><circle cx="67" cy="75" r="12" fill="none" stroke="' + INK + '" stroke-width="10"/>' +
+    '<circle cx="33" cy="75" r="12" fill="none" stroke="#fa5252" stroke-width="5"/><circle cx="67" cy="75" r="12" fill="none" stroke="#fa5252" stroke-width="5"/>' +
+    '<circle cx="50" cy="56" r="3" fill="#fff"/>';
+
+  P.pencil =
+    '<g transform="rotate(-40 50 50)">' +
+    '<rect x="8" y="42" width="12" height="16" rx="3" fill="#ff8fab"/>' +
+    '<rect x="17" y="42" width="6" height="16" fill="#adb5bd"/>' +
+    '<rect x="23" y="42" width="48" height="16" fill="#ffd43b"/>' +
+    '<path d="M23 47.5 H71 M23 52.5 H71" stroke="#f59f00" stroke-width="1.5"/>' +
+    '<path d="M71 42 L90 50 L71 58 Z" fill="#f3d9b1"/>' +
+    '<path d="M83 47 L90 50 L83 53 Z" fill="' + INK + '"/>' +
+    '</g>';
+
+  P.chair =
+    '<rect x="28" y="12" width="44" height="42" rx="5" fill="#c98b52"/>' +
+    '<path d="M40 18 V50 M50 18 V50 M60 18 V50" stroke="#a0673b" stroke-width="3"/>' +
+    '<rect x="26" y="62" width="6" height="28" rx="2" fill="#a0673b"/><rect x="68" y="62" width="6" height="28" rx="2" fill="#a0673b"/>' +
+    '<rect x="20" y="52" width="60" height="12" rx="4" fill="#e8a25c"/>';
+
+  P.table =
+    '<rect x="16" y="50" width="8" height="38" rx="2" fill="#a0673b"/><rect x="76" y="50" width="8" height="38" rx="2" fill="#a0673b"/>' +
+    '<rect x="8" y="42" width="84" height="12" rx="4" fill="#c98b52"/>' +
+    '<path d="M38 42 V30 Q38 24 44 24 H52 Q58 24 58 30 V42" fill="#74c0fc"/>' +
+    '<circle cx="44" cy="16" r="6" fill="#ff8fab"/><circle cx="54" cy="16" r="6" fill="#ffd43b"/>' +
+    '<path d="M45 22 L46 24 M53 22 L52 24" stroke="#2b8a3e" stroke-width="2"/>';
+
+  P.lamp =
+    '<ellipse cx="50" cy="86" rx="20" ry="6" fill="#868e96"/>' +
+    '<rect x="46" y="50" width="8" height="34" fill="#adb5bd"/>' +
+    '<path d="M30 16 H70 L84 52 H16 Z" fill="#ffd43b"/>' +
+    '<path d="M28 36 H72" stroke="#f59f00" stroke-width="3"/>';
+
+  P.door =
+    '<rect x="24" y="8" width="52" height="84" rx="4" fill="#c98b52"/>' +
+    '<rect x="32" y="16" width="36" height="28" rx="3" fill="#e8a25c"/>' +
+    '<rect x="32" y="52" width="36" height="32" rx="3" fill="#e8a25c"/>' +
+    '<circle cx="66" cy="50" r="4" fill="#fcc419"/>' +
+    '<path d="M14 92 H86" stroke-width="4"/>';
+
+  P.spoon =
+    '<g transform="rotate(30 50 50)">' +
+    '<rect x="45" y="42" width="10" height="50" rx="5" fill="#ced4da"/>' +
+    '<ellipse cx="50" cy="26" rx="15" ry="19" fill="#ced4da"/>' +
+    '<path d="M44 16 q-4 8 -2 16" fill="none" stroke="#fff" stroke-width="3"/>' +
+    '</g>';
+
+  P.fork =
+    '<g transform="rotate(-30 50 50)">' +
+    '<path d="M38 8 V32 M46 8 V32 M54 8 V32 M62 8 V32" stroke="' + INK + '" stroke-width="7"/>' +
+    '<path d="M38 8 V32 M46 8 V32 M54 8 V32 M62 8 V32" stroke="#ced4da" stroke-width="3"/>' +
+    '<path d="M35 30 H65 Q65 46 55 50 H45 Q35 46 35 30 Z" fill="#ced4da"/>' +
+    '<rect x="45" y="48" width="10" height="44" rx="5" fill="#ced4da"/>' +
+    '</g>';
+
+  P.guitar =
+    '<rect x="46" y="10" width="8" height="40" fill="#7a4a26"/>' +
+    '<rect x="42" y="4" width="16" height="12" rx="3" fill="#a0673b"/>' +
+    '<circle cx="50" cy="72" r="21" fill="#f08c00"/><circle cx="50" cy="48" r="15" fill="#f08c00"/>' +
+    '<circle cx="50" cy="72" r="19.5" fill="#f08c00" stroke="none"/><circle cx="50" cy="48" r="13.5" fill="#f08c00" stroke="none"/>' +
+    '<circle cx="50" cy="60" r="7" fill="' + INK + '"/>' +
+    '<rect x="42" y="78" width="16" height="5" rx="2" fill="#7a4a26"/>' +
+    '<path d="M47.5 14 V80 M50 14 V80 M52.5 14 V80" stroke="#fff" stroke-width="0.8"/>' +
+    '<path d="M38 30 h4 M38 38 h4 M58 30 h4 M58 38 h4" stroke-width="2"/>';
+
+  P.rocket =
+    '<path d="M40 74 Q50 98 60 74 Z" fill="#ffd43b"/><path d="M44 74 Q50 88 56 74 Z" fill="#ff922b" stroke="none"/>' +
+    '<path d="M34 50 L20 72 L34 70 Z M66 50 L80 72 L66 70 Z" fill="#fa5252"/>' +
+    '<path d="M50 6 Q70 26 66 74 H34 Q30 26 50 6 Z" fill="#f1f3f5"/>' +
+    '<path d="M50 6 Q62 16 65 28 H35 Q38 16 50 6 Z" fill="#fa5252"/>' +
+    '<circle cx="50" cy="44" r="9" fill="#74c0fc" stroke-width="4"/>' +
+    '<path d="M46 40 q2 -2 5 -2" fill="none" stroke="#fff" stroke-width="2"/>';
+
+  P.train =
+    '<circle cx="22" cy="18" r="5" fill="#dee2e6"/><circle cx="30" cy="10" r="6" fill="#dee2e6"/>' +
+    '<rect x="18" y="26" width="12" height="18" fill="#495057"/>' +
+    '<rect x="10" y="44" width="50" height="26" rx="4" fill="#4dabf7"/>' +
+    '<rect x="56" y="28" width="32" height="42" rx="3" fill="#fa5252"/>' +
+    '<rect x="52" y="22" width="40" height="8" rx="3" fill="#495057"/>' +
+    '<rect x="62" y="34" width="20" height="16" rx="2" fill="#d0ebff"/>' +
+    '<path d="M10 62 L2 74 H10 Z" fill="#fcc419"/>' +
+    '<circle cx="22" cy="74" r="9" fill="#495057"/><circle cx="44" cy="74" r="9" fill="#495057"/><circle cx="72" cy="74" r="11" fill="#495057"/>' +
+    '<circle cx="22" cy="74" r="3" fill="#ced4da"/><circle cx="44" cy="74" r="3" fill="#ced4da"/><circle cx="72" cy="74" r="4" fill="#ced4da"/>' +
+    '<path d="M6 88 H94" stroke-width="3"/>';
+
+  P.plane =
+    '<path d="M18 44 L10 22 H22 L36 44 Z" fill="#fa5252"/>' +
+    '<path d="M8 54 Q10 44 28 44 H78 Q92 46 94 54 Q92 62 80 62 H18 Q8 62 8 54 Z" fill="#f1f3f5"/>' +
+    '<path d="M80 46 Q88 48 92 52 H80 Z" fill="#74c0fc"/>' +
+    '<circle cx="40" cy="52" r="3" fill="#74c0fc"/><circle cx="52" cy="52" r="3" fill="#74c0fc"/><circle cx="64" cy="52" r="3" fill="#74c0fc"/>' +
+    '<path d="M42 58 H62 L46 82 H36 Z" fill="#4dabf7"/>' +
+    '<path d="M20 58 H30 L22 66 H16 Z" fill="#4dabf7"/>';
+
+  P.bike =
+    '<circle cx="24" cy="66" r="17" fill="none" stroke-width="5"/><circle cx="76" cy="66" r="17" fill="none" stroke-width="5"/>' +
+    '<path d="M24 66 L40 40 L50 66 Z M40 40 H68 L50 66 M68 40 L76 66" fill="none" stroke="' + INK + '" stroke-width="7"/>' +
+    '<path d="M24 66 L40 40 L50 66 Z M40 40 H68 L50 66 M68 40 L76 66" fill="none" stroke="#fa5252" stroke-width="3.5"/>' +
+    '<path d="M40 40 L37 30 M32 30 H44" fill="none" stroke-width="4"/>' +
+    '<path d="M68 40 L64 26 H74" fill="none" stroke-width="4"/>' +
+    '<circle cx="50" cy="66" r="4" fill="#ced4da"/><circle cx="24" cy="66" r="3" fill="#ced4da"/><circle cx="76" cy="66" r="3" fill="#ced4da"/>';
+
+  P.crown =
+    '<path d="M16 72 L10 30 L32 50 L50 20 L68 50 L90 30 L84 72 Z" fill="#fcc419"/>' +
+    '<circle cx="10" cy="28" r="5" fill="#fcc419"/><circle cx="50" cy="18" r="5" fill="#fcc419"/><circle cx="90" cy="28" r="5" fill="#fcc419"/>' +
+    '<rect x="14" y="70" width="72" height="14" rx="3" fill="#f59f00"/>' +
+    '<circle cx="32" cy="77" r="4" fill="#fa5252"/><circle cx="50" cy="77" r="4" fill="#4dabf7"/><circle cx="68" cy="77" r="4" fill="#51cf66"/>' +
+    '<path d="M50 40 l4 8 l-4 8 l-4 -8 z" fill="#fa5252" stroke-width="2"/>';
+
+  P.gift =
+    '<path d="M50 34 Q30 10 26 24 Q24 34 50 34 Z M50 34 Q70 10 74 24 Q76 34 50 34 Z" fill="#ffd43b"/>' +
+    '<rect x="18" y="46" width="64" height="42" rx="3" fill="#ff6b6b"/>' +
+    '<rect x="13" y="34" width="74" height="14" rx="3" fill="#fa5252"/>' +
+    '<rect x="44" y="34" width="12" height="54" fill="#ffd43b"/>';
+
+  // ---------- More nature ----------
+
+  P.rainbow =
+    [['#fa5252', 38], ['#ff922b', 32], ['#ffd43b', 26], ['#51cf66', 20], ['#4dabf7', 14]]
+      .map((b) => '<path d="M' + (50 - b[1]) + ' 74 A' + b[1] + ' ' + b[1] + ' 0 0 1 ' + (50 + b[1]) + ' 74" fill="none" stroke="' + b[0] + '" stroke-width="6.5" stroke-linecap="butt"/>')
+      .join('') +
+    '<path d="M9 74 A41 41 0 0 1 91 74 M23 74 A27 27 0 0 1 77 74" fill="none" stroke-width="2.5" stroke-linecap="butt"/>' +
+    '<path d="M2 82 q0 -10 10 -10 q4 -8 12 -4 q8 0 8 8 q4 6 -2 8 H4 Z" fill="#fff"/>' +
+    '<path d="M68 82 q0 -10 10 -10 q4 -8 12 -4 q8 0 8 8 q4 6 -2 8 H70 Z" fill="#fff"/>';
+
+  P.snowman =
+    '<path d="M30 60 L14 48 M70 60 L86 48 M18 51 L12 54 M82 51 L88 54" stroke="#7a4a26" stroke-width="3"/>' +
+    '<circle cx="50" cy="70" r="22" fill="#fff"/>' +
+    '<circle cx="50" cy="38" r="16" fill="#fff"/>' +
+    '<rect x="36" y="8" width="28" height="18" rx="2" fill="#343a40"/><rect x="30" y="24" width="40" height="5" rx="2" fill="#343a40"/>' +
+    eye(44, 35, 2.8) + eye(56, 35, 2.8) +
+    '<path d="M50 40 L62 43 L50 45 Z" fill="#ff922b" stroke-width="2"/>' +
+    '<path d="M36 52 Q50 58 64 52 L64 58 Q50 64 36 58 Z" fill="#fa5252"/>' +
+    '<path d="M58 58 L60 70 L66 68 L62 57" fill="#fa5252" stroke-width="2.5"/>' +
+    '<circle cx="50" cy="68" r="2.5" fill="' + INK + '" stroke="none"/><circle cx="50" cy="78" r="2.5" fill="' + INK + '" stroke="none"/>';
+
+  P.fire =
+    '<rect x="18" y="78" width="64" height="10" rx="5" fill="#a0673b" transform="rotate(-8 50 83)"/>' +
+    '<rect x="18" y="78" width="64" height="10" rx="5" fill="#c98b52" transform="rotate(8 50 83)"/>' +
+    '<path d="M50 8 C60 28 80 38 76 60 C74 74 62 84 50 84 C38 84 24 74 24 60 C24 46 34 40 36 26 C42 36 44 42 46 44 C48 32 46 20 50 8 Z" fill="#ff922b"/>' +
+    '<path d="M50 40 C56 52 66 56 64 68 C62 76 56 80 50 80 C44 80 36 76 36 68 C36 60 42 58 44 50 C46 56 48 58 50 58 C50 52 48 46 50 40 Z" fill="#ffd43b" stroke="none"/>';
+
+  P.mountain =
+    '<circle cx="80" cy="20" r="9" fill="#ffd43b"/>' +
+    '<path d="M54 86 L72 52 L94 86 Z" fill="#91a7ff"/>' +
+    '<path d="M6 86 L40 22 L74 86 Z" fill="#748ffc"/>' +
+    '<path d="M29 43 L40 22 L51 43 L45 40 L40 46 L35 40 Z" fill="#fff"/>' +
+    '<path d="M4 86 H96" stroke-width="3"/>';
+
+  P.heart =
+    '<path d="M50 86 C20 66 8 48 16 30 C24 14 44 16 50 32 C56 16 76 14 84 30 C92 48 80 66 50 86 Z" fill="#fa5252"/>' +
+    '<path d="M26 34 q4 -8 12 -8" fill="none" stroke="#fff" stroke-width="5" opacity=".75"/>';
+
+  P.snowflake =
+    ring(6, 50, 50, 38, (x, y, a) => {
+      const pt = (r, da) => (50 + Math.cos(a + da) * r).toFixed(1) + ' ' + (50 + Math.sin(a + da) * r).toFixed(1);
+      const d = 'M50 50 L' + x.toFixed(1) + ' ' + y.toFixed(1) +
+        ' M' + pt(24, 0) + ' L' + pt(32, 0.32) + ' M' + pt(24, 0) + ' L' + pt(32, -0.32) +
+        ' M' + pt(13, 0) + ' L' + pt(20, 0.45) + ' M' + pt(13, 0) + ' L' + pt(20, -0.45);
+      return '<path d="' + d + '" fill="none" stroke="' + INK + '" stroke-width="8"/><path d="' + d + '" fill="none" stroke="#a5d8ff" stroke-width="4"/>';
+    }) +
+    '<circle cx="50" cy="50" r="6" fill="#a5d8ff"/>';
+
+  // ---------- Body ----------
+
+  P.hand =
+    '<rect x="33" y="14" width="10" height="36" rx="5" fill="#ffd8a8"/>' +
+    '<rect x="45" y="9" width="10" height="40" rx="5" fill="#ffd8a8"/>' +
+    '<rect x="57" y="13" width="10" height="37" rx="5" fill="#ffd8a8"/>' +
+    '<rect x="69" y="24" width="9" height="30" rx="4.5" fill="#ffd8a8"/>' +
+    '<rect x="14" y="44" width="11" height="30" rx="5.5" fill="#ffd8a8" transform="rotate(-40 20 60)"/>' +
+    '<rect x="30" y="40" width="50" height="46" rx="18" fill="#ffd8a8"/>' +
+    '<rect x="34.5" y="37" width="42" height="10" fill="#ffd8a8" stroke="none"/>' +
+    '<path d="M27 52 L33 56" stroke="#ffd8a8" stroke-width="8"/>' +
+    '<path d="M46 66 q8 6 16 0" fill="none" stroke="#e8a25c" stroke-width="2.5"/>';
+
+  P.nose =
+    '<circle cx="50" cy="52" r="36" fill="#ffd8a8"/>' +
+    '<path d="M24 24 Q50 4 76 24 Q66 18 50 18 Q34 18 24 24 Z" fill="#a0673b"/>' +
+    eye(36, 40, 4) + eye(64, 40, 4) + cheeks(60, 24) +
+    '<path d="M50 38 C40 52 34 62 42 68 Q50 72 58 68 C66 62 60 52 50 38 Z" fill="#ffa94d" stroke-width="3.5"/>' +
+    '<path d="M46 52 q-2 6 0 10" fill="none" stroke="#fff" stroke-width="3" opacity=".8"/>' +
+    '<path d="M42 78 q8 5 16 0" fill="none"/>';
+
+  P.ear =
+    '<path d="M36 86 C28 76 26 62 26 48 C26 24 42 10 60 12 C80 14 88 36 80 54 C74 66 64 70 62 80 C60 92 44 94 36 86 Z" fill="#ffd8a8"/>' +
+    '<path d="M42 46 C42 28 64 24 68 40 C70 50 60 52 58 60 C56 68 50 70 48 64" fill="none" stroke="#e8a25c" stroke-width="5"/>' +
+    '<path d="M48 48 q4 -6 10 -2" fill="none" stroke="#e8a25c" stroke-width="3"/>';
+
+  P.tooth =
+    '<path d="M24 28 C24 12 40 12 50 18 C60 12 76 12 76 28 C76 42 72 52 70 66 C68 84 60 90 57 78 C55 68 54 62 50 62 C46 62 45 68 43 78 C40 90 32 84 30 66 C28 52 24 42 24 28 Z" fill="#fff"/>' +
+    eye(40, 34, 3.5) + eye(60, 34, 3.5) + cheeks(42, 16) +
+    '<path d="M44 44 q6 6 12 0" fill="none" stroke-width="2.5"/>' +
+    '<path d="M82 14 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z" fill="#74c0fc" stroke-width="2"/>';
+
   LG.PICTURES = P;
   LG.picture = function (id) {
     return P[id] ? svg(P[id]) : '';

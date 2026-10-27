@@ -43,7 +43,7 @@
         return slotRow.appendChild(b);
       });
 
-      const tileRow = LG.el('div', 'choices');
+      const tileRow = LG.el('div', 'choices letters');
       const tiles = letters.map((letter, t) => {
         const b = LG.el('button', 'tile small', letter);
         b.type = 'button';

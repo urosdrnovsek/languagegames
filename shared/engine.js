@@ -2,7 +2,7 @@
 // shell (top bar, progress, start and finish screens) used by every game.
 (function () {
   const LG = (window.LG = window.LG || {});
-  const LANGS = ['en', 'sl'];
+  const LANGS = LG.LANGS;
   const params = new URLSearchParams(location.search);
 
   function store(key, value) {
@@ -21,7 +21,8 @@
     if (LANGS.includes(fromUrl)) return fromUrl;
     const saved = store('lg-lang');
     if (LANGS.includes(saved)) return saved;
-    return (navigator.language || '').toLowerCase().startsWith('sl') ? 'sl' : 'en';
+    const browser = (navigator.language || '').slice(0, 2).toLowerCase();
+    return LANGS.includes(browser) ? browser : 'en';
   })();
   document.documentElement.lang = LG.lang;
 
@@ -96,6 +97,90 @@
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
+    de: {
+      appTitle: 'Sprachspiele',
+      hubSubtitle: 'Lustige Spiele zum Lesenlernen',
+      play: 'Spielen',
+      playAgain: 'Nochmal spielen',
+      allGames: 'Alle Spiele',
+      sound: 'Ton an oder aus',
+      listen: 'Anhören',
+      wellDone: 'Super gemacht!',
+      finished: 'Du hast alle Runden geschafft!',
+      tryAgain: 'Versuch es nochmal.',
+      praise: ['Toll!', 'Ja!', 'Super!', 'Prima!', 'Klasse!'],
+      privacy: 'Keine Werbung. Kein Tracking. Nur Lernen.',
+      wordsCount: '{n} Wörter zum Entdecken',
+      letterSounds: 'Erster Buchstabe',
+      letterSoundsDesc: 'Mit welchem Buchstaben beginnt das Wort?',
+      letterPrompt: '{word}. Mit welchem Buchstaben beginnt {word}?',
+      letterCorrect: '{word} beginnt mit {letter}.',
+      pictureWord: 'Lesen und finden',
+      pictureWordDesc: 'Lies die Wörter und finde das passende Wort zum Bild.',
+      pictureWordPrompt: 'Welches Wort passt zu diesem Bild?',
+      buildWord: 'Wort bauen',
+      buildWordDesc: 'Bring die Buchstaben in die richtige Reihenfolge.',
+      buildPrompt: 'Schreibe {word}.',
+      voiceMissing: 'Dieses Gerät hat keine deutsche Stimme, deshalb werden die Wörter nicht vorgelesen. Du kannst trotzdem spielen!',
+      wordBook: 'Bildwörterbuch',
+      wordBookDesc: 'Schau dir alle Bilder an. Tippe auf ein Bild, um das Wort zu hören.',
+    },
+    fr: {
+      appTitle: 'Jeux de langue',
+      hubSubtitle: 'Des jeux amusants pour apprendre à lire',
+      play: 'Jouer',
+      playAgain: 'Rejouer',
+      allGames: 'Tous les jeux',
+      sound: 'Activer ou couper le son',
+      listen: 'Écouter',
+      wellDone: 'Bravo\u00a0!',
+      finished: 'Tu as terminé toutes les manches\u00a0!',
+      tryAgain: 'Essaie encore.',
+      praise: ['Super\u00a0!', 'Oui\u00a0!', 'Bravo\u00a0!', 'Génial\u00a0!', 'Très bien\u00a0!'],
+      privacy: 'Pas de publicité. Pas de pistage. Juste apprendre.',
+      wordsCount: '{n} mots à découvrir',
+      letterSounds: 'Première lettre',
+      letterSoundsDesc: 'Par quelle lettre commence le mot\u00a0?',
+      letterPrompt: '{word}. Par quelle lettre commence {word}\u00a0?',
+      letterCorrect: '{word} commence par {letter}.',
+      pictureWord: 'Lis et trouve',
+      pictureWordDesc: "Lis les mots et trouve celui qui va avec l'image.",
+      pictureWordPrompt: 'Quel mot va avec cette image\u00a0?',
+      buildWord: 'Construis le mot',
+      buildWordDesc: 'Mets les lettres dans le bon ordre.',
+      buildPrompt: 'Écris {word}.',
+      voiceMissing: "Cet appareil n'a pas de voix française, donc les mots ne seront pas lus à voix haute. Tu peux quand même jouer\u00a0!",
+      wordBook: 'Imagier',
+      wordBookDesc: 'Regarde toutes les images. Touche une image pour entendre le mot.',
+    },
+    es: {
+      appTitle: 'Juegos de lenguaje',
+      hubSubtitle: 'Juegos divertidos para aprender a leer',
+      play: 'Jugar',
+      playAgain: 'Jugar otra vez',
+      allGames: 'Todos los juegos',
+      sound: 'Activar o quitar el sonido',
+      listen: 'Escuchar',
+      wellDone: '¡Muy bien!',
+      finished: '¡Terminaste todas las rondas!',
+      tryAgain: 'Inténtalo otra vez.',
+      praise: ['¡Genial!', '¡Sí!', '¡Súper!', '¡Muy bien!', '¡Bravo!'],
+      privacy: 'Sin anuncios. Sin rastreo. Solo aprender.',
+      wordsCount: '{n} palabras para descubrir',
+      letterSounds: 'Primera letra',
+      letterSoundsDesc: '¿Con qué letra empieza la palabra?',
+      letterPrompt: '{word}. ¿Con qué letra empieza {word}?',
+      letterCorrect: '{word} empieza con {letter}.',
+      pictureWord: 'Lee y une',
+      pictureWordDesc: 'Lee las palabras y encuentra la que va con la imagen.',
+      pictureWordPrompt: '¿Qué palabra va con esta imagen?',
+      buildWord: 'Forma la palabra',
+      buildWordDesc: 'Pon las letras en el orden correcto.',
+      buildPrompt: 'Escribe {word}.',
+      voiceMissing: 'Este dispositivo no tiene voz en español, así que las palabras no se leerán en voz alta. ¡Puedes jugar igual!',
+      wordBook: 'Diccionario ilustrado',
+      wordBookDesc: 'Mira todas las imágenes. Toca una para oír la palabra.',
+    },
   };
 
   LG.t = function (key, vars) {
@@ -132,6 +217,7 @@
   };
 
   LG.ICONS = {
+    globe: '<svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></g></svg>',
     home: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg>',
     soundOn: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     soundOff: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" fill="currentColor"/><path d="m16 9 6 6m0-6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
@@ -150,7 +236,7 @@
   };
 
   const synth = window.speechSynthesis;
-  const SPEECH_LANG = { en: 'en-US', sl: 'sl-SI' };
+  const SPEECH_LANG = { en: 'en-US', sl: 'sl-SI', de: 'de-DE', fr: 'fr-FR', es: 'es-ES' };
   let voices = [];
   let voicesSettled = false;
   const voiceListeners = [];
@@ -239,7 +325,7 @@
   };
 
   LG.letterName = function (letter) {
-    return LG.LETTER_NAMES[LG.lang][letter] || letter.toUpperCase();
+    return (LG.LETTER_NAMES[LG.lang] || {})[letter.toLowerCase()] || letter.toUpperCase();
   };
 
   let audio = null;
@@ -316,19 +402,49 @@
 
   // ---------- Language switch (used by the hub and the games) ----------
 
+  const LANG_NAMES = { en: 'English', sl: 'Slovenščina', de: 'Deutsch', fr: 'Français', es: 'Español' };
+
+  // A compact button showing the current language code; tapping it opens a
+  // menu with every language.
   LG.langSwitch = function () {
     const box = LG.el('div', 'lang-switch');
-    box.setAttribute('role', 'group');
-    box.setAttribute('aria-label', 'Language / Jezik');
-    [['en', 'EN', 'English'], ['sl', 'SL', 'Slovenščina']].forEach(([code, label, name]) => {
-      const b = LG.el('button', code === LG.lang ? 'active' : '', label);
-      b.type = 'button';
-      b.title = name;
-      b.setAttribute('aria-label', name);
-      b.setAttribute('aria-pressed', code === LG.lang);
-      b.addEventListener('click', () => LG.setLang(code));
-      box.appendChild(b);
+    const btn = LG.el('button', 'lang-btn', LG.ICONS.globe + '<span>' + LG.lang.toUpperCase() + '</span>');
+    btn.type = 'button';
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Language: ' + LANG_NAMES[LG.lang]);
+    const menu = LG.el('div', 'lang-menu');
+    menu.hidden = true;
+    LANGS.forEach((code) => {
+      const item = LG.el('button', code === LG.lang ? 'active' : '', '<b>' + code.toUpperCase() + '</b> ' + LANG_NAMES[code]);
+      item.type = 'button';
+      item.lang = code;
+      item.setAttribute('aria-current', code === LG.lang);
+      item.addEventListener('click', () => {
+        if (code === LG.lang) close();
+        else LG.setLang(code);
+      });
+      menu.appendChild(item);
     });
+    function close() {
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', () => {
+      menu.hidden = !menu.hidden;
+      btn.setAttribute('aria-expanded', String(!menu.hidden));
+      if (!menu.hidden) menu.querySelector('.active').focus();
+    });
+    document.addEventListener('click', (e) => {
+      if (!box.contains(e.target)) close();
+    });
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        close();
+        btn.focus();
+      }
+    });
+    box.append(btn, menu);
     return box;
   };
 
