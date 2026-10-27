@@ -398,6 +398,28 @@
     hungry | hungry | lačen | hungrig | affamé | hambriento
     sick | sick | bolna | krank | malade | enferma
     shy | shy | sramežljiva | schüchtern | timide | tímida
+    proud | proud | ponosna | stolz | fière | orgullosa
+    bored | bored | zdolgočasen | gelangweilt | ennuyé | aburrido
+    worried | worried | zaskrbljena | besorgt | inquiète | preocupada
+    excited | excited | navdušen | aufgeregt | enthousiaste | emocionado
+    calm | calm | mirna | ruhig | calme | tranquila
+    funny | funny | smešen | lustig | drôle | gracioso
+    morning | morning | jutro | Morgen | matin | mañana
+    evening | evening | večer | Abend | soir | tarde
+    breakfast | breakfast | zajtrk | Frühstück | petit-déjeuner | desayuno
+    lunch | lunch | kosilo | Mittagessen | déjeuner | almuerzo
+    dinner | dinner | večerja | Abendessen | dîner | cena
+    calendar | calendar | koledar | Kalender | calendrier | calendario
+    holidays | holidays | počitnice | Ferien | vacances | vacaciones
+    hourglass | hourglass | peščena ura | Sanduhr | sablier | reloj de arena
+    arrow | arrow | puščica | Pfeil | flèche | flecha
+    spiral | spiral | spirala | Spirale | spirale | espiral
+    semicircle | semicircle | polkrog | Halbkreis | demi-cercle | semicírculo
+    hexagon | hexagon | šestkotnik | Sechseck | hexagone | hexágono
+    tabletennis | table tennis | namizni tenis | Tischtennis | ping-pong | ping-pong
+    hockey | hockey | hokej | Hockey | hockey | hockey
+    golf | golf | golf | Golf | golf | golf
+    climbing | climbing | plezanje | Klettern | escalade | escalada
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -435,10 +457,10 @@
     nature: 'fire mountain tree flower leaf wave rock cactus volcano shell feather nest forest river grass island',
     colours: 'red blue yellow green colorOrange purple pink brown black white grey',
     numbers: 'one two three four five six seven eight nine ten',
-    shapes: 'circle square triangle rectangle oval diamond heart star',
-    sports: 'football swimming tennis skates skis sledge basketball running skateboard dancing volleyball',
-    feelings: 'happy sad angry scared tired surprised hungry sick shy',
-    seasons: 'spring summer autumn winter day night birthday',
+    shapes: 'circle square triangle rectangle oval diamond heart star arrow spiral semicircle hexagon',
+    sports: 'football swimming tennis skates skis sledge basketball running skateboard dancing volleyball tabletennis hockey golf climbing',
+    feelings: 'happy sad angry scared tired surprised hungry sick shy proud bored worried excited calm funny',
+    seasons: 'spring summer autumn winter day night birthday morning evening breakfast lunch dinner calendar holidays hourglass',
   };
   // Topic order and the picture that stands for each topic.
   LG.TOPICS = [

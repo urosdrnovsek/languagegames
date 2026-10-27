@@ -2726,6 +2726,130 @@
     '<path d="M44 76 q6 3 10 0" fill="none" stroke-width="2.5"/>' }) +
     '<path d="M14 92 Q10 70 26 66 Q34 66 32 76 Q30 86 24 92 Z" fill="#ffd8a8"/>';
 
+  // ---------- Feelings (more; the face's gender matches the word) ----------
+
+  P.proud = face({ hair: 'girl', inner: '<path d="M32 54 Q38 48 44 54 M56 54 Q62 48 68 54" fill="none" stroke-width="3"/>' +
+    '<path d="M38 70 Q50 80 62 70" fill="none"/>' + cheeks(66, 22) }) +
+    '<path d="M42 86 L50 98 L58 86" fill="none" stroke="#4dabf7" stroke-width="4"/>' +
+    '<circle cx="50" cy="92" r="7" fill="#fcc419"/>';
+  P.bored = face({ inner: '<path d="M30 56 H44 M56 56 H70" stroke-width="3"/>' + eye(37, 59, 3) + eye(63, 59, 3) +
+    '<path d="M40 76 H60" stroke-width="3"/>' +
+    '<circle cx="78" cy="22" r="2.5" fill="#868e96" stroke="none"/><circle cx="86" cy="22" r="2.5" fill="#868e96" stroke="none"/><circle cx="94" cy="22" r="2.5" fill="#868e96" stroke="none"/>' });
+  P.worried = face({ hair: 'girl', inner: '<path d="M30 46 L44 42 M70 46 L56 42" stroke-width="3"/>' + eye(38, 56, 4) + eye(62, 56, 4) +
+    '<path d="M38 76 q4 -4 8 0 q4 4 8 0 q4 -4 8 0" fill="none" stroke-width="3"/>' +
+    '<path d="M78 40 q-5 8 0 11 q5 -3 0 -11 z" fill="#74c0fc" stroke-width="2"/>' });
+  P.excited = face({ inner: '<path d="M30 42 Q38 36 46 42 M54 42 Q62 36 70 42" fill="none" stroke-width="3"/>' +
+    [38, 62].map((x) => '<path d="M' + x + ' 48 l2.5 5 5.5 .8 -4 3.8 1 5.4 -5 -2.6 -5 2.6 1 -5.4 -4 -3.8 5.5 -.8 z" fill="#fcc419" stroke-width="1.5"/>').join('') +
+    '<path d="M32 68 Q50 92 68 68 Z" fill="#fa5252" stroke-width="3"/>' +
+    '<path d="M8 30 l6 4 M4 46 h8 M92 30 l-6 4 M96 46 h-8" stroke="#fcc419" stroke-width="3"/>' });
+  P.calm = face({ hair: 'girl', inner: '<path d="M32 58 Q38 62 44 58 M56 58 Q62 62 68 58" fill="none" stroke-width="3"/>' +
+    '<path d="M42 74 Q50 78 58 74" fill="none" stroke-width="2.5"/>' + cheeks(68, 22) }) +
+    '<path d="M4 20 q8 -6 16 0 q8 6 16 0 M64 16 q8 -6 16 0 q8 6 16 0" fill="none" stroke="#74c0fc" stroke-width="3"/>';
+  P.funny = face({ inner: '<path d="M32 56 Q38 50 44 56" fill="none" stroke-width="3"/>' + eye(62, 56, 4.5) +
+    '<path d="M32 70 Q50 84 68 70 Z" fill="#fff" stroke-width="3"/>' +
+    '<path d="M44 76 H56 V84 Q56 90 50 90 Q44 90 44 84 Z" fill="#ff6b6b" stroke-width="2.5"/>' + cheeks(66, 22) });
+
+  // ---------- Seasons & time (more) ----------
+
+  P.morning = scene('#ffe3e3',
+    '<path d="M6 40 H94" stroke="none"/>' +
+    ring(9, 50, 70, 30, (x, y, a) => a > Math.PI ? '<path d="M' + (50 + Math.cos(a) * 24) + ' ' + (70 + Math.sin(a) * 24) + ' L' + x + ' ' + y + '" stroke="#ff922b" stroke-width="4"/>' : '') +
+    '<path d="M30 70 A20 20 0 0 1 70 70 Z" fill="#ffd43b"/>' +
+    '<path d="M6 70 Q30 60 50 70 Q72 80 94 68 V78 Q94 94 78 94 H22 Q6 94 6 78 Z" fill="#8ce99a"/>' +
+    '<path d="M22 28 q4 -4 8 0 q4 -4 8 0 M64 22 q4 -4 8 0 q4 -4 8 0" fill="none" stroke-width="2"/>');
+  P.evening = scene('#d0bfff',
+    '<path d="M6 6 H94 V50 H6 Z" fill="#ffc078" stroke="none" opacity=".7"/>' +
+    '<circle cx="50" cy="62" r="20" fill="#ff922b"/>' +
+    '<path d="M6 62 H94 V78 Q94 94 78 94 H22 Q6 94 6 78 Z" fill="#4dabf7"/>' +
+    '<path d="M20 72 H40 M56 70 H80 M30 82 H70" stroke="#ffc078" stroke-width="3"/>' +
+    '<path d="M78 18 l1.5 3.5 3.5 1.5 -3.5 1.5 -1.5 3.5 -1.5 -3.5 -3.5 -1.5 3.5 -1.5 z" fill="#fff9db" stroke-width="1.5"/>');
+  P.calendar =
+    '<rect x="12" y="16" width="76" height="76" rx="6" fill="#fff"/>' +
+    '<path d="M12 22 Q12 16 18 16 H82 Q88 16 88 22 V36 H12 Z" fill="#fa5252"/>' +
+    '<path d="M30 8 V24 M70 8 V24" stroke-width="5"/>' +
+    [0, 1, 2, 3].map((r) => [0, 1, 2, 3, 4].map((c) => '<rect x="' + (18 + c * 13.5) + '" y="' + (42 + r * 12) + '" width="9" height="8" rx="1.5" fill="' + (r === 2 && c === 3 ? '#ffd43b' : '#e9ecef') + '" stroke="none"/>').join('')).join('') +
+    '<circle cx="63" cy="70" r="9" fill="none" stroke="#fa5252" stroke-width="3"/>';
+  P.holidays =
+    '<circle cx="80" cy="18" r="10" fill="#ffd43b"/>' +
+    '<path d="M38 30 V22 Q38 16 44 16 H56 Q62 16 62 22 V30" fill="none" stroke-width="5"/>' +
+    '<rect x="16" y="30" width="68" height="56" rx="8" fill="#4dabf7"/>' +
+    '<path d="M32 30 V86 M68 30 V86" stroke="#1c7ed6" stroke-width="4"/>' +
+    '<circle cx="48" cy="50" r="8" fill="#ffd43b" stroke-width="2"/><rect x="40" y="64" width="18" height="10" rx="2" fill="#fa5252" stroke-width="2" transform="rotate(-10 49 69)"/>' +
+    '<path d="M74 46 l4 -6 l4 6 z" fill="#51cf66" stroke-width="2"/>' +
+    '<circle cx="28" cy="90" r="4" fill="#495057"/><circle cx="72" cy="90" r="4" fill="#495057"/>';
+  P.hourglass =
+    '<rect x="20" y="8" width="60" height="8" rx="3" fill="#a0673b"/><rect x="20" y="84" width="60" height="8" rx="3" fill="#a0673b"/>' +
+    '<path d="M28 16 H72 Q72 40 54 50 Q72 60 72 84 H28 Q28 60 46 50 Q28 40 28 16 Z" fill="#e7f5ff"/>' +
+    '<path d="M36 30 H64 Q60 42 50 48 Q40 42 36 30 Z" fill="#ffd43b" stroke="none"/>' +
+    '<path d="M50 50 V76" stroke="#ffd43b" stroke-width="2"/>' +
+    '<path d="M32 84 Q50 66 68 84 Z" fill="#ffd43b" stroke="none"/>' +
+    '<path d="M28 16 H72 Q72 40 54 50 Q72 60 72 84 H28 Q28 60 46 50 Q28 40 28 16 Z" fill="none"/>';
+
+  // A window showing the time of day, above a meal.
+  function mealTime(sky, inner, meal) {
+    return '<rect x="20" y="6" width="60" height="38" rx="4" fill="' + sky + '"/>' + inner +
+      '<path d="M50 6 V44 M20 25 H80" stroke="#fff" stroke-width="3"/><rect x="20" y="6" width="60" height="38" rx="4" fill="none"/>' +
+      '<path d="M4 64 H96" stroke="#c98b52" stroke-width="5"/>' + meal;
+  }
+  P.breakfast = mealTime('#ffe3e3', '<circle cx="34" cy="38" r="9" fill="#ffd43b" stroke="none"/>',
+    '<path d="M14 60 H54 Q54 84 34 86 Q14 84 14 60 Z" fill="#fff"/><path d="M16 60 Q34 52 52 60" fill="#ffe066" stroke-width="2"/>' +
+    '<circle cx="26" cy="57" r="2.5" fill="#e8a25c" stroke="none"/><circle cx="36" cy="55" r="2.5" fill="#e8a25c" stroke="none"/><circle cx="44" cy="58" r="2.5" fill="#e8a25c" stroke="none"/>' +
+    '<path d="M62 50 H84 L80 88 H66 Z" fill="#ff922b"/>');
+  P.lunch = mealTime('#a5d8ff', '<circle cx="64" cy="18" r="8" fill="#ffd43b" stroke="none"/>',
+    '<ellipse cx="50" cy="78" rx="40" ry="14" fill="#fff"/>' +
+    '<path d="M24 74 Q30 64 42 68 Q46 78 34 80 Q24 80 24 74 Z" fill="#e8a25c"/>' +
+    '<circle cx="56" cy="74" r="6" fill="#51cf66"/><circle cx="66" cy="76" r="5" fill="#51cf66"/>' +
+    '<path d="M70 70 l8 -4 M72 76 l9 -2" stroke="#ff922b" stroke-width="4"/>');
+  P.dinner = mealTime('#364fc7', '<path d="M66 14 A9 9 0 1 0 66 32 A11 11 0 0 1 66 14 Z" fill="#ffe066" stroke="none"/><circle cx="32" cy="16" r="1.5" fill="#fff" stroke="none"/><circle cx="40" cy="34" r="1.5" fill="#fff" stroke="none"/>',
+    '<ellipse cx="40" cy="80" rx="30" ry="10" fill="#fff"/>' +
+    '<path d="M18 74 H62 Q62 88 40 88 Q18 88 18 74 Z" fill="#4dabf7"/><ellipse cx="40" cy="74" rx="22" ry="4" fill="#ffa94d"/>' +
+    '<rect x="76" y="62" width="10" height="26" rx="2" fill="#fff"/><path d="M81 62 V56" stroke-width="2"/>' +
+    '<path d="M81 44 C86 50 86 54 81 56 C76 54 76 50 81 44 Z" fill="#ff922b"/>');
+
+  // ---------- Shapes (more) ----------
+
+  P.arrow = '<path d="M8 38 H56 V18 L92 50 L56 82 V62 H8 Z" fill="#4dabf7"/>';
+  P.spiral = (function () {
+    let d = '';
+    for (let t = 0; t <= 6.5 * Math.PI; t += 0.2) {
+      const r = 3 + t * 2.05;
+      d += (d ? ' L' : 'M') + (50 + Math.cos(t) * r).toFixed(1) + ' ' + (50 + Math.sin(t) * r).toFixed(1);
+    }
+    return '<path d="' + d + '" fill="none" stroke="' + INK + '" stroke-width="9"/><path d="' + d + '" fill="none" stroke="#cc5de8" stroke-width="5"/>';
+  })();
+  P.semicircle = '<path d="M8 70 A42 42 0 0 1 92 70 Z" fill="#20c997"/>';
+  P.hexagon = '<path d="M30 14 H70 L90 50 L70 86 H30 L10 50 Z" fill="#fab005"/>';
+
+  // ---------- Sports (more) ----------
+
+  P.tabletennis =
+    '<path d="M6 66 H94 L86 78 H14 Z" fill="#2f9e44"/><path d="M50 66 V54 M14 78 V92 M86 78 V92" stroke-width="3"/>' +
+    '<path d="M28 66 L50 54 L72 66" fill="none" stroke="#fff" stroke-width="2"/>' +
+    '<path d="M30 40 L18 56" stroke="' + INK + '" stroke-width="9"/><path d="M30 40 L18 56" stroke="#a0673b" stroke-width="5"/>' +
+    '<circle cx="36" cy="30" r="14" fill="#fa5252"/>' +
+    '<circle cx="72" cy="24" r="6" fill="#fff"/>' +
+    '<path d="M52 36 q8 -12 14 -10" fill="none" stroke="#adb5bd" stroke-width="2" stroke-dasharray="3 3"/>';
+  P.hockey =
+    '<path d="M70 8 L44 76 Q42 82 34 82 H12" fill="none" stroke="' + INK + '" stroke-width="11"/>' +
+    '<path d="M70 8 L44 76 Q42 82 34 82 H12" fill="none" stroke="#c98b52" stroke-width="6"/>' +
+    '<path d="M50 62 L44 76" stroke="#fff" stroke-width="5"/>' +
+    '<ellipse cx="72" cy="84" rx="14" ry="6" fill="#343a40"/><path d="M58 84 V80 Q72 74 86 80 V84" fill="#495057"/>' +
+    '<path d="M8 94 H96" stroke="#a5d8ff" stroke-width="4"/>';
+  P.golf =
+    '<path d="M4 76 Q50 66 96 76 V96 H4 Z" fill="#8ce99a"/>' +
+    '<ellipse cx="70" cy="78" rx="8" ry="3" fill="' + INK + '"/>' +
+    '<path d="M70 78 V22" stroke-width="3"/><path d="M70 22 L90 30 L70 38 Z" fill="#fa5252"/>' +
+    '<path d="M16 8 L30 74" stroke="#adb5bd" stroke-width="4"/><path d="M28 70 L42 76 L40 82 L26 78 Z" fill="#868e96"/>' +
+    '<circle cx="48" cy="78" r="5" fill="#fff"/>';
+  P.climbing =
+    '<rect x="6" y="6" width="88" height="88" rx="10" fill="#ced4da"/>' +
+    [[20, 20, '#fa5252'], [70, 16, '#4dabf7'], [36, 40, '#ffd43b'], [78, 48, '#51cf66'], [16, 66, '#cc5de8'], [56, 72, '#ff922b'], [84, 84, '#fa5252']]
+      .map((h) => '<ellipse cx="' + h[0] + '" cy="' + h[1] + '" rx="5" ry="4" fill="' + h[2] + '" stroke-width="2"/>').join('') +
+    '<path d="M60 6 V30" stroke="#fd7e14" stroke-width="2.5"/>' +
+    figure({ hair: 'short', hairColor: '#7a4a26', shirt: '#4dabf7', bottom: '#364fc7', s: 0.62, x: 56, y: 30,
+      extra: '<path d="M-12 36 L-26 10 M12 36 L28 16" stroke="' + INK + '" stroke-width="9"/><path d="M-12 36 L-26 10 M12 36 L28 16" stroke="#4dabf7" stroke-width="5"/>' }) +
+    '<rect x="6" y="6" width="88" height="88" rx="10" fill="none"/>';
+
   LG.PICTURES = P;
   LG.picture = function (id) {
     return P[id] ? svg(P[id]) : '';
