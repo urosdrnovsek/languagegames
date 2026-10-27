@@ -3,6 +3,8 @@
 (function () {
   const LG = (window.LG = window.LG || {});
   const LANGS = LG.LANGS;
+  // Folder of the shared files, for loading the QR libraries on demand.
+  const SHARED = new URL('.', (document.currentScript && document.currentScript.src) || location.href);
   const params = new URLSearchParams(location.search);
 
   function store(key, value) {
@@ -214,6 +216,55 @@
       removePlayer: 'Remove',
       resetProgress: 'Delete all scores and stickers',
       resetConfirm: 'Delete all scores and stickers on this device?',
+      showTeacher: 'Show this to your teacher!',
+      scoreboard: 'Class Scoreboard',
+      scoreboardDesc: "Run a class challenge, then collect everyone's scores by QR code.",
+      chooseGame: '1. Choose a game',
+      topicsUsed: 'Topics: {topics}',
+      allTopicsLabel: 'all topics',
+      changeTopics: 'Change topics in the teacher settings',
+      makeChallenge: '2. Make the challenge',
+      howToJoin: 'On each iPad: open the game list, tap Class Challenge, enter this code and play {game}. Or scan the QR code with the iPad camera.',
+      collect: '3. Collect scores',
+      scanHelp: 'When they finish, children hold their end screen up to this camera.',
+      startCamera: 'Start the camera',
+      added: 'Added: {name}',
+      wrongChallenge: 'That score is from another challenge or game.',
+      addByHand: 'Add by hand',
+      nameLabel: 'Name',
+      scoreLabel: 'Score',
+      add: 'Add',
+      showResults: 'Show the results',
+      backToScan: 'Back to collecting',
+      noCamera: 'No camera available. You can add scores by hand.',
+      newChallenge: 'New challenge',
+      entries: '{n} scores',
+      results: 'Results',
+      liveClassroom: 'Live Classroom',
+      liveDesc: 'A live leaderboard over the classroom Wi-Fi.',
+      liveNeedsServer: 'Live Classroom needs the classroom program running on this computer, and this page opened from it. See "Live Classroom" in the README for how to start it.',
+      boardOnly: 'Open the board on the computer running the classroom program (localhost).',
+      scanToJoin: 'Join on your iPad: scan this code, or type the address',
+      startGame: 'Start the game',
+      endGame: 'End the game',
+      playersN: '{n} players',
+      joinTitle: 'Join the class game',
+      joinBtn: 'Join',
+      waiting: "You're in! Wait for your teacher to start",
+      lookAtBoard: 'Look at the board!',
+      gameClosed: 'This game has finished. Ask your teacher.',
+      noConnection: "Can't reach the teacher's computer. Check the Wi-Fi.",
+      finishedMark: 'finished',
+      teamBattle: 'Team Battle',
+      teamBattleDesc: 'Split the class into teams and take turns on the board!',
+      howManyTeams: 'How many teams?',
+      questionsEach: 'Questions for each team',
+      teamN: 'Team {n}',
+      teamTurn: 'Team {n}, your turn!',
+      teamSteal: 'Team {n}, can you get it?',
+      teamWins: 'Team {n} wins!',
+      teamTie: "It's a tie! Great playing, everyone.",
+      teamPoints: 'First try: 2 points. Second chance for the next team: 1 point.',
       wordBook: 'Word Book',
       wordBookDesc: 'Look at all the pictures. Tap one to hear the word.',
     },
@@ -388,6 +439,55 @@
       removePlayer: 'Odstrani',
       resetProgress: 'Izbriši vse rezultate in nalepke',
       resetConfirm: 'Izbrišem vse rezultate in nalepke na tej napravi?',
+      showTeacher: 'Pokaži učitelju!',
+      scoreboard: 'Razredna lestvica',
+      scoreboardDesc: 'Izvedite razredni izziv in zberite rezultate vseh s QR-kodo.',
+      chooseGame: '1. Izberite igro',
+      topicsUsed: 'Teme: {topics}',
+      allTopicsLabel: 'vse teme',
+      changeTopics: 'Teme spremenite v nastavitvah za učitelje',
+      makeChallenge: '2. Ustvarite izziv',
+      howToJoin: 'Na vsaki tablici: odprite seznam iger, tapnite Razredni izziv, vpišite kodo in igrajte {game}. Ali pa QR-kodo skenirajte s kamero tablice.',
+      collect: '3. Zberite rezultate',
+      scanHelp: 'Ko otroci končajo, pokažejo zaključni zaslon tej kameri.',
+      startCamera: 'Vklopi kamero',
+      added: 'Dodano: {name}',
+      wrongChallenge: 'Ta rezultat je iz drugega izziva ali igre.',
+      addByHand: 'Dodaj ročno',
+      nameLabel: 'Ime',
+      scoreLabel: 'Rezultat',
+      add: 'Dodaj',
+      showResults: 'Pokaži rezultate',
+      backToScan: 'Nazaj na zbiranje',
+      noCamera: 'Kamera ni na voljo. Rezultate lahko dodate ročno.',
+      newChallenge: 'Nov izziv',
+      entries: 'Rezultatov: {n}',
+      results: 'Rezultati',
+      liveClassroom: 'Razred v živo',
+      liveDesc: 'Lestvica v živo prek šolskega Wi-Fi omrežja.',
+      liveNeedsServer: 'Razred v živo potrebuje razredni program, ki teče na tem računalniku, in to stran, odprto iz njega. Navodila so v README pod »Live Classroom«.',
+      boardOnly: 'Tablo odprite na računalniku, na katerem teče razredni program (localhost).',
+      scanToJoin: 'Pridruži se na tablici: skeniraj kodo ali vpiši naslov',
+      startGame: 'Začni igro',
+      endGame: 'Končaj igro',
+      playersN: 'Igralcev: {n}',
+      joinTitle: 'Pridruži se razredni igri',
+      joinBtn: 'Pridruži se',
+      waiting: 'Si notri! Počakaj, da učitelj začne',
+      lookAtBoard: 'Poglej na tablo!',
+      gameClosed: 'Ta igra je končana. Vprašaj učitelja.',
+      noConnection: 'Učiteljevega računalnika ni mogoče doseči. Preveri Wi-Fi.',
+      finishedMark: 'končano',
+      teamBattle: 'Boj ekip',
+      teamBattleDesc: 'Razdelite razred v ekipe in se izmenjujte pri tabli!',
+      howManyTeams: 'Koliko ekip?',
+      questionsEach: 'Vprašanj za vsako ekipo',
+      teamN: 'Ekipa {n}',
+      teamTurn: 'Ekipa {n}, na vrsti ste!',
+      teamSteal: 'Ekipa {n}, znate vi?',
+      teamWins: 'Zmaga ekipa {n}!',
+      teamTie: 'Neodločeno! Vsi ste odlično igrali.',
+      teamPoints: 'Prvi poskus: 2 točki. Druga priložnost za naslednjo ekipo: 1 točka.',
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
@@ -562,6 +662,55 @@
       removePlayer: 'Entfernen',
       resetProgress: 'Alle Ergebnisse und Sticker löschen',
       resetConfirm: 'Alle Ergebnisse und Sticker auf diesem Gerät löschen?',
+      showTeacher: 'Zeig das deiner Lehrkraft!',
+      scoreboard: 'Klassen-Bestenliste',
+      scoreboardDesc: 'Starten Sie eine Klassen-Challenge und sammeln Sie alle Ergebnisse per QR-Code.',
+      chooseGame: '1. Spiel wählen',
+      topicsUsed: 'Themen: {topics}',
+      allTopicsLabel: 'alle Themen',
+      changeTopics: 'Themen in den Lehrkraft-Einstellungen ändern',
+      makeChallenge: '2. Challenge erstellen',
+      howToJoin: 'Auf jedem iPad: Spielübersicht öffnen, Klassen-Challenge antippen, diesen Code eingeben und {game} spielen. Oder den QR-Code mit der iPad-Kamera scannen.',
+      collect: '3. Ergebnisse sammeln',
+      scanHelp: 'Wenn die Kinder fertig sind, halten sie ihren Endbildschirm vor diese Kamera.',
+      startCamera: 'Kamera starten',
+      added: 'Hinzugefügt: {name}',
+      wrongChallenge: 'Dieses Ergebnis gehört zu einer anderen Challenge oder einem anderen Spiel.',
+      addByHand: 'Von Hand hinzufügen',
+      nameLabel: 'Name',
+      scoreLabel: 'Ergebnis',
+      add: 'Hinzufügen',
+      showResults: 'Ergebnisse zeigen',
+      backToScan: 'Zurück zum Sammeln',
+      noCamera: 'Keine Kamera verfügbar. Sie können Ergebnisse von Hand eintragen.',
+      newChallenge: 'Neue Challenge',
+      entries: '{n} Ergebnisse',
+      results: 'Ergebnisse',
+      liveClassroom: 'Live-Klassenzimmer',
+      liveDesc: 'Eine Live-Bestenliste über das Schul-WLAN.',
+      liveNeedsServer: 'Das Live-Klassenzimmer braucht das Klassenzimmer-Programm auf diesem Computer, und diese Seite muss darüber geöffnet sein. Anleitung im README unter „Live Classroom“.',
+      boardOnly: 'Öffnen Sie die Tafel auf dem Computer mit dem Klassenzimmer-Programm (localhost).',
+      scanToJoin: 'Mach mit auf dem iPad: Code scannen oder Adresse eintippen',
+      startGame: 'Spiel starten',
+      endGame: 'Spiel beenden',
+      playersN: '{n} Spieler',
+      joinTitle: 'Beim Klassenspiel mitmachen',
+      joinBtn: 'Mitmachen',
+      waiting: 'Du bist dabei! Warte, bis deine Lehrkraft startet',
+      lookAtBoard: 'Schau an die Tafel!',
+      gameClosed: 'Dieses Spiel ist vorbei. Frag deine Lehrkraft.',
+      noConnection: 'Der Computer der Lehrkraft ist nicht erreichbar. Prüfe das WLAN.',
+      finishedMark: 'fertig',
+      teamBattle: 'Team-Duell',
+      teamBattleDesc: 'Teilt die Klasse in Teams und wechselt euch an der Tafel ab!',
+      howManyTeams: 'Wie viele Teams?',
+      questionsEach: 'Fragen pro Team',
+      teamN: 'Team {n}',
+      teamTurn: 'Team {n}, ihr seid dran!',
+      teamSteal: 'Team {n}, wisst ihr es?',
+      teamWins: 'Team {n} gewinnt!',
+      teamTie: 'Unentschieden! Ihr habt alle toll gespielt.',
+      teamPoints: 'Erster Versuch: 2 Punkte. Zweite Chance für das nächste Team: 1 Punkt.',
       wordBook: 'Bildwörterbuch',
       wordBookDesc: 'Schau dir alle Bilder an. Tippe auf ein Bild, um das Wort zu hören.',
     },
@@ -736,6 +885,55 @@
       removePlayer: 'Supprimer',
       resetProgress: 'Effacer tous les scores et autocollants',
       resetConfirm: 'Effacer tous les scores et autocollants de cet appareil\u00a0?',
+      showTeacher: 'Montre ceci à ton enseignant\u00a0!',
+      scoreboard: 'Tableau de la classe',
+      scoreboardDesc: 'Lancez un défi de classe, puis récupérez les scores de chacun par QR\u00a0code.',
+      chooseGame: '1. Choisissez un jeu',
+      topicsUsed: 'Thèmes\u00a0: {topics}',
+      allTopicsLabel: 'tous les thèmes',
+      changeTopics: 'Modifier les thèmes dans les réglages enseignants',
+      makeChallenge: '2. Créer le défi',
+      howToJoin: "Sur chaque iPad\u00a0: ouvrez la liste des jeux, touchez Défi de la classe, tapez ce code et jouez à {game}. Ou scannez le QR\u00a0code avec l'appareil photo.",
+      collect: '3. Récupérer les scores',
+      scanHelp: 'À la fin, les enfants montrent leur écran de fin à cette caméra.',
+      startCamera: 'Allumer la caméra',
+      added: 'Ajouté\u00a0: {name}',
+      wrongChallenge: "Ce score vient d'un autre défi ou d'un autre jeu.",
+      addByHand: 'Ajouter à la main',
+      nameLabel: 'Prénom',
+      scoreLabel: 'Score',
+      add: 'Ajouter',
+      showResults: 'Afficher les résultats',
+      backToScan: 'Retour à la collecte',
+      noCamera: 'Aucune caméra disponible. Vous pouvez ajouter les scores à la main.',
+      newChallenge: 'Nouveau défi',
+      entries: '{n} scores',
+      results: 'Résultats',
+      liveClassroom: 'Classe en direct',
+      liveDesc: 'Un classement en direct sur le Wi-Fi de la classe.',
+      liveNeedsServer: 'La classe en direct a besoin du programme de classe lancé sur cet ordinateur, et de cette page ouverte depuis celui-ci. Voir «\u00a0Live Classroom\u00a0» dans le README.',
+      boardOnly: "Ouvrez le tableau sur l'ordinateur qui fait tourner le programme (localhost).",
+      scanToJoin: "Rejoins sur ton iPad\u00a0: scanne ce code ou tape l'adresse",
+      startGame: 'Lancer la partie',
+      endGame: 'Terminer la partie',
+      playersN: '{n} joueurs',
+      joinTitle: 'Rejoindre le jeu de la classe',
+      joinBtn: 'Rejoindre',
+      waiting: "C'est bon\u00a0! Attends que ton enseignant lance la partie",
+      lookAtBoard: 'Regarde le tableau\u00a0!',
+      gameClosed: 'Cette partie est terminée. Demande à ton enseignant.',
+      noConnection: "Impossible de joindre l'ordinateur de l'enseignant. Vérifie le Wi-Fi.",
+      finishedMark: 'fini',
+      teamBattle: "Bataille d'équipes",
+      teamBattleDesc: 'Formez des équipes et jouez chacun votre tour au tableau\u00a0!',
+      howManyTeams: "Combien d'équipes\u00a0?",
+      questionsEach: 'Questions par équipe',
+      teamN: 'Équipe {n}',
+      teamTurn: 'Équipe {n}, à vous\u00a0!',
+      teamSteal: 'Équipe {n}, vous savez\u00a0?',
+      teamWins: "L'équipe {n} gagne\u00a0!",
+      teamTie: 'Égalité\u00a0! Bravo à tous.',
+      teamPoints: "Du premier coup\u00a0: 2 points. Deuxième chance pour l'équipe suivante\u00a0: 1 point.",
       wordBook: 'Imagier',
       wordBookDesc: 'Regarde toutes les images. Touche une image pour entendre le mot.',
     },
@@ -910,6 +1108,55 @@
       removePlayer: 'Quitar',
       resetProgress: 'Borrar todas las puntuaciones y pegatinas',
       resetConfirm: '¿Borrar todas las puntuaciones y pegatinas de este dispositivo?',
+      showTeacher: '¡Enséñaselo a tu docente!',
+      scoreboard: 'Marcador de la clase',
+      scoreboardDesc: 'Organice un reto de clase y recoja las puntuaciones de todos con un código QR.',
+      chooseGame: '1. Elija un juego',
+      topicsUsed: 'Temas: {topics}',
+      allTopicsLabel: 'todos los temas',
+      changeTopics: 'Cambiar los temas en los ajustes para docentes',
+      makeChallenge: '2. Crear el reto',
+      howToJoin: 'En cada iPad: abra la lista de juegos, toque Reto de la clase, escriba este código y juegue a {game}. O escanee el código QR con la cámara del iPad.',
+      collect: '3. Recoger puntuaciones',
+      scanHelp: 'Al terminar, los niños muestran su pantalla final a esta cámara.',
+      startCamera: 'Encender la cámara',
+      added: 'Añadido: {name}',
+      wrongChallenge: 'Esa puntuación es de otro reto u otro juego.',
+      addByHand: 'Añadir a mano',
+      nameLabel: 'Nombre',
+      scoreLabel: 'Puntuación',
+      add: 'Añadir',
+      showResults: 'Mostrar resultados',
+      backToScan: 'Volver a recoger',
+      noCamera: 'No hay cámara disponible. Puede añadir las puntuaciones a mano.',
+      newChallenge: 'Nuevo reto',
+      entries: '{n} puntuaciones',
+      results: 'Resultados',
+      liveClassroom: 'Clase en directo',
+      liveDesc: 'Una clasificación en directo por la wifi del aula.',
+      liveNeedsServer: 'La clase en directo necesita el programa de clase en este ordenador y esta página abierta desde él. Consulte «Live Classroom» en el README.',
+      boardOnly: 'Abra la pizarra en el ordenador que ejecuta el programa de clase (localhost).',
+      scanToJoin: 'Únete con tu iPad: escanea este código o escribe la dirección',
+      startGame: 'Empezar la partida',
+      endGame: 'Terminar la partida',
+      playersN: '{n} jugadores',
+      joinTitle: 'Únete al juego de la clase',
+      joinBtn: 'Unirme',
+      waiting: '¡Ya estás dentro! Espera a que tu docente empiece',
+      lookAtBoard: '¡Mira la pizarra!',
+      gameClosed: 'Esta partida ha terminado. Pregunta a tu docente.',
+      noConnection: 'No se puede conectar con el ordenador del docente. Revisa la wifi.',
+      finishedMark: 'terminado',
+      teamBattle: 'Batalla de equipos',
+      teamBattleDesc: '¡Divide la clase en equipos y turnaos en la pizarra!',
+      howManyTeams: '¿Cuántos equipos?',
+      questionsEach: 'Preguntas por equipo',
+      teamN: 'Equipo {n}',
+      teamTurn: '¡Equipo {n}, os toca!',
+      teamSteal: 'Equipo {n}, ¿lo sabéis?',
+      teamWins: '¡Gana el equipo {n}!',
+      teamTie: '¡Empate! Todos habéis jugado muy bien.',
+      teamPoints: 'A la primera: 2 puntos. Segunda oportunidad para el siguiente equipo: 1 punto.',
       wordBook: 'Diccionario ilustrado',
       wordBookDesc: 'Mira todas las imágenes. Toca una para oír la palabra.',
     },
@@ -1380,7 +1627,7 @@
   };
   LG.addPlayer = function (avatar, name) {
     const id = 'p' + Date.now().toString(36) + Math.floor(Math.random() * 1000);
-    prog.players.push({ id: id, avatar: avatar, name: (name || '').trim().slice(0, 20) });
+    prog.players.push({ id: id, avatar: avatar, name: (name || '').trim().slice(0, 20), num: 10 + Math.floor(Math.random() * 90) });
     LG.setPlayer(id);
     return id;
   };
@@ -1397,6 +1644,118 @@
     saveProgress();
   };
   LG.playerById = (id) => prog.players.find((p) => p.id === id) || null;
+
+  // Who this device is in a class game: the current player, or a guest
+  // animal with a number ("Fox 37") that stays the same on this device.
+  LG.identity = function () {
+    const p = LG.currentPlayer();
+    if (p) {
+      if (!p.num) {
+        p.num = 10 + Math.floor(Math.random() * 90);
+        saveProgress();
+      }
+      return { avatar: p.avatar, num: p.num, name: p.name || '' };
+    }
+    if (!prog.guest) {
+      prog.guest = { avatar: LG.AVATARS[Math.floor(Math.random() * LG.AVATARS.length)], num: 10 + Math.floor(Math.random() * 90) };
+      saveProgress();
+    }
+    return { avatar: prog.guest.avatar, num: prog.guest.num, name: '' };
+  };
+  // "Mia", or the avatar's word and number ("Fuchs 37") in the current language.
+  LG.displayName = function (who) {
+    if (who.name) return who.name;
+    const v = LG.VOCAB.find((x) => x.pic === who.avatar);
+    const word = v ? v[LG.lang] : who.avatar;
+    return word.charAt(0).toLocaleUpperCase(LG.lang) + word.slice(1) + ' ' + who.num;
+  };
+
+  // ---------- Score codes (Class Scoreboard) ----------
+  //
+  // At the end of a class challenge, scored games show a QR code holding the
+  // challenge code, game, score and who played; the teacher's Class
+  // Scoreboard scans them. A short check makes made-up codes unlikely to pass.
+
+  LG.SCORE_GAMES = [
+    { id: 'beat-clock', title: 'beatClock', pic: 'clock', better: 'high' },
+    { id: 'word-rain', title: 'wordRain', pic: 'cloud', better: 'high' },
+    { id: 'memory', title: 'memory', pic: 'cherry', better: 'low' },
+    { id: 'word-search', title: 'wordSearch', pic: 'glasses', better: 'low' },
+    { id: 'picture-hunt', title: 'pictureHunt', pic: 'map', better: 'low' },
+  ];
+  LG.formatScore = function (gameId, score) {
+    const g = LG.SCORE_GAMES.find((x) => x.id === gameId);
+    return g && g.better === 'low' ? LG.formatTime(score) : LG.t('pointsN', { n: score });
+  };
+  const scoreCheck = (body) => (LG.hash('lgs|' + body) % 46656).toString(36).padStart(3, '0');
+  LG.scoreCode = function (challenge, gameId, score, who) {
+    const body = [challenge.replace('-', ''), LG.SCORE_GAMES.findIndex((g) => g.id === gameId), score, LG.AVATARS.indexOf(who.avatar), who.num, encodeURIComponent(who.name || '')].join('.');
+    return 'LGS1.' + body + '.' + scoreCheck(body);
+  };
+  LG.readScoreCode = function (text) {
+    const m = /^LGS1\.(([0-9A-Z]{8})\.(\d+)\.(\d+)\.(\d+)\.(\d+)\.([^.]*))\.([0-9a-z]{3})$/.exec(String(text || '').trim());
+    if (!m || scoreCheck(m[1]) !== m[8]) return null;
+    const game = LG.SCORE_GAMES[+m[3]];
+    const avatar = LG.AVATARS[+m[5]];
+    if (!game || !avatar) return null;
+    let name = '';
+    try {
+      name = decodeURIComponent(m[7]).slice(0, 20);
+    } catch (e) {
+      return null;
+    }
+    return { challenge: m[2].slice(0, 4) + '-' + m[2].slice(4), game: game.id, score: +m[4], avatar: avatar, num: +m[6], name: name };
+  };
+
+  // Loads one of the bundled libraries (shared/vendor/...) once.
+  const loading = {};
+  LG.loadScript = function (path) {
+    if (!loading[path]) {
+      loading[path] = new Promise((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = new URL(path, SHARED).href;
+        el.onload = resolve;
+        el.onerror = reject;
+        document.head.appendChild(el);
+      });
+    }
+    return loading[path];
+  };
+  LG.qrSvg = function (text, cell) {
+    const qr = window.qrcode(0, 'M');
+    qr.addData(text);
+    qr.make();
+    return qr.createSvgTag(cell || 4, 2);
+  };
+
+  // ---------- Live Classroom ----------
+  //
+  // When the games are opened from the classroom program on the teacher's
+  // computer (?live=1), they report progress and the final score to it, and
+  // the board shows a live leaderboard.
+
+  LG.live = params.get('live') === '1' ? { pid: session('lg-live-pid') } : null;
+  LG.api = function (path, body) {
+    return fetch(new URL('../api/' + path, SHARED).href, body === undefined ? {} : {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    }).then((r) => (r.ok ? r.json() : Promise.reject(r.status)));
+  };
+  let lastReport = 0;
+  let reportTimer = null;
+  // progress: 0-1 of the game done; score: points or time so far.
+  LG.liveReport = function (progress, score, done) {
+    if (!LG.live || !LG.live.pid) return;
+    const send = () => {
+      lastReport = Date.now();
+      LG.api('score', { pid: LG.live.pid, progress: progress, score: score, done: !!done }).catch(() => {});
+    };
+    clearTimeout(reportTimer);
+    // At most two reports a second, but always send the last one.
+    if (done || Date.now() - lastReport > 500) send();
+    else reportTimer = setTimeout(send, 500);
+  };
 
   // Saves a score; returns { best } when it beats this player's previous best.
   LG.recordScore = function (game, score, better) {
@@ -1792,6 +2151,8 @@
       end: (result) => finish(result),
       // Runs fn when the round ends or the game restarts (stop clocks etc.).
       onCleanup: (fn) => cleanups.push(fn),
+      // Progress so far (0-1) and score, for the Live Classroom board.
+      report: (progress, score) => LG.liveReport(progress, score, false),
     };
 
     function start() {
@@ -1830,15 +2191,31 @@
       }
       parts.push(LG.el('h2', '', heading), LG.el('p', '', text));
       if (scoreId && result.score !== undefined) parts.push(LG.el('p', 'score-line', LG.t('yourScore', { score: opts.score.format(result.score) })));
+      // Live Classroom: send the final score; the board shows the results.
+      if (LG.live) {
+        LG.liveReport(1, result.score === undefined ? null : result.score, true);
+        parts.push(LG.el('p', 'look-board', LG.t('lookAtBoard')));
+      }
+      // Class challenge: a QR code the teacher's Class Scoreboard can scan.
+      if (LG.challenge && !LG.live && !LG.daily && !calm && opts.score && result.score !== undefined) {
+        const box = LG.el('div', 'score-qr');
+        const code = LG.scoreCode(LG.challenge.code, opts.score.id, result.score, LG.identity());
+        LG.loadScript('vendor/qrcode.js').then(() => {
+          box.innerHTML = LG.qrSvg(code, 5);
+          box.appendChild(LG.el('span', '', LG.t('showTeacher')));
+        }).catch(() => {});
+        parts.push(box);
+      }
       const buttons = LG.el('div', 'panel-buttons');
       parts.push(buttons);
       LG.speak(heading + ' ' + text + (record && !calm ? ' ' + LG.t('newRecord') : ''));
       const o = overlay(parts);
-      buttons.appendChild(bigButton(LG.ICONS.again, LG.t('playAgain'), () => {
+      // One go per live game: no "play again".
+      if (!LG.live) buttons.appendChild(bigButton(LG.ICONS.again, LG.t('playAgain'), () => {
         o.remove();
         start();
       }));
-      if (scoreId && showHome && !calm) {
+      if (scoreId && showHome && !calm && !LG.live) {
         const a = LG.el('a', 'big-btn secondary', LG.ICONS.trophy + '<span>' + LG.t('scores') + '</span>');
         a.href = LG.link('../../scores.html') + '#' + scoreId;
         buttons.appendChild(a);
@@ -1848,7 +2225,8 @@
         a.href = LG.link('../../index.html');
         buttons.appendChild(a);
       }
-      buttons.querySelector('button').focus();
+      const first = buttons.querySelector('button, a');
+      if (first) first.focus();
     }
 
     // Start screen. The Play tap also unlocks speech and sound in browsers

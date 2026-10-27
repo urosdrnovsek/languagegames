@@ -69,6 +69,7 @@
               points++;
               streak++;
               box.querySelector('b').textContent = points;
+              ctx.report(Math.min(1, 1 - clock.ms / (SECONDS * 1000)), points);
               LG.sfx.good();
               LG.markCorrect(w.pic);
               if (streak % 3 === 0) {
@@ -96,6 +97,7 @@
         ctx.end({ won: true, stars: stars, title: LG.t('timeUp'), text: LG.t('pointsText', { n: points }), score: points });
       }
 
+      ctx.report(0, 0);
       next();
     },
   });

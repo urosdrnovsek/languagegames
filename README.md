@@ -16,6 +16,7 @@ internet connection beyond loading the page, and no build step.
 - **Beat the Clock** (`games/beat-clock/`): 60 seconds to match as many pictures and words as possible; three in a row adds 3 seconds. With `?daily=1` it is the **Daily Challenge**: the same words for everyone today.
 - **Word Rain** (`games/word-rain/`): pictures fall; tap the one for the word at the bottom before it lands. Three hearts, and it speeds up.
 - **Tug of War** (`games/tug-of-war/`): two players on one tablet, sitting opposite; the first right answer pulls the rope.
+- **Team Battle** (`games/teams/`): 2-4 teams take turns on the whiteboard; 2 points for a first-try answer, and if a team gets it wrong the next team can win 1 point.
 - **Word Bingo** (`games/bingo/`): the teacher's screen calls words, each child's device shows its own 3 × 3 picture card from the same 24-word deck. No network needed.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
 - **Sticker Album** (`album.html`): a word's sticker is won after answering it right 3 times in any game; one page per topic.
@@ -51,6 +52,61 @@ avatar with an optional nickname), their scores and stickers.
 - **Daily challenge**: Beat the Clock with today's date as the seed, all topics.
 - **Calm mode**: hides the race games, Tug of War and the scores, and removes
   the Picture Hunt timer, for children who find competition stressful.
+
+## Class competitions (no internet server)
+
+### Class Scoreboard (works anywhere, offline)
+
+1. On the board, open **Class Scoreboard** (game list → Play together), pick a
+   game (Beat the Clock, Word Rain, Memory Pairs, Word Search or Picture Hunt)
+   and make the challenge. The topics come from the teacher settings.
+2. Children enter the code under **Class Challenge**, or scan the QR code with
+   the iPad camera, and play. Everyone gets the same words.
+3. Each end screen shows a QR code with the child's avatar, name and score.
+   Children hold it up to the teacher's camera; the scoreboard reads it
+   (scores from another challenge or game are refused). Scores can also be
+   added by hand.
+4. **Show the results** puts a podium and the full list on the board.
+
+The scores never leave the teacher's device. QR codes are drawn with
+[qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) (MIT) and
+read with [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0), both bundled in
+`shared/vendor/` with their licenses.
+
+### Live Classroom (classroom Wi-Fi, teacher's computer)
+
+A live leaderboard while the children play. The teacher's computer runs a
+small program (`classroom/classroom.py`, Python standard library only) that
+serves the games to the iPads over the classroom Wi-Fi. Nothing is sent to
+the internet; players' avatars, names and scores live only in the program's
+memory and are gone when it stops.
+
+**Starting it**
+
+1. Download this project (on GitHub: **Code → Download ZIP**) and unzip it.
+2. Make sure Python 3 is installed:
+   - **Mac**: usually already there. If not, macOS offers to install it the
+     first time (the "command line developer tools").
+   - **Windows**: install it from [python.org](https://www.python.org/downloads/)
+     and tick **"Add python.exe to PATH"**.
+3. In the `classroom` folder, double-click **start-classroom.command** (Mac),
+   **start-classroom.bat** (Windows) or run `start-classroom.sh` (Linux).
+   The first time on a Mac, right-click it and choose **Open**. If the
+   computer asks whether to allow incoming network connections, allow it.
+4. The board opens in the browser (`http://localhost:8000/live/board.html`).
+   Pick a game, open the lobby, and the board shows a QR code and address.
+5. Children scan the QR code on their iPads (same Wi-Fi), tap **Join**, and
+   wait. Press **Start the game**: every iPad starts the same challenge, and
+   the board shows a live leaderboard. **End the game** shows the podium.
+
+Board actions (start, end, remove a player) only work on the teacher's
+computer itself. Up to 60 players can join.
+
+**If the iPads can't connect**: many school networks stop devices from
+talking to each other ("client isolation"), and only the school's IT can
+change that. A phone hotspot from the teacher's phone, with the computer and
+iPads joined to it, is a quick workaround. Also check that the computer's
+firewall allowed the program.
 
 ## Running it
 
@@ -154,6 +210,10 @@ words.html            Word Book
 voice-test.html       shows which speech voices a browser has
 settings.html         teacher settings
 album.html            sticker album
+scoreboard.html       Class Scoreboard (QR score collection)
+live/board.html       Live Classroom board (teacher's computer)
+live/join.html        Live Classroom join page (iPads)
+classroom/            the Live Classroom program and launchers
 scores.html           personal bests and device leaderboard
 games/*/index.html    one page per game
 games/*/game.js       game rules
@@ -163,6 +223,7 @@ shared/pictures.js    all pictures (SVG)
 shared/words.js       word bank (all five languages)
 shared/styles.css     shared styles
 shared/fonts/         bundled reading fonts and their licenses
+shared/vendor/        bundled QR code libraries and their licenses
 ```
 
 ## License

@@ -103,6 +103,7 @@
         });
         hit.clue.classList.add('found');
         found++;
+        ctx.report(found / placed.length, Math.round(clock.ms));
         LG.sfx.good();
         LG.markCorrect(hit.w.pic);
         LG.speak(hit.w.word);
@@ -153,6 +154,7 @@
         }
       });
 
+      ctx.report(0, 0);
       ctx.stage.append(head, clues, board);
     },
   });

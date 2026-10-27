@@ -30,6 +30,7 @@
     .card.race { background: #fff4e6; }
     .card.together { background: #e7f5ff; }
     .card.me { background: #ebfbee; }
+    .card[hidden] { display: none; }
     .strip { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 30px 0 10px; }
     .strip div { width: 54px; height: 54px; }
     .strip svg { width: 100%; height: 100%; }
@@ -95,9 +96,13 @@
           { path: 'games/beat-clock/index.html', query: 'daily=1', title: 'dailyChallenge', desc: 'dailyDesc', pic: 'calendar' },
         ], calm],
         ['sectionTogether', 'together', [
+          g('teams', 'teamBattle', 'crown'),
           g('tug-of-war', 'tug', 'rope', { hide: calm }),
           g('bingo', 'bingo', 'flag'),
           { action: enterCode, title: 'classChallenge', desc: 'classChallengeDesc', pic: 'trophy' },
+          { path: 'scoreboard.html', title: 'scoreboard', desc: 'scoreboardDesc', pic: 'calendar', hide: calm },
+          // Only when the games are served by the classroom program.
+          { path: 'live/board.html', title: 'liveClassroom', desc: 'liveDesc', pic: 'computer', hide: true, id: 'live-card' },
         ]],
         ['sectionMe', 'me', [
           { path: 'album.html', title: 'stickers', desc: 'stickersDesc', pic: 'star' },
@@ -110,8 +115,12 @@
         const sec = LG.el('section', 'section');
         sec.appendChild(LG.el('h2', '', LG.t(heading)));
         const cards = sec.appendChild(LG.el('div', 'cards'));
-        items.filter((it) => !it.hide).forEach((it) => {
+        items.filter((it) => !it.hide || it.id).forEach((it) => {
           const card = LG.el(it.action ? 'button' : 'a', 'card ' + cls);
+          if (it.id) {
+            card.id = it.id;
+            card.hidden = true;
+          }
           if (it.action) {
             card.type = 'button';
             card.addEventListener('click', it.action);
@@ -156,6 +165,10 @@
         document.body.appendChild(o);
         input.focus();
       }
+
+      // Show Live Classroom when the classroom program (always plain http)
+      // serves these pages.
+      if (!calm && location.protocol === 'http:') LG.api('info').then((i) => i.ok && (document.getElementById('live-card').hidden = false)).catch(() => {});
 
       const strip = document.getElementById('strip');
       LG.sample(LG.words(LG.lang), 10).forEach((w) => strip.appendChild(LG.el('div', '', LG.picture(w.pic))));

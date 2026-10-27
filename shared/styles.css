@@ -668,3 +668,48 @@ span.slot { display: inline-grid; place-items: center; }
 .bingo-cell.line { border-color: var(--good); box-shadow: 0 5px 0 var(--good); background: var(--good-bg); }
 .code-input { font-family: ui-monospace, 'Cascadia Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; }
 .gate-error { color: var(--bad); min-height: 1.4em; margin: 0 0 10px; }
+
+/* ---------- Class Scoreboard and Live Classroom ---------- */
+
+.score-qr { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0 auto 16px; padding: 10px; width: fit-content; background: #fff; border: 3px solid var(--ink); border-radius: 16px; }
+.score-qr svg { width: 200px; height: 200px; }
+.score-qr span { font-weight: 700; font-size: 1rem; color: var(--ink); }
+.panel .look-board { font-weight: 700; font-size: 1.3rem; color: var(--accent-dark); }
+
+/* Leaderboard rows and podium (Class Scoreboard, Live Classroom) */
+
+.entries { display: flex; flex-direction: column; gap: 6px; max-height: 420px; overflow: auto; }
+.row { display: flex; align-items: center; gap: 10px; padding: 4px 10px 4px 4px; border-radius: 14px; background: #f8f9fa; font-weight: 700; font-size: 1.1rem; }
+.row .rank { width: 30px; text-align: center; }
+.row .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.row.new { animation: pop 0.5s ease; background: var(--good-bg); }
+.podium { display: flex; justify-content: center; align-items: flex-end; gap: 12px; margin: 10px 0 24px; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 6px; width: min(30%, 200px); }
+.step .avatar { width: 84px; height: 84px; }
+.step b { font-size: 1.3rem; text-align: center; overflow-wrap: anywhere; }
+.step .block { width: 100%; border: 4px solid var(--ink); border-radius: 16px 16px 0 0; display: grid; place-items: center; font-size: 2.6rem; font-weight: 700; }
+.step.p1 .block { height: 170px; background: var(--star); }
+.step.p2 .block { height: 120px; background: #dee2e6; }
+.step.p3 .block { height: 90px; background: #ffc078; }
+.step .val { font-weight: 700; color: var(--ink-soft); }
+.code-big { font-family: ui-monospace, 'Cascadia Mono', monospace; font-size: clamp(2.4rem, 9vw, 4rem); font-weight: 700; letter-spacing: 0.08em; }
+
+/* ---------- Team Battle ---------- */
+
+.team-setup { display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+.team-choice h3 { margin: 0 0 8px; font-size: 1.4rem; }
+.team-choice div { display: flex; gap: 10px; justify-content: center; }
+.team-rules { color: var(--ink-soft); font-size: 1.1rem; margin: 0; max-width: 32em; }
+.stage.team-stage { max-width: 1100px; justify-content: flex-start; }
+.team-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; width: 100%; }
+.team-chip { display: flex; align-items: center; gap: 8px; padding: 6px 16px 6px 6px; border: 4px solid var(--team); border-radius: 999px; background: var(--team-soft); font-weight: 700; font-size: clamp(1.1rem, 2.5vw, 1.6rem); transition: transform 0.2s; }
+.team-chip b { font-size: 1.4em; min-width: 1.2em; text-align: center; }
+.team-chip.active { transform: scale(1.12); box-shadow: 0 0 0 4px var(--ink); }
+.team-pic { display: inline-block; width: 44px; height: 44px; flex: none; }
+.team-pic svg { width: 100%; height: 100%; }
+.team-prompt { display: flex; align-items: center; gap: 12px; padding: 8px 22px 8px 8px; border-radius: 999px; background: var(--team); color: #fff; font-weight: 700; font-size: clamp(1.3rem, 3.5vw, 2.2rem); border: 4px solid var(--ink); text-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+.team-prompt .team-pic { width: 52px; height: 52px; background: #fff; border-radius: 50%; padding: 4px; }
+.team-area { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 22px; width: 100%; }
+.team-words { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; flex: 1; min-width: 260px; max-width: 620px; }
+.team-words .word-btn { min-width: 0; width: 100%; font-size: clamp(1.6rem, 4vw, 2.8rem); }
+.team-pics { grid-template-columns: repeat(4, 1fr); max-width: 760px; }

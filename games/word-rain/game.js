@@ -80,6 +80,7 @@
         if (item === target) {
           caught++;
           box.querySelector('b').textContent = caught;
+          ctx.report(null, caught);
           LG.sfx.good();
           LG.markCorrect(item.w.pic);
           item.el.classList.add('caught');
@@ -94,6 +95,7 @@
         }
       }
 
+      ctx.report(null, 0);
       let last = performance.now();
       let frame = requestAnimationFrame(step);
       ctx.onCleanup(() => cancelAnimationFrame(frame));

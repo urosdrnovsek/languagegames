@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Language Games</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .lb { width: 100%; max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 18px; }
+    .box { background: var(--card); border: 4px solid var(--ink); border-radius: 24px; box-shadow: 0 6px 0 var(--ink); padding: 18px; }
+    .box h2 { margin: 0 0 10px; font-size: 1.4rem; }
+    .box p { margin: 0 0 12px; color: var(--ink-soft); }
+    .game-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+    .game-pick button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; border: 3px solid var(--ink); border-radius: 16px; background: var(--card); font-weight: 700; font-size: 1.05rem; }
+    .game-pick button .ico { width: 56px; height: 56px; }
+    .game-pick button .ico svg { width: 100%; height: 100%; }
+    .game-pick button.active { background: #edf2ff; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent); }
+    .join { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; }
+    .join .qr { background: #fff; padding: 8px; border: 3px solid var(--ink); border-radius: 14px; }
+    .join .qr svg { width: 220px; height: 220px; display: block; }
+    .join .info { flex: 1; min-width: 260px; }
+    .join .addr { font-family: ui-monospace, monospace; font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700; overflow-wrap: anywhere; }
+    .lobby { display: flex; flex-wrap: wrap; gap: 10px; }
+    .lobby { margin-top: 16px; }
+    .kid { display: flex; align-items: center; gap: 10px; padding: 4px 8px 4px 4px; border: 3px solid var(--ink); border-radius: 999px; font-weight: 700; font-size: 1.35rem; background: var(--card); }
+    .kid.new { animation: pop 0.4s ease; }
+    .kid .avatar { width: 48px; height: 48px; }
+    .kid button { border: 0; background: transparent; width: 28px; height: 28px; padding: 4px; }
+    .kid button svg { width: 100%; height: 100%; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .live-row { display: grid; grid-template-columns: 34px 40px minmax(80px, 200px) 1fr auto; align-items: center; gap: 10px; padding: 4px 10px 4px 4px; border-radius: 14px; background: #f8f9fa; font-weight: 700; font-size: 1.15rem; transition: transform 0.3s; }
+    .live-row .bar { height: 18px; border-radius: 9px; background: #e9ecef; overflow: hidden; border: 2px solid var(--ink); }
+    .live-row .bar i { display: block; height: 100%; background: var(--accent); transition: width 0.5s; }
+    .live-row.done .bar i { background: var(--good); }
+    .live-row .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .live-list { display: flex; flex-direction: column; gap: 6px; }
+    .big-msg { font-size: 1.3rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <main class="lb" id="lb"></main>
+  <script src="../shared/pictures.js"></script>
+  <script src="../shared/words.js"></script>
+  <script src="../shared/engine.js"></script>
+  <script src="../shared/vendor/qrcode.js"></script>
+  <script>
+    (function () {
+      document.title = LG.t('liveClassroom') + ' · ' + LG.t('appTitle');
+      document.body.prepend(LG.topbar(LG.t('liveClassroom'), '../index.html'));
+      const lb = document.getElementById('lb');
+      const el = LG.el;
+      const btn = (cls, html, fn) => {
+        const b = el('button', cls, html);
+        b.type = 'button';
+        b.addEventListener('click', fn);
+        return b;
+      };
+      let game = 'beat-clock';
+      let info = null;
+      let poll = null;
+      let view = '';
+      let seenIds = '';
+
+      LG.api('info').then((i) => {
+        info = i;
+        if (!i.teacher) return message(LG.t('boardOnly'));
+        if (i.session && i.session.status !== 'done') {
+          game = i.session.game;
+          return watch();
+        }
+        setup();
+      }).catch(() => message(LG.t('liveNeedsServer')));
+
+      function message(text) {
+        lb.innerHTML = '';
+        const box = el('section', 'box');
+        box.appendChild(el('p', 'big-msg', ''));
+        box.querySelector('p').textContent = text;
+        lb.appendChild(box);
+      }
+
+      function setup() {
+        clearInterval(poll);
+        view = 'setup';
+        lb.innerHTML = '';
+        const box = el('section', 'box');
+        box.appendChild(el('h2', '', LG.t('chooseGame')));
+        const grid = el('div', 'game-pick');
+        LG.SCORE_GAMES.forEach((g) => {
+          const b = btn(g.id === game ? 'active' : '', '<span class="ico">' + LG.picture(g.pic) + '</span><span></span>', () => {
+            game = g.id;
+            setup();
+          });
+          b.querySelector('span:last-child').textContent = LG.t(g.title);
+          grid.appendChild(b);
+        });
+        box.appendChild(grid);
+        const topics = LG.savedSettings().topics;
+        const t = el('p', '');
+        t.textContent = LG.t('topicsUsed', { topics: topics.length ? topics.map((x) => LG.t('topic_' + x)).join(', ') : LG.t('allTopicsLabel') }) + ' · ';
+        const a = el('a', '', LG.t('changeTopics'));
+        a.href = LG.link('../settings.html');
+        t.appendChild(a);
+        box.appendChild(t);
+        box.appendChild(btn('big-btn', LG.ICONS.play + '<span>' + LG.t('joinTitle') + '</span>', () => {
+          const code = LG.makeCode(topics, Math.floor(Math.random() * 1024));
+          LG.api('session', { code: code, game: game, lang: LG.lang }).then(watch);
+        }));
+        lb.appendChild(box);
+      }
+
+      // Lobby, live game and results all follow the server's state.
+      function watch() {
+        clearInterval(poll);
+        const refresh = () => LG.api('state').then(draw).catch(() => {});
+        refresh();
+        poll = setInterval(refresh, 1000);
+      }
+
+      function joinUrl() {
+        const base = (info.urls && info.urls[0]) || location.origin + '/';
+        return base + 'live/join.html?lang=' + LG.lang;
+      }
+
+      function rankedPlayers(st) {
+        const g = LG.SCORE_GAMES.find((x) => x.id === st.session.game);
+        const list = st.players.slice();
+        if (g.better === 'high') list.sort((a, b) => (b.score || 0) - (a.score || 0));
+        else list.sort((a, b) => (a.done !== b.done ? (a.done ? -1 : 1) : a.done ? a.score - b.score : b.progress - a.progress));
+        return list;
+      }
+
+      function draw(st) {
+        if (!st.session) return setup();
+        const s = st.session;
+        const g = LG.SCORE_GAMES.find((x) => x.id === s.game);
+        if (s.status === 'lobby') {
+          if (view !== 'lobby') {
+            view = 'lobby';
+            seenIds = '';
+            lb.innerHTML = '';
+            const box = el('section', 'box');
+            box.appendChild(el('h2', '', LG.t(g.title)));
+            const row = el('div', 'join');
+            row.appendChild(el('div', 'qr', LG.qrSvg(joinUrl(), 5)));
+            const i = el('div', 'info', '<p></p><div class="addr"></div><h3 class="count"></h3>');
+            i.querySelector('p').textContent = LG.t('scanToJoin');
+            i.querySelector('.addr').textContent = joinUrl().replace(/\?.*$/, '');
+            row.appendChild(i);
+            box.appendChild(row);
+            box.appendChild(el('div', 'lobby'));
+            const actions = el('div', 'actions');
+            actions.append(btn('big-btn', LG.ICONS.play + '<span>' + LG.t('startGame') + '</span>', () => LG.api('start', {}).then(watch)),
+              btn('big-btn secondary', LG.ICONS.again + '<span>' + LG.t('newGame') + '</span>', () => LG.api('end', {}).then(setup)));
+            lb.append(box, actions);
+          }
+          lb.querySelector('.count').textContent = LG.t('playersN', { n: st.players.length });
+          // Redraw only when someone joins or leaves; animate newcomers.
+          const ids = st.players.map((p) => p.pid).join();
+          if (ids === seenIds) return;
+          const before = seenIds.split(',');
+          seenIds = ids;
+          const lobby = lb.querySelector('.lobby');
+          lobby.innerHTML = '';
+          st.players.forEach((p) => {
+            const k = el('div', 'kid' + (before.includes(p.pid) ? '' : ' new'), LG.avatarHtml(p) + '<span></span>');
+            k.querySelector('span:last-child').textContent = LG.displayName(p);
+            const x = btn('', LG.ICONS.close, () => LG.api('kick', { pid: p.pid }));
+            x.setAttribute('aria-label', LG.t('removePlayer'));
+            k.appendChild(x);
+            lobby.appendChild(k);
+          });
+          return;
+        }
+        if (s.status === 'playing') {
+          if (view !== 'playing') {
+            view = 'playing';
+            lb.innerHTML = '';
+            const box = el('section', 'box');
+            box.appendChild(el('h2', '', LG.t(g.title)));
+            box.appendChild(el('div', 'live-list'));
+            const actions = el('div', 'actions');
+            actions.append(btn('big-btn', LG.ICONS.trophy + '<span>' + LG.t('endGame') + '</span>', () => LG.api('end', {}).then(watch)));
+            lb.append(box, actions);
+          }
+          const list = lb.querySelector('.live-list');
+          const ranked = rankedPlayers(st);
+          const top = Math.max(1, ...ranked.map((p) => p.score || 0));
+          list.innerHTML = '';
+          ranked.forEach((p, i) => {
+            const width = g.better === 'high' ? ((p.score || 0) / top) * 100 : p.progress * 100;
+            const r = el('div', 'live-row' + (p.done ? ' done' : ''), '<span class="rank">' + (i + 1) + '</span>' + LG.avatarHtml(p) + '<span class="name"></span><span class="bar"><i style="width:' + width + '%"></i></span><span class="val"></span>');
+            r.querySelector('.name').textContent = LG.displayName(p);
+            r.querySelector('.val').textContent = p.score === null ? '' : g.better === 'high' || p.done ? LG.formatScore(s.game, p.score) : '';
+            list.appendChild(r);
+          });
+          return;
+        }
+        // Finished: podium and results.
+        if (view !== 'done') {
+          view = 'done';
+          clearInterval(poll);
+          lb.innerHTML = '';
+          const ranked = rankedPlayers(st).filter((p) => p.score !== null && (g.better === 'high' || p.done));
+          const box = el('section', 'box');
+          box.appendChild(el('h2', '', LG.t('results') + ' · ' + LG.t(g.title)));
+          const podium = el('div', 'podium');
+          [1, 0, 2].forEach((i) => {
+            const p = ranked[i];
+            if (!p) return;
+            const step = el('div', 'step p' + (i + 1), LG.avatarHtml(p) + '<b></b><span class="val"></span><div class="block">' + (i + 1) + '</div>');
+            step.querySelector('b').textContent = LG.displayName(p);
+            step.querySelector('.val').textContent = LG.formatScore(s.game, p.score);
+            podium.appendChild(step);
+          });
+          box.appendChild(podium);
+          const list = el('div', 'entries');
+          list.style.maxHeight = 'none';
+          ranked.forEach((p, i) => {
+            const r = el('div', 'row', '<span class="rank">' + (i + 1) + '</span>' + LG.avatarHtml(p) + '<span class="name"></span><span class="val"></span>');
+            r.querySelector('.name').textContent = LG.displayName(p);
+            r.querySelector('.val').textContent = LG.formatScore(s.game, p.score);
+            list.appendChild(r);
+          });
+          box.appendChild(list);
+          const actions = el('div', 'actions');
+          actions.append(btn('big-btn secondary', LG.ICONS.again + '<span>' + LG.t('newGame') + '</span>', setup));
+          lb.append(box, actions);
+          if (ranked.length) {
+            LG.sfx.win();
+            LG.confetti(80);
+          }
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

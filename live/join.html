@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Language Games</title>
+  <link rel="stylesheet" href="../shared/styles.css">
+  <style>
+    .jn { width: 100%; max-width: 520px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+    .jn .card { width: 100%; background: var(--card); border: 4px solid var(--ink); border-radius: 28px; box-shadow: 0 8px 0 var(--ink); padding: 24px 18px; }
+    .jn h2 { margin: 0 0 12px; font-size: 1.8rem; }
+    .jn p { font-size: 1.2rem; color: var(--ink-soft); }
+    .me { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .me .avatar { width: 96px; height: 96px; }
+    .me b { font-size: 1.5rem; }
+    .dots::after { content: ''; animation: dots 1.5s steps(4) infinite; }
+    @keyframes dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+  </style>
+</head>
+<body>
+  <main class="jn" id="jn"></main>
+  <script src="../shared/pictures.js"></script>
+  <script src="../shared/words.js"></script>
+  <script src="../shared/engine.js"></script>
+  <script>
+    (function () {
+      document.title = LG.t('joinTitle') + ' · ' + LG.t('appTitle');
+      document.body.prepend(LG.topbar(LG.t('joinTitle'), null));
+      const jn = document.getElementById('jn');
+      const el = LG.el;
+      let pid = null;
+      try {
+        pid = sessionStorage.getItem('lg-live-pid');
+      } catch (e) {}
+
+      function card(parts) {
+        jn.innerHTML = '';
+        const c = el('div', 'card');
+        c.append(...parts);
+        jn.appendChild(c);
+      }
+      function text(cls, t) {
+        const p = el('p', cls);
+        p.textContent = t;
+        return p;
+      }
+
+      // Step 1: who am I? Then join.
+      function ask() {
+        const who = LG.identity();
+        const me = el('div', 'me', LG.avatarHtml(who) + '<b></b>');
+        me.querySelector('b').textContent = LG.displayName(who);
+        const change = LG.playerChip(ask);
+        const go = el('button', 'big-btn', LG.ICONS.play + '<span>' + LG.t('joinBtn') + '</span>');
+        go.type = 'button';
+        go.addEventListener('click', join);
+        card([el('h2', '', LG.t('joinTitle')), me, change, go]);
+      }
+
+      function join() {
+        const who = LG.identity();
+        LG.api('join', { pid: pid, avatar: who.avatar, num: who.num, name: who.name })
+          .then((r) => {
+            pid = r.pid;
+            try {
+              sessionStorage.setItem('lg-live-pid', pid);
+            } catch (e) {}
+            wait();
+          })
+          .catch(() => card([text('', LG.t('gameClosed'))]));
+      }
+
+      // Step 2: wait in the lobby until the teacher starts the game.
+      function wait() {
+        const who = LG.identity();
+        const me = el('div', 'me', LG.avatarHtml(who) + '<b></b>');
+        me.querySelector('b').textContent = LG.displayName(who);
+        card([me, text('dots', LG.t('waiting'))]);
+        const tick = () => LG.api('state').then((st) => {
+          const s = st.session;
+          if (!s || s.status === 'done' || !st.players.some((p) => p.pid === pid)) {
+            card([text('', LG.t('gameClosed'))]);
+            return;
+          }
+          if (s.status === 'playing') {
+            location.href = '../games/' + s.game + '/index.html?lang=' + (s.lang || LG.lang) + '&challenge=' + s.code + '&live=1&home=0';
+            return;
+          }
+          setTimeout(tick, 1200);
+        }).catch(() => {
+          card([text('', LG.t('noConnection'))]);
+          setTimeout(tick, 3000);
+        });
+        tick();
+      }
+
+      // No game open yet: wait for the teacher to open one.
+      function start() {
+        LG.api('info')
+          .then((i) => {
+            if (i.session && i.session.status !== 'done') return ask();
+            card([text('dots', LG.t('waiting'))]);
+            setTimeout(start, 2000);
+          })
+          .catch(() => {
+            card([text('', LG.t('noConnection'))]);
+            setTimeout(start, 3000);
+          });
+      }
+      start();
+    })();
+  </script>
+</body>
+</html>

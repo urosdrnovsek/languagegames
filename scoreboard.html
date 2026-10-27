@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Language Games</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .sb { width: 100%; max-width: 1100px; margin: 0 auto; padding: 8px 16px 40px; display: flex; flex-direction: column; gap: 18px; }
+    .box { background: var(--card); border: 4px solid var(--ink); border-radius: 24px; box-shadow: 0 6px 0 var(--ink); padding: 18px; }
+    .box h2 { margin: 0 0 10px; font-size: 1.4rem; }
+    .box p { margin: 0 0 12px; color: var(--ink-soft); }
+    .game-pick { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .game-pick button { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px; border: 3px solid var(--ink); border-radius: 16px; background: var(--card); font-weight: 700; font-size: 1.05rem; }
+    .game-pick button .ico { width: 56px; height: 56px; }
+    .game-pick button .ico svg { width: 100%; height: 100%; }
+    .game-pick button.active { background: #edf2ff; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent); }
+    .join { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+    .join .qr { background: #fff; padding: 8px; border: 3px solid var(--ink); border-radius: 14px; }
+    .join .qr svg { width: 180px; height: 180px; display: block; }
+    .join .info { flex: 1; min-width: 240px; }
+    .scan { display: grid; grid-template-columns: minmax(260px, 1fr) minmax(260px, 1fr); gap: 18px; align-items: start; }
+    @media (max-width: 700px) { .scan { grid-template-columns: 1fr; } }
+    .cam { position: relative; border: 4px solid var(--ink); border-radius: 20px; overflow: hidden; background: #212529; aspect-ratio: 4 / 3; display: grid; place-items: center; }
+    .cam video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+    .cam.flash { box-shadow: 0 0 0 8px var(--good); }
+    .msg { min-height: 1.6em; font-weight: 700; }
+    .msg.bad { color: var(--bad); }
+    .msg.good { color: var(--good); }
+    .hand { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .hand input { font: inherit; padding: 8px 10px; border: 3px solid var(--ink); border-radius: 12px; min-width: 0; flex: 1; }
+    .hand input[type=number] { max-width: 120px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  </style>
+</head>
+<body>
+  <main class="sb" id="sb"></main>
+  <script src="shared/pictures.js"></script>
+  <script src="shared/words.js"></script>
+  <script src="shared/engine.js"></script>
+  <script src="shared/vendor/qrcode.js"></script>
+  <script>
+    (function () {
+      document.title = LG.t('scoreboard') + ' · ' + LG.t('appTitle');
+      document.body.prepend(LG.topbar(LG.t('scoreboard'), 'index.html'));
+      const sb = document.getElementById('sb');
+      const KEY = 'lg-scoreboard';
+      let state;
+      try {
+        state = JSON.parse(localStorage.getItem(KEY) || 'null');
+      } catch (e) {
+        state = null;
+      }
+      state = state || { game: 'beat-clock', code: null, entries: [] };
+      const save = () => {
+        try {
+          localStorage.setItem(KEY, JSON.stringify(state));
+        } catch (e) {}
+      };
+      const gameInfo = () => LG.SCORE_GAMES.find((g) => g.id === state.game);
+      const el = LG.el;
+      const btn = (cls, html, fn) => {
+        const b = el('button', cls, html);
+        b.type = 'button';
+        b.addEventListener('click', fn);
+        return b;
+      };
+
+      // Best score per child, best first.
+      function ranked() {
+        const g = gameInfo();
+        const best = {};
+        state.entries.forEach((e) => {
+          const key = e.avatar + '|' + e.num + '|' + e.name;
+          if (!best[key] || (g.better === 'low' ? e.score < best[key].score : e.score > best[key].score)) best[key] = e;
+        });
+        return Object.values(best).sort((a, b) => (g.better === 'low' ? a.score - b.score : b.score - a.score));
+      }
+
+      // ---- 1. Setup: choose a game, make the challenge ----
+      function setup() {
+        sb.innerHTML = '';
+        const pick = el('section', 'box');
+        pick.appendChild(el('h2', '', LG.t('chooseGame')));
+        const grid = el('div', 'game-pick');
+        LG.SCORE_GAMES.forEach((g) => {
+          const b = btn(g.id === state.game ? 'active' : '', '<span class="ico">' + LG.picture(g.pic) + '</span><span></span>', () => {
+            state.game = g.id;
+            save();
+            setup();
+          });
+          b.querySelector('span:last-child').textContent = LG.t(g.title);
+          grid.appendChild(b);
+        });
+        pick.appendChild(grid);
+        const topics = LG.savedSettings().topics;
+        const t = el('p', '', '');
+        t.textContent = LG.t('topicsUsed', { topics: topics.length ? topics.map((x) => LG.t('topic_' + x)).join(', ') : LG.t('allTopicsLabel') }) + ' · ';
+        const a = el('a', '', LG.t('changeTopics'));
+        a.href = LG.link('settings.html');
+        t.appendChild(a);
+        t.style.marginTop = '12px';
+        pick.appendChild(t);
+        const make = el('section', 'box');
+        make.appendChild(el('h2', '', LG.t('makeChallenge')));
+        make.appendChild(btn('big-btn', LG.ICONS.flag + '<span>' + LG.t('makeChallenge').replace(/^2\. /, '') + '</span>', () => {
+          state.code = LG.makeCode(topics, Math.floor(Math.random() * 1024));
+          state.entries = [];
+          save();
+          collect();
+        }));
+        sb.append(pick, make);
+      }
+
+      // ---- 2 + 3. Show the code and collect scores ----
+      let stream = null;
+      let scanning = false;
+      function stopCamera() {
+        scanning = false;
+        if (stream) stream.getTracks().forEach((tr) => tr.stop());
+        stream = null;
+      }
+      function collect() {
+        stopCamera();
+        sb.innerHTML = '';
+        const g = gameInfo();
+        const join = el('section', 'box');
+        join.appendChild(el('h2', '', LG.t('makeChallenge').replace(/^2\. /, '') + ' · ' + LG.t(g.title)));
+        const row = el('div', 'join');
+        const url = new URL('games/' + g.id + '/index.html', location.href);
+        url.search = 'lang=' + LG.lang + '&challenge=' + state.code;
+        row.appendChild(el('div', 'qr', LG.qrSvg(url.href, 4)));
+        const info = el('div', 'info', '<div class="code-big"></div><p></p>');
+        info.querySelector('.code-big').textContent = state.code;
+        info.querySelector('p').textContent = LG.t('howToJoin', { game: LG.t(g.title) });
+        row.appendChild(info);
+        join.appendChild(row);
+
+        const scan = el('section', 'box');
+        scan.appendChild(el('h2', '', LG.t('collect')));
+        scan.appendChild(el('p', '', LG.t('scanHelp')));
+        const cols = el('div', 'scan');
+        const left = el('div', '');
+        const cam = el('div', 'cam');
+        const start = btn('big-btn', '<span>' + LG.t('startCamera') + '</span>', startCamera);
+        cam.appendChild(start);
+        const msg = el('p', 'msg');
+        left.append(cam, msg);
+        // Adding by hand, for devices without a camera.
+        const hand = el('form', 'hand');
+        const name = el('input');
+        name.placeholder = LG.t('nameLabel');
+        name.maxLength = 20;
+        const score = el('input');
+        score.type = 'number';
+        score.min = 0;
+        score.placeholder = LG.t('scoreLabel') + (g.better === 'low' ? ' (s)' : '');
+        const add = el('button', 'small-btn', LG.t('add'));
+        add.type = 'submit';
+        hand.append(name, score, add);
+        hand.addEventListener('submit', (e) => {
+          e.preventDefault();
+          if (!name.value.trim() || score.value === '') return;
+          addEntry({ avatar: 'star', num: 0, name: name.value.trim().slice(0, 20), score: g.better === 'low' ? Math.round(+score.value * 1000) : Math.round(+score.value) });
+          name.value = score.value = '';
+        });
+        left.append(el('h3', '', LG.t('addByHand')), hand);
+        const right = el('div', '');
+        const count = el('h3', '');
+        const list = el('div', 'entries');
+        right.append(count, list);
+        cols.append(left, right);
+        scan.appendChild(cols);
+        const actions = el('div', 'actions');
+        actions.append(
+          btn('big-btn', LG.ICONS.trophy + '<span>' + LG.t('showResults') + '</span>', results),
+          btn('big-btn secondary', LG.ICONS.again + '<span>' + LG.t('newChallenge') + '</span>', () => {
+            stopCamera();
+            state.code = null;
+            state.entries = [];
+            save();
+            setup();
+          }),
+        );
+        sb.append(join, scan, actions);
+
+        function drawList(highlight) {
+          count.textContent = LG.t('entries', { n: ranked().length });
+          list.innerHTML = '';
+          ranked().forEach((e, i) => {
+            const r = el('div', 'row' + (e === highlight ? ' new' : ''), '<span class="rank">' + (i + 1) + '</span>' + LG.avatarHtml(e) + '<span class="name"></span><span class="val"></span>');
+            r.querySelector('.name').textContent = LG.displayName(e);
+            r.querySelector('.val').textContent = LG.formatScore(state.game, e.score);
+            list.appendChild(r);
+          });
+        }
+        function say(text, cls) {
+          msg.textContent = text;
+          msg.className = 'msg ' + (cls || '');
+        }
+        function addEntry(e) {
+          state.entries.push(e);
+          save();
+          drawList(e);
+          LG.sfx.good();
+          say(LG.t('added', { name: LG.displayName(e) }), 'good');
+        }
+        drawList();
+
+        let lastText = '';
+        let lastAt = 0;
+        function startCamera() {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return say(LG.t('noCamera'), 'bad');
+          Promise.all([LG.loadScript('vendor/jsQR.js'), navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: false })])
+            .then(([, s]) => {
+              stream = s;
+              const video = el('video');
+              video.setAttribute('playsinline', '');
+              video.muted = true;
+              video.srcObject = s;
+              cam.replaceChildren(video);
+              video.play();
+              const canvas = document.createElement('canvas');
+              const c2d = canvas.getContext('2d', { willReadFrequently: true });
+              scanning = true;
+              const tick = () => {
+                if (!scanning) return;
+                if (video.readyState >= 2) {
+                  canvas.width = Math.min(800, video.videoWidth);
+                  canvas.height = Math.round(canvas.width * video.videoHeight / video.videoWidth);
+                  c2d.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  const img = c2d.getImageData(0, 0, canvas.width, canvas.height);
+                  const found = window.jsQR(img.data, img.width, img.height, { inversionAttempts: 'dontInvert' });
+                  if (found) onCode(found.data);
+                }
+                setTimeout(tick, 150);
+              };
+              tick();
+            })
+            .catch(() => say(LG.t('noCamera'), 'bad'));
+        }
+        function onCode(text) {
+          // The same QR stays in view for a while; take it once.
+          if (text === lastText && Date.now() - lastAt < 4000) return;
+          lastText = text;
+          lastAt = Date.now();
+          const e = LG.readScoreCode(text);
+          if (!e || e.challenge !== state.code || e.game !== state.game) {
+            LG.sfx.bad();
+            return say(LG.t('wrongChallenge'), 'bad');
+          }
+          cam.classList.add('flash');
+          setTimeout(() => cam.classList.remove('flash'), 400);
+          addEntry(e);
+        }
+        LG.scoreboardAdd = onCode; // for testing without a camera
+      }
+
+      // ---- Results: podium and the full list ----
+      function results() {
+        stopCamera();
+        sb.innerHTML = '';
+        const g = gameInfo();
+        const all = ranked();
+        const box = el('section', 'box');
+        box.appendChild(el('h2', '', LG.t('results') + ' · ' + LG.t(g.title)));
+        const podium = el('div', 'podium');
+        [1, 0, 2].forEach((i) => {
+          const e = all[i];
+          if (!e) return;
+          const step = el('div', 'step p' + (i + 1), LG.avatarHtml(e) + '<b></b><span class="val"></span><div class="block">' + (i + 1) + '</div>');
+          step.querySelector('b').textContent = LG.displayName(e);
+          step.querySelector('.val').textContent = LG.formatScore(state.game, e.score);
+          podium.appendChild(step);
+        });
+        box.appendChild(podium);
+        const list = el('div', 'entries');
+        list.style.maxHeight = 'none';
+        all.forEach((e, i) => {
+          const r = el('div', 'row', '<span class="rank">' + (i + 1) + '</span>' + LG.avatarHtml(e) + '<span class="name"></span><span class="val"></span>');
+          r.querySelector('.name').textContent = LG.displayName(e);
+          r.querySelector('.val').textContent = LG.formatScore(state.game, e.score);
+          list.appendChild(r);
+        });
+        box.appendChild(list);
+        const actions = el('div', 'actions');
+        actions.append(btn('big-btn secondary', '<span>' + LG.t('backToScan') + '</span>', collect));
+        sb.append(box, actions);
+        if (all.length) {
+          LG.sfx.win();
+          LG.confetti(80);
+        }
+      }
+
+      if (state.code) collect();
+      else setup();
+    })();
+  </script>
+</body>
+</html>

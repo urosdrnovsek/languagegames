@@ -61,6 +61,7 @@
           d.el.classList.add('matched');
           open = [];
           matched++;
+          ctx.report(matched / PAIRS, Math.round(clock.ms));
           LG.sfx.good();
           LG.markCorrect(a.w.pic);
           if (matched === PAIRS) {
@@ -81,6 +82,7 @@
         }
       }
 
+      ctx.report(0, 0);
       ctx.stage.append(head, grid);
     },
   });

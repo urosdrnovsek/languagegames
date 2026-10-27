@@ -89,6 +89,7 @@
           return;
         }
         found.add(w.pic);
+        ctx.report(found.size / targets.length, Math.round(SECONDS * 1000 - left));
         tile.classList.add('found');
         LG.markCorrect(w.pic);
         tile.disabled = true;
@@ -123,6 +124,7 @@
         }), 2400);
       }
 
+      ctx.report(0, 0);
       const box = LG.el('div', 'hunt');
       box.append(timer, list, grid);
       ctx.stage.appendChild(box);
