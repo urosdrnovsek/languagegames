@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Language Games</title>
+  <link rel="stylesheet" href="shared/styles.css">
+  <style>
+    .book { width: 100%; max-width: 1100px; margin: 0 auto; padding: 8px 16px 32px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; }
+    .word-card {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      background: var(--card); border: 4px solid var(--ink); border-radius: 22px;
+      box-shadow: 0 5px 0 var(--ink); padding: 12px 8px 10px; font-size: 1.5rem; font-weight: 700;
+    }
+    .word-card:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--ink); }
+    .word-card .pic { width: 100%; max-width: 110px; aspect-ratio: 1; }
+    .word-card .pic svg { width: 100%; height: 100%; }
+    .word-card.speaking { background: var(--tile); }
+  </style>
+</head>
+<body>
+  <main class="book">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <script src="shared/pictures.js"></script>
+  <script src="shared/words.js"></script>
+  <script src="shared/engine.js"></script>
+  <script>
+    (function () {
+      // Reuse the game top bar layout, without progress or rounds.
+      const bar = LG.el('header', 'topbar');
+      if (new URLSearchParams(location.search).get('home') !== '0') {
+        const home = LG.el('a', 'icon-btn', LG.ICONS.home);
+        home.href = LG.link('index.html');
+        home.setAttribute('aria-label', LG.t('allGames'));
+        bar.appendChild(home);
+      }
+      bar.appendChild(LG.el('h1', 'game-title', LG.t('wordBook')));
+      const tools = LG.el('div', 'tools');
+      tools.append(LG.langSwitch(), LG.soundButton());
+      bar.appendChild(tools);
+      document.body.prepend(bar);
+      document.title = LG.t('wordBook') + ' · ' + LG.t('appTitle');
+
+      const grid = document.getElementById('grid');
+      LG.words(LG.lang)
+        .sort((a, b) => a.word.localeCompare(b.word, LG.lang))
+        .forEach((w) => {
+          const b = LG.el('button', 'word-card', '<div class="pic">' + LG.picture(w.pic) + '</div>');
+          b.type = 'button';
+          b.appendChild(LG.el('span', '', w.word));
+          b.addEventListener('click', () => {
+            b.classList.add('speaking');
+            LG.speak(w.word).then(() => b.classList.remove('speaking'));
+          });
+          grid.appendChild(b);
+        });
+    })();
+  </script>
+</body>
+</html>
