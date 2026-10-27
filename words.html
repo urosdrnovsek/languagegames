@@ -44,6 +44,7 @@
       document.body.prepend(bar);
       document.title = LG.t('wordBook') + ' · ' + LG.t('appTitle');
 
+      document.querySelector('.book').prepend(LG.voiceNotice());
       const grid = document.getElementById('grid');
       LG.words(LG.lang)
         .sort((a, b) => a.word.localeCompare(b.word, LG.lang))

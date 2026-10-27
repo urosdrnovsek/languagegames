@@ -50,11 +50,11 @@ URL options:
 ## Speech
 
 Words are read aloud with the browser's built-in speech voices
-(`speechSynthesis`). English voices exist on almost every device; Slovenian
-voices are available on most phones and on Windows/macOS, but not everywhere.
-When there is no voice for the chosen language, the games stay silent rather
-than read Slovenian with an English accent. Every game can be played without
-sound.
+(`speechSynthesis`). English voices exist on almost every device. Slovenian
+voices are much rarer: Windows usually has one, but iPhones, iPads and most
+Android phones don't. When there is no voice for the chosen language, the
+games stay silent rather than read Slovenian with an English accent, and a
+note on the start screen says so. Every game can be played without sound.
 
 ## Adding words and pictures
 

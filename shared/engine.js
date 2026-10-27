@@ -64,6 +64,7 @@
       buildWord: 'Build the Word',
       buildWordDesc: 'Put the letters in the right order.',
       buildPrompt: 'Spell {word}.',
+      voiceMissing: "This device has no English voice, so words won't be read aloud. You can still play!",
       wordBook: 'Word Book',
       wordBookDesc: 'Look at all the pictures. Tap one to hear the word.',
     },
@@ -91,6 +92,7 @@
       buildWord: 'Sestavi besedo',
       buildWordDesc: 'Postavi črke v pravi vrstni red.',
       buildPrompt: 'Sestavi besedo {word}.',
+      voiceMissing: 'Ta naprava nima slovenskega glasu, zato besede ne bodo prebrane na glas. Igraš lahko vseeno!',
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
@@ -148,32 +150,59 @@
   };
 
   const synth = window.speechSynthesis;
+  const SPEECH_LANG = { en: 'en-US', sl: 'sl-SI' };
   let voices = [];
+  let voicesSettled = false;
+  const voiceListeners = [];
   function loadVoices() {
     voices = synth ? synth.getVoices() : [];
+    if (voices.length) voicesSettled = true;
+    voiceListeners.forEach((cb) => cb());
   }
   if (synth) {
     loadVoices();
     synth.addEventListener && synth.addEventListener('voiceschanged', loadVoices);
   }
-  const SPEECH_LANG = { en: 'en-US', sl: 'sl-SI' };
+  // Some browsers never fire voiceschanged; after a moment, trust what we have.
+  setTimeout(() => {
+    voicesSettled = true;
+    loadVoices();
+  }, 2000);
 
   function findVoice() {
-    const exact = voices.filter((v) => v.lang.replace('_', '-').toLowerCase() === SPEECH_LANG[LG.lang].toLowerCase());
-    const close = voices.filter((v) => v.lang.toLowerCase().startsWith(LG.lang));
-    return exact[0] || close[0] || null;
+    const want = SPEECH_LANG[LG.lang].toLowerCase();
+    const norm = (v) => v.lang.replace('_', '-').toLowerCase();
+    return voices.find((v) => norm(v) === want) || voices.find((v) => norm(v).startsWith(LG.lang + '-') || norm(v) === LG.lang) || null;
   }
+
+  // 'ok', 'missing' (no voice for this language), 'none' (no speech at all)
+  // or 'unknown' (still loading).
+  LG.voiceStatus = function () {
+    if (!synth) return 'none';
+    if (findVoice()) return 'ok';
+    if (!voicesSettled) return 'unknown';
+    return voices.length ? 'missing' : 'none';
+  };
+  LG.onVoices = (cb) => voiceListeners.push(cb);
+
+  // Keeps utterances referenced until they finish; Chrome can otherwise
+  // garbage-collect them mid-sentence and never fire onend.
+  const speaking = new Set();
 
   // Speaks text in the current language. Resolves when finished (or at once
   // if speech is unavailable), so games never wait on audio to continue.
+  // Call it straight from a tap handler: iOS and some Chrome versions only
+  // allow speech that starts during a user gesture, so it must not be
+  // delayed with setTimeout.
   LG.speak = function (text) {
     return new Promise((resolve) => {
       if (LG.muted || !synth || !text) return resolve();
       const voice = findVoice();
       // Voices are loaded but none speaks this language: stay silent rather
       // than read the words with the wrong accent.
-      if (voices.length && !voice) return resolve();
-      synth.cancel();
+      if (LG.voiceStatus() === 'missing') return resolve();
+      if (synth.speaking || synth.pending) synth.cancel();
+      synth.resume();
       const u = new SpeechSynthesisUtterance(text);
       u.lang = SPEECH_LANG[LG.lang];
       if (voice) u.voice = voice;
@@ -181,6 +210,7 @@
       u.pitch = 1.05;
       let done = false;
       const finish = () => {
+        speaking.delete(u);
         if (!done) {
           done = true;
           resolve();
@@ -188,9 +218,24 @@
       };
       u.onend = finish;
       u.onerror = finish;
+      speaking.add(u);
       setTimeout(finish, 1500 + text.length * 120);
-      setTimeout(() => synth.speak(u), 60);
+      synth.speak(u);
     });
+  };
+
+  // A short note shown when this device can't read the current language aloud.
+  LG.voiceNotice = function () {
+    const note = LG.el('p', 'voice-note');
+    note.setAttribute('role', 'status');
+    const update = () => {
+      const status = LG.voiceStatus();
+      note.textContent = status === 'missing' || status === 'none' ? LG.t('voiceMissing') : '';
+      note.hidden = !note.textContent;
+    };
+    update();
+    LG.onVoices(update);
+    return note;
   };
 
   LG.letterName = function (letter) {
@@ -428,6 +473,7 @@
       LG.el('div', 'panel-pic', LG.picture(opts.pic)),
       LG.el('h2', '', LG.t(opts.titleKey)),
       LG.el('p', '', LG.t(opts.descKey)),
+      LG.voiceNotice(),
       bigButton(LG.ICONS.play, LG.t('play'), () => {
         startScreen.remove();
         LG.sfx.tap();

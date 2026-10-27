@@ -228,6 +228,19 @@ button:disabled { cursor: default; }
 }
 .panel h2 { margin: 8px 0 4px; font-size: clamp(1.7rem, 7vw, 2.3rem); }
 .panel p { margin: 0 0 20px; font-size: 1.2rem; color: var(--ink-soft); }
+.voice-note {
+  margin: 0 auto 16px;
+  max-width: 34em;
+  padding: 10px 14px;
+  border: 3px solid var(--star);
+  border-radius: 16px;
+  background: var(--tile);
+  font-size: 1rem;
+  color: var(--ink);
+  text-align: center;
+}
+.voice-note[hidden] { display: none; }
+.panel .voice-note { font-size: 1rem; color: var(--ink); }
 .panel-pic { width: 140px; height: 140px; margin: 0 auto; }
 .panel-pic svg { width: 100%; height: 100%; }
 .panel-buttons { display: flex; flex-direction: column; gap: 12px; align-items: center; }

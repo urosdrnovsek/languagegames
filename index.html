@@ -42,6 +42,7 @@
       <h1 id="title"></h1>
       <p id="subtitle"></p>
     </header>
+    <div id="voice"></div>
     <div class="cards" id="cards"></div>
     <div class="strip" id="strip" aria-hidden="true"></div>
     <p class="foot" id="foot"></p>
@@ -56,6 +57,7 @@
       document.getElementById('title').textContent = LG.t('appTitle');
       document.getElementById('subtitle').textContent = LG.t('hubSubtitle');
       document.getElementById('tools').append(LG.langSwitch(), LG.soundButton());
+      document.getElementById('voice').appendChild(LG.voiceNotice());
 
       const games = [
         { path: 'games/letter-sounds/index.html', title: 'letterSounds', desc: 'letterSoundsDesc', pic: 'apple' },
