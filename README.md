@@ -60,7 +60,7 @@ phones, computers and interactive whiteboards.
 
 | Game | What children do |
 |---|---|
-| **Beat the Clock** (`games/beat-clock/`) | 60 seconds to match as many pictures and words as possible. Three in a row adds 3 seconds. |
+| **Beat the Clock** (`games/beat-clock/`) | 60 seconds to match as many pictures and words as possible. Three in a row adds 3 seconds, up to 30 extra seconds in all. |
 | **Word Rain** (`games/word-rain/`) | Pictures fall; tap the one for the word at the bottom before it lands. Three hearts, and it speeds up. |
 | **Rocket Race** (`games/rocket-race/`) | Read three words and tap the one for the picture. Ten right answers fly the rocket to the Moon; a wrong one adds 2 seconds. A ghost rocket flies at the pace of your best time. |
 | **Whack-a-Mole** (`games/whack-a-mole/`) | Moles pop up from nine holes holding pictures. Tap the one for the word before it hides. 60 seconds, and the moles get quicker. |
@@ -285,6 +285,14 @@ Open `index.html` in a browser, or serve the folder:
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
+
+## Browsers
+
+Tested with automated play-throughs in Chromium (Chrome, Edge) and WebKit,
+the engine of Safari on iPad and iPhone: every page in all five languages,
+the games played to the end, the reading fonts, class challenges and the
+Live Classroom. Real touch screens, speech voices and cameras still need a
+check on the devices themselves.
 
 ## Publishing on a website
 

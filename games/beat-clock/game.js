@@ -1,10 +1,12 @@
 // Beat the Clock: 60 seconds to match as many words and pictures as
 // possible. Questions alternate between "picture: pick the word" and
-// "word: pick the picture"; three right in a row adds 3 seconds.
+// "word: pick the picture"; three right in a row adds 3 seconds, up to
+// 30 extra seconds in all, so even the fastest game ends.
 // With ?daily=1 it's the Daily Challenge: today's words for everyone.
 (function () {
   const SECONDS = 60;
   const BONUS = 3;
+  const MAX_BONUS = 30;
 
   LG.createGame({
     titleKey: 'beatClock',
@@ -21,6 +23,7 @@
       let q = 0;
       let points = 0;
       let streak = 0;
+      let bonus = 0;
       let done = false;
 
       const head = LG.el('div', 'game-head');
@@ -72,7 +75,8 @@
               ctx.report(Math.min(1, 1 - clock.ms / (SECONDS * 1000)), points);
               LG.sfx.good();
               LG.markCorrect(w.pic);
-              if (streak % 3 === 0) {
+              if (streak % 3 === 0 && bonus < MAX_BONUS) {
+                bonus += BONUS;
                 clock.add(BONUS);
                 const f = LG.el('span', 'floater', '+' + BONUS + 's');
                 head.appendChild(f);
