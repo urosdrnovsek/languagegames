@@ -20,10 +20,13 @@
     round(_, ctx) {
       // Targets come from the chosen topics. Decoys are other words from
       // those topics first, then words from the rest of the bank.
+      // Every word on the board is different (the fruit and the colour
+      // orange share a word in several languages).
+      const unique = (list) => list.filter((w, i) => list.findIndex((x) => x.word === w.word) === i);
       const pool = LG.words(LG.lang, { min: 4 });
-      const targets = LG.sample(pool, WORDS);
+      const targets = unique(LG.shuffle(pool)).slice(0, WORDS);
       const others = LG.words(LG.lang, { allTopics: true }).filter((w) => !pool.some((p) => p.pic === w.pic));
-      const decoys = LG.shuffle(pool.filter((w) => !targets.includes(w))).concat(LG.shuffle(others));
+      const decoys = unique(targets.concat(LG.shuffle(pool), LG.shuffle(others))).slice(targets.length);
       const picked = targets.concat(decoys.slice(0, TILES - targets.length));
       const found = new Set();
       let over = false;

@@ -200,13 +200,63 @@
     eye | eye | oko | Auge | œil | ojo
     ear | ear | uho | Ohr | oreille | oreja
     nose | nose | nos | Nase | nez | nariz
-    hand | hand | roka | Hand | main | mano
+    hand | hand | dlan | Hand | main | mano
     tooth | tooth | zob | Zahn | dent | diente
     foot | foot | stopalo | Fuß | pied | pie
     mouth | mouth | usta | Mund | bouche | boca
     leg | leg | noga | Bein | jambe | pierna
     flag | flag | zastava | Fahne | drapeau | bandera
     castle | castle | grad | Burg | château | castillo
+    red | red | rdeča | rot | rouge | rojo
+    blue | blue | modra | blau | bleu | azul
+    yellow | yellow | rumena | gelb | jaune | amarillo
+    green | green | zelena | grün | vert | verde
+    colorOrange | orange | oranžna | orange | orange | naranja
+    purple | purple | vijolična | lila | violet | morado
+    pink | pink | roza | rosa | rose | rosa
+    brown | brown | rjava | braun | marron | marrón
+    black | black | črna | schwarz | noir | negro
+    white | white | bela | weiß | blanc | blanco
+    grey | grey | siva | grau | gris | gris
+    one | one | ena | eins | un | uno
+    two | two | dva | zwei | deux | dos
+    three | three | tri | drei | trois | tres
+    four | four | štiri | vier | quatre | cuatro
+    five | five | pet | fünf | cinq | cinco
+    six | six | šest | sechs | six | seis
+    seven | seven | sedem | sieben | sept | siete
+    eight | eight | osem | acht | huit | ocho
+    nine | nine | devet | neun | neuf | nueve
+    ten | ten | deset | zehn | dix | diez
+    mother | mother | mama | Mutter | mère | madre
+    father | father | oče | Vater | père | padre
+    baby | baby | dojenček | Baby | bébé | bebé
+    grandma | grandma | babica | Oma | grand-mère | abuela
+    grandpa | grandpa | dedek | Opa | grand-père | abuelo
+    brother | brother | brat | Bruder | frère | hermano
+    sister | sister | sestra | Schwester | sœur | hermana
+    boy | boy | deček | Junge | garçon | niño
+    girl | girl | deklica | Mädchen | fille | niña
+    head | head | glava | Kopf | tête | cabeza
+    hair | hair | lasje | Haare | cheveux | pelo
+    arm | arm | roka | Arm | bras | brazo
+    finger | finger | prst | Finger | doigt | dedo
+    knee | knee | koleno | Knie | genou | rodilla
+    tummy | tummy | trebuh | Bauch | ventre | barriga
+    eyebrow | eyebrow | obrv | Augenbraue | sourcil | ceja
+    desk | desk | klop | Pult | bureau | pupitre
+    ruler | ruler | ravnilo | Lineal | règle | regla
+    eraser | eraser | radirka | Radiergummi | gomme | goma
+    crayon | crayon | voščenka | Wachsmalstift | crayon de cire | cera
+    glue | glue | lepilo | Kleber | colle | pegamento
+    paper | paper | papir | Papier | papier | papel
+    board | board | tabla | Tafel | tableau | pizarra
+    puzzle | puzzle | sestavljanka | Puzzle | puzzle | puzle
+    blocks | blocks | kocke | Bauklötze | cubes | bloques
+    yoyo | yo-yo | jojo | Jo-Jo | yoyo | yoyó
+    rope | skipping rope | kolebnica | Springseil | corde à sauter | comba
+    slide | slide | tobogan | Rutsche | toboggan | tobogán
+    swing | swing | gugalnica | Schaukel | balançoire | columpio
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -230,21 +280,24 @@
     vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli',
     food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut',
     clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown',
-    body: 'eye ear nose mouth tooth hand foot leg',
+    body: 'eye ear nose mouth tooth hand foot leg head hair arm finger knee tummy eyebrow',
+    family: 'mother father baby grandma grandpa brother sister boy girl',
     home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock',
     household: 'cup spoon fork plate bottle pot soap towel toothbrush comb broom bucket basket box candle key umbrella ladder hammer bell',
-    toys: 'ball balloon kite drum guitar teddy doll robot gift',
-    school: 'book pencil scissors backpack brush',
+    toys: 'ball balloon kite drum guitar teddy doll robot gift puzzle blocks yoyo rope slide swing',
+    school: 'book pencil scissors backpack brush desk ruler eraser crayon glue paper board',
     transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine',
     nature: 'sun moon star cloud rainbow snowflake snowman lightning fire mountain tree flower leaf wave rock cactus volcano planet shell feather nest',
+    colours: 'red blue yellow green colorOrange purple pink brown black white grey',
+    numbers: 'one two three four five six seven eight nine ten',
     other: 'heart flag castle',
   };
   // Topic order and the picture that stands for each topic.
   LG.TOPICS = [
     ['farm', 'cow'], ['wild', 'lion'], ['water', 'fish'], ['bugs', 'ladybug'],
     ['fruit', 'apple'], ['vegetables', 'carrot'], ['food', 'pizza'], ['clothes', 'shirt'],
-    ['body', 'hand'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'],
-    ['school', 'pencil'], ['transport', 'bus'], ['nature', 'tree'], ['other', 'heart'],
+    ['body', 'hand'], ['family', 'mother'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'],
+    ['school', 'pencil'], ['transport', 'bus'], ['nature', 'tree'], ['colours', 'blue'], ['numbers', 'three'], ['other', 'heart'],
   ].map(([id, pic]) => ({ id: id, pic: pic }));
   const TOPIC_OF = {};
   Object.keys(TOPIC_WORDS).forEach((t) => TOPIC_WORDS[t].split(' ').forEach((pic) => (TOPIC_OF[pic] = t)));
@@ -260,7 +313,7 @@
     es: /^(ch|ll|h|qu|gu[eiéí]|[cg][eiéí])/i,
   };
   // Words the rules above miss.
-  const SKIP_FIRST_WORDS = { en: ['owl', 'eye', 'ear', 'ice cream', 'TV'] };
+  const SKIP_FIRST_WORDS = { en: ['owl', 'eye', 'ear', 'ice cream', 'TV', 'one', 'eight', 'eyebrow'] };
 
   LG.ALPHABET = {
     en: 'abcdefghijklmnoprstuvwyz'.split(''),
