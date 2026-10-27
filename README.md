@@ -8,9 +8,10 @@ internet connection beyond loading the page, and no build step.
 - **First Letter** (`games/letter-sounds/`): see a picture, hear the word, tap the letter it starts with.
 - **Read and Match** (`games/picture-word/`): read three words and pick the one for the picture. Later rounds use words with the same first letter, so the child has to read the whole word.
 - **Build the Word** (`games/build-word/`): tap letters to spell the pictured word. Words get longer as the game goes on, and from round 5 there is an extra letter that doesn't belong.
+- **Picture Hunt** (`games/picture-hunt/`): read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. Stars depend on the time left.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
 
-Each game has 8 rounds drawn at random from a bank of 103 pictured words
+The round-based games have 8 rounds drawn at random from a bank of 103 pictured words
 (animals, food, toys and things, nature, body), so every play-through is
 different. German nouns keep their capital letter.
 

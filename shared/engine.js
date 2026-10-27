@@ -66,6 +66,13 @@
       buildWordDesc: 'Put the letters in the right order.',
       buildPrompt: 'Spell {word}.',
       voiceMissing: "This device has no English voice, so words won't be read aloud. You can still play!",
+      pictureHunt: 'Picture Hunt',
+      pictureHuntDesc: 'Read the words and find all their pictures before the time runs out.',
+      huntPrompt: 'Find the pictures for all the words!',
+      timeUp: "Time's up!",
+      huntFoundSome: 'You found {n} of {total}. Try again!',
+      huntWon: 'You found all the pictures!',
+      timeLeft: 'Time left',
       wordBook: 'Word Book',
       wordBookDesc: 'Look at all the pictures. Tap one to hear the word.',
     },
@@ -94,6 +101,13 @@
       buildWordDesc: 'Postavi črke v pravi vrstni red.',
       buildPrompt: 'Sestavi besedo {word}.',
       voiceMissing: 'Ta naprava nima slovenskega glasu, zato besede ne bodo prebrane na glas. Igraš lahko vseeno!',
+      pictureHunt: 'Lov na slike',
+      pictureHuntDesc: 'Preberi besede in poišči vse njihove slike, preden poteče čas.',
+      huntPrompt: 'Poišči slike za vse besede!',
+      timeUp: 'Čas je potekel!',
+      huntFoundSome: 'Najdenih: {n} od {total}. Poskusi znova!',
+      huntWon: 'Vse slike so najdene!',
+      timeLeft: 'Preostali čas',
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
@@ -122,6 +136,13 @@
       buildWordDesc: 'Bring die Buchstaben in die richtige Reihenfolge.',
       buildPrompt: 'Schreibe {word}.',
       voiceMissing: 'Dieses Gerät hat keine deutsche Stimme, deshalb werden die Wörter nicht vorgelesen. Du kannst trotzdem spielen!',
+      pictureHunt: 'Bildersuche',
+      pictureHuntDesc: 'Lies die Wörter und finde alle Bilder, bevor die Zeit abläuft.',
+      huntPrompt: 'Finde die Bilder zu allen Wörtern!',
+      timeUp: 'Die Zeit ist um!',
+      huntFoundSome: 'Du hast {n} von {total} gefunden. Versuch es nochmal!',
+      huntWon: 'Du hast alle Bilder gefunden!',
+      timeLeft: 'Verbleibende Zeit',
       wordBook: 'Bildwörterbuch',
       wordBookDesc: 'Schau dir alle Bilder an. Tippe auf ein Bild, um das Wort zu hören.',
     },
@@ -150,6 +171,13 @@
       buildWordDesc: 'Mets les lettres dans le bon ordre.',
       buildPrompt: 'Écris {word}.',
       voiceMissing: "Cet appareil n'a pas de voix française, donc les mots ne seront pas lus à voix haute. Tu peux quand même jouer\u00a0!",
+      pictureHunt: 'Chasse aux images',
+      pictureHuntDesc: 'Lis les mots et trouve toutes leurs images avant la fin du temps.',
+      huntPrompt: 'Trouve les images de tous les mots\u00a0!',
+      timeUp: 'Temps écoulé\u00a0!',
+      huntFoundSome: 'Tu as trouvé {n} sur {total}. Essaie encore\u00a0!',
+      huntWon: 'Tu as trouvé toutes les images\u00a0!',
+      timeLeft: 'Temps restant',
       wordBook: 'Imagier',
       wordBookDesc: 'Regarde toutes les images. Touche une image pour entendre le mot.',
     },
@@ -178,6 +206,13 @@
       buildWordDesc: 'Pon las letras en el orden correcto.',
       buildPrompt: 'Escribe {word}.',
       voiceMissing: 'Este dispositivo no tiene voz en español, así que las palabras no se leerán en voz alta. ¡Puedes jugar igual!',
+      pictureHunt: 'Busca las imágenes',
+      pictureHuntDesc: 'Lee las palabras y encuentra todas sus imágenes antes de que se acabe el tiempo.',
+      huntPrompt: '¡Encuentra las imágenes de todas las palabras!',
+      timeUp: '¡Se acabó el tiempo!',
+      huntFoundSome: 'Encontraste {n} de {total}. ¡Inténtalo otra vez!',
+      huntWon: '¡Encontraste todas las imágenes!',
+      timeLeft: 'Tiempo restante',
       wordBook: 'Diccionario ilustrado',
       wordBookDesc: 'Mira todas las imágenes. Toca una para oír la palabra.',
     },
@@ -468,7 +503,8 @@
   //
   // LG.createGame({ titleKey, descKey, pic, rounds, round(index, ctx) })
   // round() draws one round into ctx.stage and calls ctx.complete(promise)
-  // when the child has solved it. Add ?home=0 to a game's URL to hide the
+  // when the child has solved it. Games that aren't played in rounds pass
+  // `progress: false` and call ctx.end(result) themselves. Add ?home=0 to a game's URL to hide the
   // link back to the game list (for sites that embed a single game).
 
   LG.createGame = function (opts) {
@@ -499,6 +535,7 @@
     const stage = LG.el('main', 'stage');
     stage.setAttribute('aria-live', 'polite');
 
+    if (opts.progress === false) progress.hidden = true;
     document.body.append(bar, progress, stage);
 
     function overlay(inner) {
@@ -553,6 +590,8 @@
         });
       },
       isLocked: () => locked,
+      // End the game now. result: { won, stars (0-3), title, text }.
+      end: (result) => finish(result),
     };
 
     function start() {
@@ -563,14 +602,23 @@
       showRound();
     }
 
-    function finish() {
+    function finish(result) {
+      result = result || {};
+      const won = result.won !== false;
+      const title = result.title || LG.t('wellDone');
+      const text = result.text || LG.t('finished');
+      const count = result.stars === undefined ? 3 : result.stars;
       stage.innerHTML = '';
-      LG.sfx.win();
-      LG.confetti(70);
-      LG.speak(LG.t('wellDone') + ' ' + LG.t('finished'));
-      const stars = LG.el('div', 'big-stars', LG.ICONS.star + LG.ICONS.star + LG.ICONS.star);
+      if (won) {
+        LG.sfx.win();
+        LG.confetti(70);
+      }
+      LG.speak(title + ' ' + text);
+      let starsHtml = '';
+      for (let i = 0; i < 3; i++) starsHtml += i < count ? LG.ICONS.star : LG.ICONS.star.replace('<svg', '<svg class="empty"');
+      const stars = LG.el('div', 'big-stars', starsHtml);
       const buttons = LG.el('div', 'panel-buttons');
-      const o = overlay([stars, LG.el('h2', '', LG.t('wellDone')), LG.el('p', '', LG.t('finished')), buttons]);
+      const o = overlay([stars, LG.el('h2', '', title), LG.el('p', '', text), buttons]);
       buttons.appendChild(bigButton(LG.ICONS.again, LG.t('playAgain'), () => {
         o.remove();
         start();
