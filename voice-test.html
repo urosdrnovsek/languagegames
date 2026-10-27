@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voice test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #fff; color: #222; max-width: 720px; margin: 0 auto; padding: 16px; }
+    button { font-size: 1.1rem; padding: 10px 18px; margin: 4px 6px 4px 0; border-radius: 10px; border: 2px solid #333; background: #ffe066; cursor: pointer; }
+    pre { background: #f1f3f5; padding: 12px; border-radius: 10px; white-space: pre-wrap; word-break: break-word; font-size: 0.9rem; }
+    h1 { font-size: 1.4rem; }
+  </style>
+</head>
+<body>
+  <h1>Voice test</h1>
+  <p>Tap a button. If you hear nothing, copy the report below and send it.</p>
+  <button id="en" type="button">Speak English</button>
+  <button id="sl" type="button">Speak Slovenian</button>
+  <button id="any" type="button">Speak (default voice)</button>
+  <button id="copy" type="button">Copy report</button>
+  <pre id="out"></pre>
+  <script>
+    const out = document.getElementById('out');
+    const lines = [];
+    const log = (s) => { lines.push(s); out.textContent = lines.join('\n'); };
+    const synth = window.speechSynthesis;
+    log('Browser: ' + navigator.userAgent);
+    log('Speech supported: ' + !!synth);
+
+    function listVoices(label) {
+      if (!synth) return;
+      const v = synth.getVoices();
+      log(label + ': ' + v.length + ' voices' + (v.length ? '\n  ' + v.map((x) => x.lang + '  ' + x.name + (x.localService ? '' : ' (online)')).join('\n  ') : ''));
+    }
+    listVoices('Voices at load');
+    if (synth) synth.addEventListener('voiceschanged', () => listVoices('Voices changed'));
+    setTimeout(() => listVoices('Voices after 2 s'), 2000);
+
+    function speak(text, lang) {
+      if (!synth) return log('No speechSynthesis in this browser.');
+      const u = new SpeechSynthesisUtterance(text);
+      if (lang) {
+        u.lang = lang;
+        const v = synth.getVoices().find((x) => x.lang.replace('_', '-').toLowerCase().startsWith(lang.slice(0, 2)));
+        if (v) u.voice = v;
+        log('Speaking "' + text + '" lang=' + lang + ' voice=' + (v ? v.name : 'none found'));
+      } else {
+        log('Speaking "' + text + '" with default voice');
+      }
+      const t0 = performance.now();
+      u.onstart = () => log('  start after ' + Math.round(performance.now() - t0) + ' ms');
+      u.onend = () => log('  end after ' + Math.round(performance.now() - t0) + ' ms');
+      u.onerror = (e) => log('  ERROR: ' + e.error);
+      window._u = u;
+      synth.speak(u);
+      setTimeout(() => log('  after 3 s: speaking=' + synth.speaking + ' pending=' + synth.pending + ' paused=' + synth.paused), 3000);
+    }
+    document.getElementById('en').onclick = () => speak('Hello! This is a cat.', 'en-US');
+    document.getElementById('sl').onclick = () => speak('Živijo! To je muca.', 'sl-SI');
+    document.getElementById('any').onclick = () => speak('Hello');
+    document.getElementById('copy').onclick = () => {
+      navigator.clipboard && navigator.clipboard.writeText(out.textContent).then(() => log('(copied)'), () => log('(copy failed, select the text instead)'));
+    };
+  </script>
+</body>
+</html>
