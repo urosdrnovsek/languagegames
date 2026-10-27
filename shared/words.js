@@ -300,6 +300,44 @@
     goose | goose | gos | Gans | oie | ganso
     turkey | turkey | puran | Truthahn | dinde | pavo
     hamster | hamster | hrček | Hamster | hamster | hámster
+    circle | circle | krog | Kreis | cercle | círculo
+    square | square | kvadrat | Quadrat | carré | cuadrado
+    triangle | triangle | trikotnik | Dreieck | triangle | triángulo
+    rectangle | rectangle | pravokotnik | Rechteck | rectangle | rectángulo
+    oval | oval | oval | Oval | ovale | óvalo
+    diamond | diamond | romb | Raute | losange | rombo
+    football | football | nogomet | Fußball | football | fútbol
+    swimming | swimming | plavanje | Schwimmen | natation | natación
+    tennis | tennis | tenis | Tennis | tennis | tenis
+    skates | skates | drsalke | Schlittschuhe | patins | patines
+    skis | skis | smuči | Ski | skis | esquís
+    sledge | sledge | sani | Schlitten | luge | trineo
+    basketball | basketball | košarka | Basketball | basket | baloncesto
+    running | running | tek | Laufen | course | carrera
+    happy | happy | vesela | fröhlich | contente | contenta
+    sad | sad | žalosten | traurig | triste | triste
+    angry | angry | jezna | wütend | fâchée | enfadada
+    scared | scared | prestrašen | ängstlich | apeuré | asustado
+    tired | tired | utrujena | müde | fatiguée | cansada
+    surprised | surprised | presenečen | überrascht | surpris | sorprendido
+    spring | spring | pomlad | Frühling | printemps | primavera
+    summer | summer | poletje | Sommer | été | verano
+    autumn | autumn | jesen | Herbst | automne | otoño
+    winter | winter | zima | Winter | hiver | invierno
+    day | day | dan | Tag | jour | día
+    night | night | noč | Nacht | nuit | noche
+    water | water | voda | Wasser | eau | agua
+    juice | juice | sok | Saft | jus | zumo
+    rice | rice | riž | Reis | riz | arroz
+    pasta | pasta | testenine | Nudeln | pâtes | pasta
+    sausage | sausage | klobasa | Wurst | saucisse | salchicha
+    pancake | pancake | palačinka | Pfannkuchen | crêpe | tortita
+    skirt | skirt | krilo | Rock | jupe | falda
+    pyjamas | pyjamas | pižama | Schlafanzug | pyjama | pijama
+    shorts | shorts | kratke hlače | Shorts | short | pantalón corto
+    sweater | sweater | pulover | Pullover | pull | jersey
+    sandals | sandals | sandali | Sandalen | sandales | sandalias
+    belt | belt | pas | Gürtel | ceinture | cinturón
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -321,8 +359,8 @@
     bugs: 'bee butterfly ladybug spider snail ant worm caterpillar grasshopper dragonfly fly beetle',
     fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut',
     vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli peas pumpkin lettuce garlic beans',
-    food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut',
-    clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown',
+    food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut water juice rice pasta sausage pancake',
+    clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown skirt pyjamas shorts sweater sandals belt',
     body: 'eye ear nose mouth tooth hand foot leg head hair arm finger knee tummy eyebrow',
     family: 'mother father baby grandma grandpa brother sister boy girl',
     home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock',
@@ -333,18 +371,22 @@
     transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine',
     jobs: 'doctor nurse firefighter police farmer cook builder pilot vet teacher',
     places: 'schoolhouse shop park hospital farmhouse beach zoo playground library castle flag',
-    sky: 'sun moon star cloud rainbow snowflake snowman lightning planet rain wind storm fog',
+    sky: 'sun moon cloud rainbow snowflake snowman lightning planet rain wind storm fog',
     nature: 'fire mountain tree flower leaf wave rock cactus volcano shell feather nest',
     colours: 'red blue yellow green colorOrange purple pink brown black white grey',
     numbers: 'one two three four five six seven eight nine ten',
-    other: 'heart',
+    shapes: 'circle square triangle rectangle oval diamond heart star',
+    sports: 'football swimming tennis skates skis sledge basketball running',
+    feelings: 'happy sad angry scared tired surprised',
+    seasons: 'spring summer autumn winter day night',
   };
   // Topic order and the picture that stands for each topic.
   LG.TOPICS = [
     ['farm', 'cow'], ['wild', 'lion'], ['water', 'fish'], ['bugs', 'ladybug'],
     ['fruit', 'apple'], ['vegetables', 'carrot'], ['food', 'pizza'], ['clothes', 'shirt'],
     ['body', 'hand'], ['family', 'mother'], ['jobs', 'doctor'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'], ['music', 'guitar'],
-    ['school', 'pencil'], ['transport', 'bus'], ['places', 'schoolhouse'], ['sky', 'rainbow'], ['nature', 'tree'], ['colours', 'blue'], ['numbers', 'three'], ['other', 'heart'],
+    ['school', 'pencil'], ['transport', 'bus'], ['places', 'schoolhouse'], ['sky', 'rainbow'], ['nature', 'tree'], ['seasons', 'autumn'], ['colours', 'blue'], ['numbers', 'three'], ['shapes', 'triangle'],
+    ['sports', 'football'], ['feelings', 'happy'],
   ].map(([id, pic]) => ({ id: id, pic: pic }));
   const TOPIC_OF = {};
   Object.keys(TOPIC_WORDS).forEach((t) => TOPIC_WORDS[t].split(' ').forEach((pic) => (TOPIC_OF[pic] = t)));

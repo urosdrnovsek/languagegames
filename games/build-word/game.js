@@ -5,8 +5,12 @@
   const ROUNDS = 8;
   const EXTRA_FROM = 4;
   // Short words first; a small topic may need longer ones to have enough.
-  let words = LG.words(LG.lang, { maxLength: 5 });
-  if (words.length < 3) words = LG.words(LG.lang, { maxLength: 7, min: 3 });
+  let words = [];
+  for (const max of [5, 7, 10]) {
+    words = LG.words(LG.lang, { maxLength: max });
+    if (words.length >= 3) break;
+  }
+  if (words.length < 3) words = LG.words(LG.lang, { maxLength: 5, allTopics: true });
   const alphabet = LG.ALPHABET[LG.lang];
   let queue = [];
 

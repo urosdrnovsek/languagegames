@@ -15,9 +15,11 @@ internet connection beyond loading the page, and no build step.
   b, d, p, q and g, and wider letter spacing.
   A quick sum keeps children from changing them by accident.
 
-The round-based games have 8 rounds drawn at random from a bank of 200 pictured words
-(animals, food, clothes, home, toys, vehicles, nature, body), so every play-through is
-different. German nouns keep their capital letter.
+The round-based games have 8 rounds drawn at random from a bank of 331 pictured words in
+26 topics (animals, food, clothes, body, family, jobs, home, school, toys,
+music, transport, places, weather, nature, seasons, colours, numbers, shapes,
+sports, feelings), so every play-through is different. German nouns keep their capital letter. Words for people (jobs, family,
+feelings) match the person in the picture: *Ärztin*, *enfermero*, *vesela*.
 
 No ads, no tracking, no accounts, no cookies, and nothing is sent anywhere.
 The only things stored are the chosen language, the sound on/off setting and
@@ -59,8 +61,9 @@ URL options:
 | `topics` | comma-separated topic ids, e.g. `fruit,vegetables` | Only words from these topics. |
 
 Topic ids: `farm`, `wild`, `water`, `bugs`, `fruit`, `vegetables`, `food`,
-`clothes`, `body`, `home`, `household`, `toys`, `school`, `transport`,
-`nature`, `other`. With small topics the games repeat words; when a topic
+`clothes`, `body`, `family`, `jobs`, `home`, `household`, `toys`, `music`,
+`school`, `transport`, `places`, `sky`, `nature`, `seasons`, `colours`,
+`numbers`, `shapes`, `sports`, `feelings`. With small topics the games repeat words; when a topic
 is too small for a game (for example under 4 words for Picture Hunt), that
 game also uses words from other topics.
 

@@ -2136,6 +2136,201 @@
     '<path d="M46 62 q4 3 8 0" fill="none" stroke-width="2"/>' +
     '<ellipse cx="42" cy="84" rx="5" ry="3" fill="#ffc2d1"/><ellipse cx="58" cy="84" rx="5" ry="3" fill="#ffc2d1"/>';
 
+  // ---------- Shapes ----------
+
+  P.circle = '<circle cx="50" cy="50" r="38" fill="#4dabf7"/>';
+  P.square = '<rect x="14" y="14" width="72" height="72" rx="3" fill="#fa5252"/>';
+  P.triangle = '<path d="M50 10 L90 84 H10 Z" fill="#51cf66"/>';
+  P.rectangle = '<rect x="6" y="26" width="88" height="48" rx="3" fill="#ffd43b"/>';
+  P.oval = '<ellipse cx="50" cy="50" rx="42" ry="28" fill="#cc5de8"/>';
+  P.diamond = '<path d="M50 6 L88 50 L50 94 L12 50 Z" fill="#ff922b"/>';
+
+  // ---------- Sports ----------
+
+  P.football =
+    '<path d="M6 70 V22 H94 V70" fill="none" stroke-width="5"/>' +
+    [22, 38, 54, 70, 86].map((x) => '<path d="M' + x + ' 22 V70" stroke="#adb5bd" stroke-width="1.5"/>').join('') +
+    [34, 46, 58].map((y) => '<path d="M6 ' + y + ' H94" stroke="#adb5bd" stroke-width="1.5"/>').join('') +
+    '<path d="M2 92 H98" stroke="#51cf66" stroke-width="6"/>' +
+    '<circle cx="50" cy="72" r="18" fill="#fff"/>' +
+    '<path d="M50 63 L58 69 L55 78 H45 L42 69 Z" fill="' + INK + '"/>' +
+    '<path d="M50 63 V54 M58 69 L67 66 M55 78 L60 86 M45 78 L40 86 M42 69 L33 66" stroke-width="2"/>';
+  P.swimming =
+    '<path d="M60 46 Q76 24 90 34" fill="none" stroke="' + INK + '" stroke-width="10"/><path d="M60 46 Q76 24 90 34" fill="none" stroke="#ffd8a8" stroke-width="5"/>' +
+    '<circle cx="42" cy="48" r="14" fill="#ffd8a8"/>' +
+    '<path d="M28 44 Q42 30 56 44 Z" fill="#fa5252"/>' +
+    '<rect x="32" y="46" width="9" height="6" rx="3" fill="#74c0fc" stroke-width="2"/><rect x="44" y="46" width="9" height="6" rx="3" fill="#74c0fc" stroke-width="2"/>' +
+    '<path d="M4 62 H96 V96 H4 Z" fill="#4dabf7" stroke="none"/>' +
+    '<path d="M4 62 q8 -6 16 0 q8 6 16 0 q8 -6 16 0 q8 6 16 0 q8 -6 16 0 q8 6 12 0" fill="none" stroke="#fff" stroke-width="3"/>' +
+    '<path d="M14 78 q8 -5 16 0 M54 82 q8 -5 16 0" fill="none" stroke="#a5d8ff" stroke-width="3"/>';
+  P.tennis =
+    '<path d="M54 58 L84 92" stroke="' + INK + '" stroke-width="12"/><path d="M56 60 L84 92" stroke="#fa5252" stroke-width="7"/>' +
+    '<ellipse cx="38" cy="38" rx="26" ry="30" fill="#fff" transform="rotate(-40 38 38)"/>' +
+    '<g transform="rotate(-40 38 38)">' + [24, 31, 38, 45, 52].map((x) => '<path d="M' + x + ' 12 V64" stroke="#adb5bd" stroke-width="1.5"/>').join('') +
+    [20, 29, 38, 47, 56].map((y) => '<path d="M14 ' + y + ' H62" stroke="#adb5bd" stroke-width="1.5"/>').join('') + '</g>' +
+    '<ellipse cx="38" cy="38" rx="26" ry="30" fill="none" stroke="' + INK + '" stroke-width="5" transform="rotate(-40 38 38)"/>' +
+    '<circle cx="80" cy="24" r="11" fill="#d8f5a2"/><path d="M71 18 Q80 26 76 34 M84 14 Q80 24 89 30" fill="none" stroke="#fff" stroke-width="2"/>';
+  P.skates =
+    '<path d="M24 14 H52 V44 L80 54 Q88 58 86 66 H22 Z" fill="#fff"/>' +
+    '<path d="M24 14 H52 V24 H24 Z" fill="#74c0fc"/>' +
+    '<path d="M34 30 h12 M34 38 h12 M36 46 h12" stroke="#4dabf7" stroke-width="2.5"/>' +
+    '<path d="M30 66 V78 M78 66 V78" stroke-width="3"/>' +
+    '<path d="M14 80 H86 Q92 80 92 74" fill="none" stroke="#adb5bd" stroke-width="5"/>';
+  P.skis =
+    '<path d="M24 92 L40 10 Q42 4 46 8 L32 92 Z" fill="#fa5252"/><path d="M58 92 L74 10 Q76 4 80 8 L66 92 Z" fill="#4dabf7"/>' +
+    '<path d="M30 56 H40 M64 56 H74" stroke-width="4"/>' +
+    '<path d="M12 88 L28 18 M88 88 L90 18" stroke="#495057" stroke-width="3"/>' +
+    '<circle cx="14" cy="80" r="4" fill="none" stroke-width="2"/><circle cx="88" cy="80" r="4" fill="none" stroke-width="2"/>';
+  P.sledge =
+    '<path d="M8 70 H82 Q94 70 94 58 Q94 50 88 52" fill="none" stroke="' + INK + '" stroke-width="8"/>' +
+    '<path d="M8 70 H82 Q94 70 94 58 Q94 50 88 52" fill="none" stroke="#adb5bd" stroke-width="4"/>' +
+    '<path d="M24 70 V58 M64 70 V58" stroke-width="4"/>' +
+    '<rect x="12" y="46" width="70" height="12" rx="4" fill="#c98b52"/>' +
+    '<path d="M28 46 V58 M46 46 V58 M64 46 V58" stroke="#a0673b" stroke-width="2"/>' +
+    '<path d="M82 50 Q90 30 78 24" fill="none" stroke="#fa5252" stroke-width="3"/>' +
+    '<circle cx="20" cy="24" r="3" fill="#d0ebff"/><circle cx="40" cy="14" r="3" fill="#d0ebff"/><circle cx="62" cy="26" r="3" fill="#d0ebff"/>' +
+    '<path d="M2 82 Q50 74 98 82" fill="none" stroke="#a5d8ff" stroke-width="4"/>';
+  P.basketball =
+    '<rect x="50" y="6" width="44" height="30" rx="2" fill="#fff"/><rect x="62" y="16" width="20" height="14" fill="none" stroke="#fa5252" stroke-width="2"/>' +
+    '<path d="M60 34 H84" stroke="#ff922b" stroke-width="5"/>' +
+    '<path d="M62 36 L66 52 M72 36 V52 M82 36 L78 52 M64 44 H80" stroke="#adb5bd" stroke-width="1.5"/>' +
+    '<circle cx="36" cy="66" r="26" fill="#ff922b"/>' +
+    '<path d="M10 66 H62 M36 40 V92 M18 48 Q30 66 18 84 M54 48 Q42 66 54 84" fill="none" stroke-width="2.5"/>';
+  P.running =
+    limb('M50 40 L40 58 L22 62', '#fa5252', 6) + limb('M50 40 L64 54 L78 48', '#fa5252', 6) +
+    limb('M46 64 L30 76 L22 92', '#4c6ef5', 7) + limb('M46 64 L64 74 L70 90', '#4c6ef5', 7) +
+    '<path d="M44 36 Q56 34 54 50 L48 66 Q38 66 40 56 Z" fill="#fa5252"/>' +
+    '<circle cx="56" cy="22" r="11" fill="#ffd8a8"/>' + eye(60, 21, 2) +
+    '<path d="M46 18 Q50 8 60 10 Q66 12 66 18 Q58 14 46 18 Z" fill="#7a4a26"/>' +
+    '<ellipse cx="18" cy="92" rx="7" ry="3.5" fill="' + INK + '"/><ellipse cx="74" cy="90" rx="7" ry="3.5" fill="' + INK + '"/>' +
+    '<path d="M8 34 H24 M4 44 H20 M10 54 H22" stroke="#adb5bd" stroke-width="3"/>';
+
+  // ---------- Feelings (the face's gender matches the word) ----------
+
+  function face(o) {
+    const skin = o.skin || SKIN[0];
+    let g = '';
+    if (o.hair === 'girl') g += '<circle cx="18" cy="56" r="9" fill="#7a4a26"/><circle cx="82" cy="56" r="9" fill="#7a4a26"/>';
+    g += '<circle cx="50" cy="56" r="34" fill="' + skin + '"/>';
+    g += o.hair === 'girl'
+      ? '<path d="M16 50 Q14 18 50 18 Q86 18 84 50 Q76 32 60 32 Q50 26 40 32 Q24 32 16 50 Z" fill="#7a4a26"/>'
+      : '<path d="M16 48 Q14 18 50 18 Q86 18 84 48 Q70 30 50 32 Q30 30 16 48 Z" fill="#e8590c"/>';
+    return g + o.inner;
+  }
+  P.happy = face({ hair: 'girl', inner: eye(38, 56, 4) + eye(62, 56, 4) + cheeks(68, 22) + '<path d="M34 70 Q50 88 66 70 Z" fill="#fff" stroke-width="3"/>' });
+  P.sad = face({ inner: '<path d="M30 48 L42 52 M70 48 L58 52" stroke-width="3"/>' + eye(38, 58, 4) + eye(62, 58, 4) +
+    '<path d="M38 80 Q50 68 62 80" fill="none"/>' + '<path d="M66 64 q-4 8 0 11 q4 -3 0 -11 z" fill="#74c0fc" stroke-width="2"/>' });
+  P.angry = face({ hair: 'girl', skin: '#ffc9a8', inner: '<path d="M28 44 L44 52 M72 44 L56 52" stroke-width="4"/>' + eye(38, 58, 4) + eye(62, 58, 4) +
+    '<path d="M38 78 Q50 70 62 78" fill="none" stroke-width="3.5"/>' + '<circle cx="28" cy="70" r="6" fill="#fa5252" opacity=".35" stroke="none"/><circle cx="72" cy="70" r="6" fill="#fa5252" opacity=".35" stroke="none"/>' });
+  P.scared = face({ inner: '<path d="M30 44 Q38 38 44 44 M56 44 Q62 38 70 44" fill="none" stroke-width="3"/>' +
+    '<circle cx="38" cy="56" r="7" fill="#fff"/><circle cx="62" cy="56" r="7" fill="#fff"/>' + eye(38, 56, 3) + eye(62, 56, 3) +
+    '<ellipse cx="50" cy="76" rx="8" ry="6" fill="' + INK + '"/>' + '<path d="M8 40 l6 4 M6 56 h8 M92 40 l-6 4 M94 56 h-8" stroke="#74c0fc" stroke-width="3"/>' });
+  P.tired = face({ hair: 'girl', inner: '<path d="M32 58 Q38 62 44 58 M56 58 Q62 62 68 58" fill="none" stroke-width="3"/>' +
+    '<ellipse cx="50" cy="76" rx="7" ry="5" fill="' + INK + '"/>' + cheeks(68, 22) +
+    '<path d="M74 14 h8 l-8 9 h8 M86 2 h6 l-6 7 h6" fill="none" stroke="#4c6ef5" stroke-width="2.5"/>' });
+  P.surprised = face({ inner: '<path d="M30 40 Q38 32 46 40 M54 40 Q62 32 70 40" fill="none" stroke-width="3"/>' +
+    eye(38, 54, 4.5) + eye(62, 54, 4.5) + '<ellipse cx="50" cy="76" rx="7" ry="9" fill="' + INK + '"/>' + cheeks(66, 22) });
+
+  // ---------- Seasons & time ----------
+
+  function scene(bg, inner) {
+    return '<rect x="6" y="6" width="88" height="88" rx="16" fill="' + bg + '"/>' + inner + '<rect x="6" y="6" width="88" height="88" rx="16" fill="none"/>';
+  }
+  P.spring = scene('#d3f9d8',
+    '<path d="M6 76 H94 V78 Q94 94 78 94 H22 Q6 94 6 78 Z" fill="#8ce99a" stroke="none"/>' +
+    '<rect x="44" y="50" width="10" height="30" fill="#a0673b"/>' +
+    '<circle cx="36" cy="40" r="14" fill="#69db7c"/><circle cx="62" cy="40" r="14" fill="#69db7c"/><circle cx="49" cy="28" r="16" fill="#69db7c"/>' +
+    [[34, 34], [44, 22], [58, 26], [64, 44], [40, 46], [52, 38]].map((p) => '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4" fill="#ff8fab" stroke-width="1.5"/>').join('') +
+    '<path d="M20 86 V76 M78 86 V76" stroke="#2b8a3e" stroke-width="2.5"/><path d="M16 72 Q20 66 24 72 L22 78 H18 Z M74 72 Q78 66 82 72 L80 78 H76 Z" fill="#fa5252" stroke-width="2"/>');
+  P.summer = scene('#fff3bf',
+    ring(12, 50, 42, 30, (x, y, a) => '<path d="M' + (50 + Math.cos(a) * 24) + ' ' + (42 + Math.sin(a) * 24) + ' L' + x + ' ' + y + '" stroke="#f59f00" stroke-width="4"/>') +
+    '<circle cx="50" cy="42" r="18" fill="#ffd43b"/>' +
+    '<rect x="36" y="36" width="12" height="7" rx="3" fill="' + INK + '"/><rect x="52" y="36" width="12" height="7" rx="3" fill="' + INK + '"/><path d="M48 39 H52" stroke-width="2"/>' +
+    '<path d="M42 50 q8 6 16 0" fill="none" stroke-width="2.5"/>' +
+    '<path d="M6 80 H94 V82 Q94 94 82 94 H18 Q6 94 6 82 Z" fill="#4dabf7" stroke="none"/>');
+  P.autumn = scene('#fff4e6',
+    '<rect x="44" y="52" width="10" height="34" fill="#a0673b"/>' +
+    '<circle cx="34" cy="42" r="15" fill="#ff922b"/><circle cx="64" cy="42" r="15" fill="#e8590c"/><circle cx="49" cy="28" r="17" fill="#fcc419"/>' +
+    [[18, 66, 20], [76, 72, -30], [28, 84, 50], [68, 86, 10]].map((p) => '<path d="M' + p[0] + ' ' + p[1] + ' q6 -8 12 0 q-6 8 -12 0 z" fill="#e8590c" stroke-width="2" transform="rotate(' + p[2] + ' ' + p[0] + ' ' + p[1] + ')"/>').join(''));
+  P.winter = scene('#e7f5ff',
+    '<path d="M6 74 Q50 64 94 74 V78 Q94 94 78 94 H22 Q6 94 6 78 Z" fill="#fff"/>' +
+    '<path d="M50 72 V30 M50 44 L36 30 M50 52 L66 36 M36 30 L30 22 M66 36 L72 28" fill="none" stroke="#7a4a26" stroke-width="5"/>' +
+    '<path d="M32 30 h8 M62 36 h8" stroke="#fff" stroke-width="4"/>' +
+    [[20, 22], [78, 18], [24, 52], [82, 54], [62, 14]].map((p) => '<path d="M' + (p[0] - 5) + ' ' + p[1] + ' h10 M' + p[0] + ' ' + (p[1] - 5) + ' v10 M' + (p[0] - 3.5) + ' ' + (p[1] - 3.5) + ' l7 7 M' + (p[0] + 3.5) + ' ' + (p[1] - 3.5) + ' l-7 7" stroke="#74c0fc" stroke-width="2"/>').join(''));
+  P.day = scene('#a5d8ff',
+    '<circle cx="64" cy="34" r="14" fill="#ffd43b"/>' +
+    '<path d="M18 62 A10 10 0 0 1 18 44 A13 13 0 0 1 42 40 A11 11 0 0 1 56 54 A8 8 0 0 1 52 62 Z" fill="#fff"/>' +
+    '<path d="M6 76 Q50 66 94 76 V78 Q94 94 78 94 H22 Q6 94 6 78 Z" fill="#8ce99a"/>');
+  P.night = scene('#364fc7',
+    '<path d="M58 18 A26 26 0 0 0 58 70 A32 32 0 0 1 58 18 Z" fill="#ffe066"/>' +
+    [[22, 24], [80, 30], [30, 60], [76, 72], [44, 82]].map((p) => '<path d="M' + p[0] + ' ' + (p[1] - 5) + ' l1.5 3.5 3.5 1.5 -3.5 1.5 -1.5 3.5 -1.5 -3.5 -3.5 -1.5 3.5 -1.5 z" fill="#ffe066" stroke-width="1.5"/>').join(''));
+
+  // ---------- More food ----------
+
+  P.water =
+    '<path d="M24 14 H76 L68 90 H32 Z" fill="#e7f5ff"/>' +
+    '<path d="M27 38 H73 L68 90 H32 Z" fill="#74c0fc"/>' +
+    '<path d="M34 46 V82" stroke="#fff" stroke-width="4" opacity=".7"/>' +
+    '<path d="M54 50 q-6 9 0 13 q6 -4 0 -13 z" fill="#fff" stroke="none"/>';
+  P.juice =
+    '<path d="M60 4 L52 40" stroke="' + INK + '" stroke-width="7"/><path d="M60 4 L52 40" stroke="#fa5252" stroke-width="3"/>' +
+    '<path d="M24 22 H76 L68 90 H32 Z" fill="#fff4e6"/>' +
+    '<path d="M26 36 H74 L68 90 H32 Z" fill="#ff922b"/>' +
+    '<circle cx="74" cy="26" r="14" fill="#ffd43b"/><circle cx="74" cy="26" r="9" fill="#ffe066" stroke="none"/>' +
+    '<path d="M74 17 V35 M65 26 H83 M68 20 L80 32 M80 20 L68 32" stroke="#fff" stroke-width="1.5"/>' +
+    '<path d="M34 44 V82" stroke="#fff" stroke-width="4" opacity=".6"/>';
+  P.rice =
+    '<path d="M64 10 L44 54 M76 12 L52 56" stroke="#c98b52" stroke-width="4"/>' +
+    '<path d="M14 54 Q20 26 50 28 Q80 26 86 54 Z" fill="#fff"/>' +
+    [[30, 44], [40, 38], [52, 36], [64, 40], [72, 48], [46, 46], [58, 48], [36, 50]].map((p) => '<ellipse cx="' + p[0] + '" cy="' + p[1] + '" rx="3" ry="1.6" fill="#f1f3f5" stroke-width="1"/>').join('') +
+    '<path d="M10 54 H90 Q88 86 50 88 Q12 86 10 54 Z" fill="#fa5252"/>' +
+    '<path d="M24 66 H76" stroke="#fff" stroke-width="3"/>';
+  P.pasta =
+    '<ellipse cx="50" cy="64" rx="44" ry="20" fill="#fff"/>' +
+    '<path d="M18 58 Q30 44 42 58 Q54 70 66 56 Q76 46 84 58 M22 66 Q36 52 50 66 Q62 76 76 64 M28 52 Q40 40 54 50 Q66 58 74 48" fill="none" stroke="#fcc419" stroke-width="5"/>' +
+    '<path d="M36 50 Q50 38 64 50 Q56 60 50 56 Q44 60 36 50 Z" fill="#fa5252"/>' +
+    '<circle cx="46" cy="48" r="2" fill="#2b8a3e" stroke="none"/><circle cx="56" cy="46" r="2" fill="#2b8a3e" stroke="none"/>';
+  P.sausage =
+    '<path d="M12 40 Q8 30 18 28 L80 22 Q92 22 90 34 Q88 42 80 42 L20 48 Q12 48 12 40 Z" fill="#e8590c"/>' +
+    '<path d="M14 72 Q10 62 20 60 L82 56 Q94 56 92 68 Q90 76 82 76 L22 80 Q14 80 14 72 Z" fill="#c92a2a"/>' +
+    '<path d="M26 34 q20 -4 40 -4 M28 66 q20 -4 40 -4" fill="none" stroke="#fff" stroke-width="3" opacity=".5"/>';
+  P.pancake =
+    '<ellipse cx="50" cy="80" rx="42" ry="10" fill="#fff"/>' +
+    [70, 60, 50, 40].map((y) => '<ellipse cx="50" cy="' + y + '" rx="34" ry="9" fill="#e8a25c"/>').join('') +
+    '<path d="M18 40 Q20 32 50 30 Q80 32 82 40 Q78 50 72 46 Q70 56 64 48 Q56 54 50 46 Q40 52 36 46 Q26 50 18 40 Z" fill="#a0673b"/>' +
+    '<rect x="42" y="26" width="16" height="10" rx="2" fill="#ffe066"/>';
+
+  // ---------- More clothes ----------
+
+  P.skirt =
+    '<rect x="28" y="16" width="44" height="12" rx="3" fill="#cc5de8"/>' +
+    '<path d="M28 28 H72 L88 84 Q50 94 12 84 Z" fill="#e599f7"/>' +
+    '<path d="M40 28 L32 88 M50 28 V90 M60 28 L68 88" stroke="#cc5de8" stroke-width="2.5"/>';
+  P.pyjamas =
+    '<path d="M30 8 Q42 14 50 14 Q58 14 70 8 L90 20 L84 34 L74 30 V52 H26 V30 L16 34 L10 20 Z" fill="#a5d8ff"/>' +
+    '<path d="M26 52 H74 L78 94 H54 L50 66 L46 94 H22 Z" fill="#a5d8ff"/>' +
+    [[40, 26], [60, 36], [36, 44], [62, 70], [34, 80], [68, 86]].map((p) => '<path d="M' + p[0] + ' ' + (p[1] - 4) + ' l1.2 2.8 2.8 1.2 -2.8 1.2 -1.2 2.8 -1.2 -2.8 -2.8 -1.2 2.8 -1.2 z" fill="#ffd43b" stroke-width="1.2"/>').join('') +
+    '<path d="M50 14 V52" stroke-width="2"/>';
+  P.shorts =
+    '<path d="M18 22 H82 L90 74 H58 L50 46 L42 74 H10 Z" fill="#51cf66"/>' +
+    '<rect x="18" y="22" width="64" height="10" fill="#2f9e44"/>' +
+    '<path d="M50 32 V46 M26 40 q6 6 12 0 M62 40 q6 6 12 0" fill="none" stroke="#d3f9d8" stroke-width="2"/>';
+  P.sweater =
+    '<path d="M34 12 Q50 22 66 12 L90 26 L90 84 H76 V40 L74 90 H26 L24 40 V84 H10 V26 Z" fill="#fa5252"/>' +
+    '<path d="M34 12 Q50 24 66 12" fill="none" stroke-width="4"/>' +
+    '<path d="M26 80 H74 M10 78 H24 M76 78 H90" stroke="#ffc9c9" stroke-width="4"/>' +
+    [[36, 44], [50, 44], [64, 44], [43, 58], [57, 58]].map((p) => '<path d="M' + (p[0] - 5) + ' ' + p[1] + ' l5 -5 l5 5 l-5 5 z" fill="#fff" stroke="none"/>').join('');
+  P.sandals =
+    [[30, -8], [70, 8]].map((f) => '<g transform="rotate(' + f[1] + ' ' + f[0] + ' 50)">' +
+      '<path d="M' + (f[0] - 12) + ' 50 Q' + (f[0] - 14) + ' 14 ' + f[0] + ' 14 Q' + (f[0] + 14) + ' 14 ' + (f[0] + 12) + ' 50 Q' + (f[0] + 12) + ' 86 ' + f[0] + ' 88 Q' + (f[0] - 12) + ' 86 ' + (f[0] - 12) + ' 50 Z" fill="#e8a25c"/>' +
+      '<path d="M' + (f[0] - 12) + ' 30 Q' + f[0] + ' 40 ' + (f[0] + 12) + ' 30 M' + (f[0] - 12) + ' 52 H' + (f[0] + 12) + '" fill="none" stroke="#4dabf7" stroke-width="5"/></g>').join('');
+  P.belt =
+    '<path d="M4 44 H96 V58 H4 Z" fill="#7a4a26"/>' +
+    [70, 78, 86].map((x) => '<circle cx="' + x + '" cy="51" r="2" fill="#3b2412" stroke="none"/>').join('') +
+    '<rect x="22" y="36" width="26" height="30" rx="4" fill="none" stroke="' + INK + '" stroke-width="9"/>' +
+    '<rect x="22" y="36" width="26" height="30" rx="4" fill="none" stroke="#fcc419" stroke-width="5"/>' +
+    '<path d="M35 51 H54" stroke-width="3"/>';
+
   LG.PICTURES = P;
   LG.picture = function (id) {
     return P[id] ? svg(P[id]) : '';
