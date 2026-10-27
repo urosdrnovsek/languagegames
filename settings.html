@@ -15,7 +15,7 @@
     .font-card input { position: absolute; opacity: 0; pointer-events: none; }
     .font-card:has(input:checked) { border-color: var(--accent); background: #edf2ff; box-shadow: 0 0 0 3px var(--accent); }
     .font-card:has(input:focus-visible) { outline: 4px solid var(--accent); outline-offset: 3px; }
-    .font-card .sample { display: block; white-space: nowrap; font-size: 1.7rem; line-height: 1.2; margin-bottom: 4px; }
+    .font-card .sample { display: block; max-width: 100%; overflow: hidden; white-space: nowrap; letter-spacing: 0.3em; font-size: 1.7rem; line-height: 1.2; margin-bottom: 4px; }
     .font-card .name { display: block; font-weight: 700; font-size: 1.1rem; }
     .font-card .desc { display: block; color: var(--ink-soft); font-size: 0.95rem; margin-top: 2px; }
     .letters { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -116,12 +116,13 @@
         input.value = f;
         input.checked = current.font === f;
         input.addEventListener('change', () => update({ font: f }));
-        const sample = LG.el('span', 'sample', 'a g b d p q');
+        const sample = LG.el('span', 'sample fit', 'agbdpq');
         if (FAMILY[f]) sample.style.fontFamily = FAMILY[f] + ', sans-serif';
         else sample.style.fontFamily = "'Nunito', 'Century Gothic', 'Avenir Next', 'Trebuchet MS', system-ui, sans-serif";
         card.append(input, sample, LG.el('span', 'name', f === 'default' ? LG.t('font_default') : NAMES[f]), LG.el('span', 'desc', LG.t('fontDesc_' + f)));
         $('fonts').appendChild(card);
       });
+      LG.fit($('fonts'));
 
       // ---- Coloured letters ----
       LG.COLOR_LETTERS.forEach((l) => {
