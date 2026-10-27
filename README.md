@@ -11,8 +11,8 @@ internet connection beyond loading the page, and no build step.
 - **Picture Hunt** (`games/picture-hunt/`): read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. Stars depend on the time left.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
 
-The round-based games have 8 rounds drawn at random from a bank of 103 pictured words
-(animals, food, toys and things, nature, body), so every play-through is
+The round-based games have 8 rounds drawn at random from a bank of 200 pictured words
+(animals, food, clothes, home, toys, vehicles, nature, body), so every play-through is
 different. German nouns keep their capital letter.
 
 No ads, no tracking, no accounts, no cookies, and nothing is sent anywhere.

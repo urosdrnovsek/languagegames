@@ -36,6 +36,30 @@
     fox | fox | lisica | Fuchs | renard | zorro
     crab | crab | rak | Krabbe | crabe | cangrejo
     octopus | octopus | hobotnica | Krake | pieuvre | pulpo
+    horse | horse | konj | Pferd | cheval | caballo
+    giraffe | giraffe | žirafa | Giraffe | girafe | jirafa
+    zebra | zebra | zebra | Zebra | zèbre | cebra
+    tiger | tiger | tiger | Tiger | tigre | tigre
+    panda | panda | panda | Panda | panda | panda
+    camel | camel | kamela | Kamel | chameau | camello
+    hippo | hippo | povodni konj | Nilpferd | hippopotame | hipopótamo
+    crocodile | crocodile | krokodil | Krokodil | crocodile | cocodrilo
+    shark | shark | morski pes | Hai | requin | tiburón
+    dolphin | dolphin | delfin | Delfin | dauphin | delfín
+    starfish | starfish | morska zvezda | Seestern | étoile de mer | estrella de mar
+    jellyfish | jellyfish | meduza | Qualle | méduse | medusa
+    squirrel | squirrel | veverica | Eichhörnchen | écureuil | ardilla
+    hedgehog | hedgehog | jež | Igel | hérisson | erizo
+    goat | goat | koza | Ziege | chèvre | cabra
+    chick | chick | piščanec | Küken | poussin | pollito
+    parrot | parrot | papiga | Papagei | perroquet | loro
+    bat | bat | netopir | Fledermaus | chauve-souris | murciélago
+    worm | worm | črv | Wurm | ver | gusano
+    ant | ant | mravlja | Ameise | fourmi | hormiga
+    dinosaur | dinosaur | dinozaver | Dinosaurier | dinosaure | dinosaurio
+    flamingo | flamingo | flamingo | Flamingo | flamant | flamenco
+    seal | seal | tjulenj | Robbe | phoque | foca
+    koala | koala | koala | Koala | koala | koala
     apple | apple | jabolko | Apfel | pomme | manzana
     banana | banana | banana | Banane | banane | plátano
     pear | pear | hruška | Birne | poire | pera
@@ -57,11 +81,37 @@
     pizza | pizza | pica | Pizza | pizza | pizza
     cookie | cookie | piškot | Keks | biscuit | galleta
     pineapple | pineapple | ananas | Ananas | ananas | piña
+    potato | potato | krompir | Kartoffel | pomme de terre | patata
+    corn | corn | koruza | Mais | maïs | maíz
+    cucumber | cucumber | kumara | Gurke | concombre | pepino
+    pepper | pepper | paprika | Paprika | poivron | pimiento
+    onion | onion | čebula | Zwiebel | oignon | cebolla
+    broccoli | broccoli | brokoli | Brokkoli | brocoli | brócoli
+    peach | peach | breskev | Pfirsich | pêche | melocotón
+    plum | plum | sliva | Pflaume | prune | ciruela
+    kiwi | kiwi | kivi | Kiwi | kiwi | kiwi
+    coconut | coconut | kokos | Kokosnuss | noix de coco | coco
+    nut | nut | oreh | Nuss | noix | nuez
+    honey | honey | med | Honig | miel | miel
+    chocolate | chocolate | čokolada | Schokolade | chocolat | chocolate
+    candy | candy | bonbon | Bonbon | bonbon | caramelo
+    lollipop | lollipop | lizika | Lutscher | sucette | piruleta
+    donut | donut | krof | Donut | beignet | dónut
+    sandwich | sandwich | sendvič | Sandwich | sandwich | sándwich
+    soup | soup | juha | Suppe | soupe | sopa
     hat | hat | klobuk | Hut | chapeau | sombrero
     sock | sock | nogavica | Socke | chaussette | calcetín
     shoe | shoe | čevelj | Schuh | chaussure | zapato
     shirt | shirt | majica | T-Shirt | tee-shirt | camiseta
     glasses | glasses | očala | Brille | lunettes | gafas
+    dress | dress | obleka | Kleid | robe | vestido
+    trousers | trousers | hlače | Hose | pantalon | pantalón
+    jacket | jacket | jakna | Jacke | veste | chaqueta
+    scarf | scarf | šal | Schal | écharpe | bufanda
+    glove | glove | rokavica | Handschuh | gant | guante
+    boot | boot | škorenj | Stiefel | botte | bota
+    cap | cap | kapa | Kappe | casquette | gorra
+    button | button | gumb | Knopf | bouton | botón
     cup | cup | lonček | Tasse | tasse | taza
     spoon | spoon | žlica | Löffel | cuillère | cuchara
     fork | fork | vilice | Gabel | fourchette | tenedor
@@ -84,6 +134,32 @@
     table | table | miza | Tisch | table | mesa
     lamp | lamp | svetilka | Lampe | lampe | lámpara
     door | door | vrata | Tür | porte | puerta
+    bathtub | bathtub | kad | Badewanne | baignoire | bañera
+    soap | soap | milo | Seife | savon | jabón
+    towel | towel | brisača | Handtuch | serviette | toalla
+    toothbrush | toothbrush | zobna ščetka | Zahnbürste | brosse à dents | cepillo de dientes
+    comb | comb | glavnik | Kamm | peigne | peine
+    mirror | mirror | ogledalo | Spiegel | miroir | espejo
+    window | window | okno | Fenster | fenêtre | ventana
+    sofa | sofa | kavč | Sofa | canapé | sofá
+    television | TV | televizor | Fernseher | télévision | televisión
+    phone | phone | telefon | Telefon | téléphone | teléfono
+    computer | computer | računalnik | Computer | ordinateur | ordenador
+    backpack | backpack | nahrbtnik | Rucksack | sac à dos | mochila
+    basket | basket | košara | Korb | panier | cesta
+    box | box | škatla | Kiste | boîte | caja
+    bucket | bucket | vedro | Eimer | seau | cubo
+    broom | broom | metla | Besen | balai | escoba
+    candle | candle | sveča | Kerze | bougie | vela
+    plate | plate | krožnik | Teller | assiette | plato
+    bottle | bottle | steklenica | Flasche | bouteille | botella
+    pot | pot | lonec | Topf | casserole | olla
+    teddy | teddy | medvedek | Teddy | nounours | osito
+    doll | doll | punčka | Puppe | poupée | muñeca
+    robot | robot | robot | Roboter | robot | robot
+    brush | brush | čopič | Pinsel | pinceau | pincel
+    ladder | ladder | lestev | Leiter | échelle | escalera
+    hammer | hammer | kladivo | Hammer | marteau | martillo
     house | house | hiša | Haus | maison | casa
     car | car | avto | Auto | voiture | coche
     bus | bus | avtobus | Bus | bus | autobús
@@ -92,6 +168,13 @@
     bike | bike | kolo | Fahrrad | vélo | bicicleta
     boat | boat | ladja | Boot | bateau | barco
     rocket | rocket | raketa | Rakete | fusée | cohete
+    truck | truck | tovornjak | Lastwagen | camion | camión
+    tractor | tractor | traktor | Traktor | tracteur | tractor
+    helicopter | helicopter | helikopter | Hubschrauber | hélicoptère | helicóptero
+    ambulance | ambulance | rešilec | Krankenwagen | ambulance | ambulancia
+    firetruck | fire truck | gasilsko vozilo | Feuerwehrauto | camion de pompiers | camión de bomberos
+    scooter | scooter | skiro | Roller | trottinette | patinete
+    submarine | submarine | podmornica | U-Boot | sous-marin | submarino
     sun | sun | sonce | Sonne | soleil | sol
     moon | moon | luna | Mond | lune | luna
     star | star | zvezda | Stern | étoile | estrella
@@ -104,12 +187,26 @@
     tree | tree | drevo | Baum | arbre | árbol
     flower | flower | roža | Blume | fleur | flor
     leaf | leaf | list | Blatt | feuille | hoja
+    wave | wave | val | Welle | vague | ola
+    rock | rock | kamen | Stein | caillou | piedra
+    cactus | cactus | kaktus | Kaktus | cactus | cactus
+    volcano | volcano | vulkan | Vulkan | volcan | volcán
+    planet | planet | planet | Planet | planète | planeta
+    shell | shell | školjka | Muschel | coquillage | concha
+    feather | feather | pero | Feder | plume | pluma
+    nest | nest | gnezdo | Nest | nid | nido
+    lightning | lightning | strela | Blitz | éclair | rayo
     heart | heart | srce | Herz | cœur | corazón
     eye | eye | oko | Auge | œil | ojo
     ear | ear | uho | Ohr | oreille | oreja
     nose | nose | nos | Nase | nez | nariz
     hand | hand | roka | Hand | main | mano
     tooth | tooth | zob | Zahn | dent | diente
+    foot | foot | stopalo | Fuß | pied | pie
+    mouth | mouth | usta | Mund | bouche | boca
+    leg | leg | noga | Bein | jambe | pierna
+    flag | flag | zastava | Fahne | drapeau | bandera
+    castle | castle | grad | Burg | château | castillo
   `;
 
   LG.VOCAB = TABLE.trim()
@@ -131,7 +228,7 @@
     es: /^(ch|ll|h|qu|gu[eiéí]|[cg][eiéí])/i,
   };
   // Words the rules above miss.
-  const SKIP_FIRST_WORDS = { en: ['owl', 'eye', 'ear', 'ice cream'] };
+  const SKIP_FIRST_WORDS = { en: ['owl', 'eye', 'ear', 'ice cream', 'TV'] };
 
   LG.ALPHABET = {
     en: 'abcdefghijklmnoprstuvwyz'.split(''),

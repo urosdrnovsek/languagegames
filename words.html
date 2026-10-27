@@ -17,6 +17,8 @@
     .word-card .pic { width: 100%; max-width: 110px; aspect-ratio: 1; }
     .word-card .pic svg { width: 100%; height: 100%; }
     .word-card.speaking { background: var(--tile); }
+    .word-card span { text-align: center; line-height: 1.15; }
+    .word-card span.long { font-size: 1.05rem; }
   </style>
 </head>
 <body>
@@ -51,7 +53,7 @@
         .forEach((w) => {
           const b = LG.el('button', 'word-card', '<div class="pic">' + LG.picture(w.pic) + '</div>');
           b.type = 'button';
-          b.appendChild(LG.el('span', '', w.word));
+          b.appendChild(LG.el('span', w.letters.length > 8 ? 'long' : '', w.word));
           b.addEventListener('click', () => {
             b.classList.add('speaking');
             LG.speak(w.word).then(() => b.classList.remove('speaking'));
