@@ -1,9 +1,9 @@
 // First Letter: see a picture, hear the word, tap the letter it starts with.
 (function () {
   const ROUNDS = 8;
-  const words = LG.words(LG.lang, { firstLetter: true });
+  const words = LG.words(LG.lang, { firstLetter: true, min: 3 });
   // Letters that start some word in the bank: familiar choices for distractors.
-  const initials = Array.from(new Set(words.map((w) => w.letters[0])));
+  const initials = Array.from(new Set(LG.words(LG.lang, { firstLetter: true, allTopics: true }).map((w) => w.letters[0])));
   let queue = [];
 
   LG.createGame({
@@ -12,7 +12,7 @@
     pic: 'apple',
     rounds: ROUNDS,
     onStart() {
-      queue = LG.sample(words, ROUNDS);
+      queue = LG.deal(words, ROUNDS);
     },
     round(i, ctx) {
       const w = queue[i];

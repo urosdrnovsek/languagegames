@@ -32,12 +32,34 @@
     .link-row code { flex: 1; min-width: 0; padding: 10px 12px; border: 3px solid var(--ink); border-radius: 12px; background: #f1f3f5; font-size: 1rem; overflow-wrap: anywhere; }
     .small-btn { border: 3px solid var(--ink); border-radius: 12px; background: var(--accent); color: #fff; font-weight: 700; font-size: 1rem; padding: 8px 16px; box-shadow: 0 3px 0 var(--ink); }
     .small-btn.secondary { background: var(--card); color: var(--ink); }
+    .topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(138px, 1fr)); gap: 8px; }
+    .topic { position: relative; display: flex; align-items: center; gap: 8px; padding: 8px; border: 3px solid var(--ink); border-radius: 16px; background: var(--card); cursor: pointer; }
+    .topic input { position: absolute; opacity: 0; pointer-events: none; }
+    .topic:has(input:checked) { border-color: var(--accent); background: #edf2ff; box-shadow: 0 0 0 3px var(--accent); }
+    .topic:has(input:focus-visible) { outline: 4px solid var(--accent); outline-offset: 3px; }
+    .topic .pic { width: 40px; height: 40px; flex: none; }
+    .topic .pic svg { width: 100%; height: 100%; }
+    .topic .label { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+    .topic .label b { font-size: 1rem; hyphens: auto; overflow-wrap: break-word; }
+    .topic .label small { color: var(--ink-soft); }
+    .topics-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; font-weight: 700; }
+    .topics-few { margin: 10px 0 0; padding: 8px 12px; border: 3px solid var(--star); border-radius: 12px; background: var(--tile); }
     .gate-input { width: 140px; font-size: 2rem; text-align: center; padding: 6px; border: 3px solid var(--ink); border-radius: 14px; font-family: inherit; margin: 0 auto 10px; display: block; }
     .gate-error { color: var(--bad); min-height: 1.4em; }
   </style>
 </head>
 <body>
   <main class="settings" id="settings" hidden>
+    <section class="box">
+      <h2 id="topicsHeading"></h2>
+      <p id="topicsHelp"></p>
+      <div class="topics" id="topics"></div>
+      <div class="topics-foot">
+        <button type="button" class="small-btn secondary" id="allTopics"></button>
+        <span id="topicsCount"></span>
+      </div>
+      <p class="topics-few" id="topicsFew" hidden></p>
+    </section>
     <section class="box">
       <h2 id="fontHeading"></h2>
       <p id="fontHelp"></p>
@@ -96,9 +118,10 @@
       document.body.prepend(bar);
       document.title = LG.t('teacherSettings') + ' · ' + LG.t('appTitle');
 
-      ['fontHeading', 'fontHelp', 'colorsHeading', 'colorsHelp', 'spacingHeading', 'spacingLabel', 'previewHeading', 'linkHeading', 'linkHelp']
+      ['topicsHeading', 'topicsHelp', 'fontHeading', 'fontHelp', 'colorsHeading', 'colorsHelp', 'spacingHeading', 'spacingLabel', 'previewHeading', 'linkHeading', 'linkHelp']
         .forEach((k) => ($(k).textContent = LG.t(k)));
       $('copy').textContent = LG.t('copy');
+      $('allTopics').textContent = LG.t('allTopics');
       $('reset').textContent = LG.t('reset');
 
       // Sample words in this language that contain the letters children mix up.
@@ -106,6 +129,29 @@
         .filter((w) => /[bdpqg]/.test(w.word))
         .sort((a, b) => (b.word.match(/[bdpqg]/g).length - a.word.match(/[bdpqg]/g).length) || a.letters.length - b.letters.length)
         .slice(0, 3);
+
+      // ---- Word topics ----
+      const allWords = LG.words(LG.lang, { allTopics: true });
+      LG.TOPICS.forEach((t) => {
+        const label = LG.el('label', 'topic');
+        const input = LG.el('input');
+        input.type = 'checkbox';
+        input.value = t.id;
+        input.checked = current.topics.includes(t.id);
+        input.addEventListener('change', () => {
+          const topics = LG.TOPICS.map((x) => x.id).filter((id) => (id === t.id ? input.checked : current.topics.includes(id)));
+          update({ topics: topics });
+        });
+        const count = allWords.filter((w) => w.topic === t.id).length;
+        const text = LG.el('span', 'label', '<b></b><small>' + count + '</small>');
+        text.querySelector('b').textContent = LG.t('topic_' + t.id);
+        label.append(input, LG.el('span', 'pic', LG.picture(t.pic)), text);
+        $('topics').appendChild(label);
+      });
+      $('allTopics').addEventListener('click', () => {
+        update({ topics: [] });
+        document.querySelectorAll('.topic input').forEach((i) => (i.checked = false));
+      });
 
       // ---- Fonts ----
       LG.FONTS.forEach((f) => {
@@ -164,6 +210,11 @@
         LG.COLOR_LETTERS.forEach((l) => tiles.appendChild(LG.el('div', 'tile small', LG.fmt(l))));
         preview.append(words, tiles);
         LG.fit(preview);
+        const chosen = current.topics.length ? allWords.filter((w) => current.topics.includes(w.topic)).length : allWords.length;
+        $('topicsCount').textContent = LG.t('topicsCount', { n: chosen });
+        $('topicsFew').textContent = LG.t('topicsFew');
+        $('topicsFew').hidden = !(current.topics.length && chosen < 10);
+        $('allTopics').hidden = !current.topics.length;
         const q = LG.settingsQuery(current);
         $('query').textContent = q ? '&' + q : LG.t('linkNone');
         $('copy').hidden = !q;
@@ -179,7 +230,8 @@
       });
 
       $('reset').addEventListener('click', () => {
-        update({ font: 'default', colors: [], spacing: false });
+        update({ font: 'default', colors: [], spacing: false, topics: [] });
+        document.querySelectorAll('.topic input').forEach((i) => (i.checked = false));
         document.querySelector('input[name=font][value=default]').checked = true;
         document.querySelectorAll('.letter-toggle input').forEach((i) => (i.checked = false));
         $('spacing').checked = false;

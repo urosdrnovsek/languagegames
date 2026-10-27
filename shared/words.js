@@ -218,6 +218,38 @@
       return entry;
     });
 
+  // Topics, roughly following the themes of early-years vocabulary
+  // curricula. Each picture belongs to one topic; teachers can limit the
+  // games to some topics in the settings.
+  const TOPIC_WORDS = {
+    farm: 'cat dog pig cow sheep duck hen horse goat chick rabbit mouse',
+    wild: 'bear lion elephant monkey tiger panda giraffe zebra camel hippo crocodile fox koala squirrel hedgehog owl bat bird parrot flamingo penguin snake turtle dinosaur',
+    water: 'fish whale crab octopus shark dolphin starfish jellyfish seal frog',
+    bugs: 'bee butterfly ladybug spider snail ant worm',
+    fruit: 'apple banana pear cherry grapes lemon orange strawberry watermelon pineapple peach plum kiwi coconut',
+    vegetables: 'carrot tomato mushroom potato corn cucumber pepper onion broccoli',
+    food: 'cheese bread egg milk cake icecream pizza cookie honey chocolate candy lollipop donut sandwich soup nut',
+    clothes: 'hat sock shoe shirt glasses dress trousers jacket scarf glove boot cap button crown',
+    body: 'eye ear nose mouth tooth hand foot leg',
+    home: 'house door window bed chair table lamp sofa bathtub mirror television phone computer clock',
+    household: 'cup spoon fork plate bottle pot soap towel toothbrush comb broom bucket basket box candle key umbrella ladder hammer bell',
+    toys: 'ball balloon kite drum guitar teddy doll robot gift',
+    school: 'book pencil scissors backpack brush',
+    transport: 'car bus train plane bike boat rocket truck tractor helicopter ambulance firetruck scooter submarine',
+    nature: 'sun moon star cloud rainbow snowflake snowman lightning fire mountain tree flower leaf wave rock cactus volcano planet shell feather nest',
+    other: 'heart flag castle',
+  };
+  // Topic order and the picture that stands for each topic.
+  LG.TOPICS = [
+    ['farm', 'cow'], ['wild', 'lion'], ['water', 'fish'], ['bugs', 'ladybug'],
+    ['fruit', 'apple'], ['vegetables', 'carrot'], ['food', 'pizza'], ['clothes', 'shirt'],
+    ['body', 'hand'], ['home', 'house'], ['household', 'cup'], ['toys', 'teddy'],
+    ['school', 'pencil'], ['transport', 'bus'], ['nature', 'tree'], ['other', 'heart'],
+  ].map(([id, pic]) => ({ id: id, pic: pic }));
+  const TOPIC_OF = {};
+  Object.keys(TOPIC_WORDS).forEach((t) => TOPIC_WORDS[t].split(' ').forEach((pic) => (TOPIC_OF[pic] = t)));
+  LG.VOCAB.forEach((v) => (v.topic = TOPIC_OF[v.pic]));
+
   // The First Letter game skips words whose first letter doesn't match their
   // first sound: digraphs (sh, sch, ch, ll), silent h, soft c/g and so on.
   const SKIP_FIRST = {
@@ -248,15 +280,33 @@
     },
   };
 
-  // Words for one language: [{ pic, word, letters }].
+  // Words for one language: [{ pic, word, letters, topic }].
   //   firstLetter: only words that suit the First Letter game
   //   maxLength:   only single words (no spaces or hyphens) up to this length
+  //   allTopics:   ignore the topics chosen in the teacher settings
+  //   min:         if the chosen topics give fewer words than this, use all topics
   LG.words = function (lang, opts) {
     opts = opts || {};
+    const topics = opts.allTopics || !LG.settings ? [] : LG.settings.topics;
     const skipWords = SKIP_FIRST_WORDS[lang] || [];
-    return LG.VOCAB.filter((v) => v[lang] && LG.PICTURES[v.pic])
-      .map((v) => ({ pic: v.pic, word: v[lang], letters: Array.from(v[lang]) }))
+    const list = LG.VOCAB.filter((v) => v[lang] && LG.PICTURES[v.pic])
+      .filter((v) => !topics.length || topics.includes(v.topic))
+      .map((v) => ({ pic: v.pic, word: v[lang], letters: Array.from(v[lang]), topic: v.topic }))
       .filter((w) => !opts.firstLetter || !(SKIP_FIRST[lang].test(w.word) || skipWords.includes(w.word)))
       .filter((w) => !opts.maxLength || (w.letters.length <= opts.maxLength && /^\p{L}+$/u.test(w.word)));
+    if (opts.min && topics.length && list.length < opts.min) return LG.words(lang, Object.assign({}, opts, { allTopics: true }));
+    return list;
+  };
+
+  // n items from list in random order, repeating the list if it's too short
+  // (never the same item twice in a row).
+  LG.deal = function (list, n) {
+    let out = [];
+    while (out.length < n && list.length) {
+      let batch = LG.shuffle(list);
+      if (out.length && batch.length > 1 && batch[0] === out[out.length - 1]) batch.push(batch.shift());
+      out = out.concat(batch);
+    }
+    return out.slice(0, n);
   };
 })();

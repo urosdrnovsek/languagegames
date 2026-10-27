@@ -1,7 +1,7 @@
 // Read and Match: read three words and tap the one that names the picture.
 (function () {
   const ROUNDS = 8;
-  const words = LG.words(LG.lang);
+  const words = LG.words(LG.lang, { min: 3 });
   let queue = [];
 
   // Early rounds use any other words; later rounds prefer words that start
@@ -20,7 +20,7 @@
     pic: 'cat',
     rounds: ROUNDS,
     onStart() {
-      queue = LG.sample(words, ROUNDS);
+      queue = LG.deal(words, ROUNDS);
     },
     round(i, ctx) {
       const w = queue[i];

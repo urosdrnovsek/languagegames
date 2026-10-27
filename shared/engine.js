@@ -98,6 +98,27 @@
       copy: 'Copy',
       copied: 'Copied!',
       reset: 'Back to standard settings',
+      topicsHeading: 'Word topics',
+      topicsHelp: 'Choose the topics you are practising, and the games use only those words. With no topic chosen, all words are used.',
+      allTopics: 'All topics',
+      topicsCount: '{n} words chosen',
+      topicsFew: 'With so few words, some games also use words from other topics.',
+      topic_farm: 'Pets & farm animals',
+      topic_wild: 'Wild animals',
+      topic_water: 'Sea & water animals',
+      topic_bugs: 'Bugs & small animals',
+      topic_fruit: 'Fruit',
+      topic_vegetables: 'Vegetables',
+      topic_food: 'Food & drink',
+      topic_clothes: 'Clothes',
+      topic_body: 'Body',
+      topic_home: 'Home & furniture',
+      topic_household: 'Things at home',
+      topic_toys: 'Toys & music',
+      topic_school: 'School',
+      topic_transport: 'Transport',
+      topic_nature: 'Nature & weather',
+      topic_other: 'Other words',
       wordBook: 'Word Book',
       wordBookDesc: 'Look at all the pictures. Tap one to hear the word.',
     },
@@ -158,6 +179,27 @@
       copy: 'Kopiraj',
       copied: 'Kopirano!',
       reset: 'Nazaj na običajne nastavitve',
+      topicsHeading: 'Teme besed',
+      topicsHelp: 'Izberite teme, ki jih vadite, in igre bodo uporabljale samo te besede. Če ni izbrana nobena tema, se uporabijo vse besede.',
+      allTopics: 'Vse teme',
+      topicsCount: 'Izbranih besed: {n}',
+      topicsFew: 'Pri tako malo besedah nekatere igre uporabijo tudi besede iz drugih tem.',
+      topic_farm: 'Domače živali',
+      topic_wild: 'Divje živali',
+      topic_water: 'Vodne živali',
+      topic_bugs: 'Žuželke in male živali',
+      topic_fruit: 'Sadje',
+      topic_vegetables: 'Zelenjava',
+      topic_food: 'Hrana in pijača',
+      topic_clothes: 'Oblačila',
+      topic_body: 'Telo',
+      topic_home: 'Dom in pohištvo',
+      topic_household: 'Predmeti v hiši',
+      topic_toys: 'Igrače in glasba',
+      topic_school: 'Šola',
+      topic_transport: 'Prevozna sredstva',
+      topic_nature: 'Narava in vreme',
+      topic_other: 'Druge besede',
       wordBook: 'Slikovni slovar',
       wordBookDesc: 'Oglej si vse slike. Tapni sliko in poslušaj besedo.',
     },
@@ -218,6 +260,27 @@
       copy: 'Kopieren',
       copied: 'Kopiert!',
       reset: 'Zurück zu den Standardeinstellungen',
+      topicsHeading: 'Wortthemen',
+      topicsHelp: 'Wählen Sie die Themen, die Sie gerade üben – die Spiele verwenden dann nur diese Wörter. Ohne Auswahl werden alle Wörter verwendet.',
+      allTopics: 'Alle Themen',
+      topicsCount: '{n} Wörter ausgewählt',
+      topicsFew: 'Bei so wenigen Wörtern verwenden manche Spiele auch Wörter aus anderen Themen.',
+      topic_farm: 'Haus- und Bauernhoftiere',
+      topic_wild: 'Wilde Tiere',
+      topic_water: 'Wassertiere',
+      topic_bugs: 'Insekten und kleine Tiere',
+      topic_fruit: 'Obst',
+      topic_vegetables: 'Gemüse',
+      topic_food: 'Essen und Trinken',
+      topic_clothes: 'Kleidung',
+      topic_body: 'Körper',
+      topic_home: 'Zuhause und Möbel',
+      topic_household: 'Dinge im Haus',
+      topic_toys: 'Spielzeug und Musik',
+      topic_school: 'Schule',
+      topic_transport: 'Fahrzeuge',
+      topic_nature: 'Natur und Wetter',
+      topic_other: 'Weitere Wörter',
       wordBook: 'Bildwörterbuch',
       wordBookDesc: 'Schau dir alle Bilder an. Tippe auf ein Bild, um das Wort zu hören.',
     },
@@ -278,6 +341,27 @@
       copy: 'Copier',
       copied: 'Copié\u00a0!',
       reset: 'Revenir aux réglages standard',
+      topicsHeading: 'Thèmes de vocabulaire',
+      topicsHelp: "Choisissez les thèmes que vous travaillez\u00a0: les jeux n'utilisent alors que ces mots. Sans thème choisi, tous les mots sont utilisés.",
+      allTopics: 'Tous les thèmes',
+      topicsCount: '{n} mots choisis',
+      topicsFew: "Avec si peu de mots, certains jeux utilisent aussi des mots d'autres thèmes.",
+      topic_farm: 'Animaux de la ferme',
+      topic_wild: 'Animaux sauvages',
+      topic_water: 'Animaux aquatiques',
+      topic_bugs: 'Insectes et petites bêtes',
+      topic_fruit: 'Fruits',
+      topic_vegetables: 'Légumes',
+      topic_food: 'Nourriture et boissons',
+      topic_clothes: 'Vêtements',
+      topic_body: 'Le corps',
+      topic_home: 'La maison et les meubles',
+      topic_household: 'Objets de la maison',
+      topic_toys: 'Jouets et musique',
+      topic_school: "L'école",
+      topic_transport: 'Transports',
+      topic_nature: 'Nature et météo',
+      topic_other: 'Autres mots',
       wordBook: 'Imagier',
       wordBookDesc: 'Regarde toutes les images. Touche une image pour entendre le mot.',
     },
@@ -338,6 +422,27 @@
       copy: 'Copiar',
       copied: '¡Copiado!',
       reset: 'Volver a los ajustes estándar',
+      topicsHeading: 'Temas de vocabulario',
+      topicsHelp: 'Elija los temas que está practicando y los juegos usarán solo esas palabras. Si no elige ningún tema, se usan todas las palabras.',
+      allTopics: 'Todos los temas',
+      topicsCount: '{n} palabras elegidas',
+      topicsFew: 'Con tan pocas palabras, algunos juegos también usan palabras de otros temas.',
+      topic_farm: 'Mascotas y animales de granja',
+      topic_wild: 'Animales salvajes',
+      topic_water: 'Animales acuáticos',
+      topic_bugs: 'Insectos y animales pequeños',
+      topic_fruit: 'Frutas',
+      topic_vegetables: 'Verduras',
+      topic_food: 'Comida y bebida',
+      topic_clothes: 'Ropa',
+      topic_body: 'El cuerpo',
+      topic_home: 'La casa y los muebles',
+      topic_household: 'Objetos de casa',
+      topic_toys: 'Juguetes y música',
+      topic_school: 'La escuela',
+      topic_transport: 'Transportes',
+      topic_nature: 'Naturaleza y tiempo',
+      topic_other: 'Otras palabras',
       wordBook: 'Diccionario ilustrado',
       wordBookDesc: 'Mira todas las imágenes. Toca una para oír la palabra.',
     },
@@ -358,13 +463,13 @@
 
   // ---------- Teacher settings ----------
   //
-  // Font, coloured letters and letter spacing. Saved on the device by the
+  // Font, coloured letters, letter spacing and word topics. Saved on the device by the
   // settings page; a site that embeds the games can also set them in the
-  // URL (?font=andika&colors=bdpq&spacing=1), which wins over the device.
+  // URL (?font=andika&colors=bdpq&spacing=1&topics=fruit,food), which wins over the device.
 
   LG.FONTS = ['default', 'andika', 'opendyslexic', 'lexend', 'atkinson'];
   LG.COLOR_LETTERS = ['b', 'd', 'p', 'q', 'g'];
-  const DEFAULT_SETTINGS = { font: 'default', colors: [], spacing: false };
+  const DEFAULT_SETTINGS = { font: 'default', colors: [], spacing: false, topics: [] };
 
   function cleanSettings(raw) {
     raw = raw || {};
@@ -372,6 +477,7 @@
       font: LG.FONTS.includes(raw.font) ? raw.font : 'default',
       colors: LG.COLOR_LETTERS.filter((l) => (raw.colors || []).includes(l)),
       spacing: raw.spacing === true,
+      topics: LG.TOPICS.map((t) => t.id).filter((id) => (raw.topics || []).includes(id)),
     };
   }
 
@@ -388,6 +494,7 @@
     if (params.has('font')) s.font = cleanSettings({ font: params.get('font') }).font;
     if (params.has('colors')) s.colors = cleanSettings({ colors: Array.from(params.get('colors')) }).colors;
     if (params.has('spacing')) s.spacing = params.get('spacing') === '1';
+    if (params.has('topics')) s.topics = cleanSettings({ topics: params.get('topics').split(',') }).topics;
     return s;
   })();
 
@@ -409,6 +516,7 @@
     if (s.font !== 'default') q.push('font=' + s.font);
     if (s.colors.length) q.push('colors=' + s.colors.join(''));
     if (s.spacing) q.push('spacing=1');
+    if (s.topics.length) q.push('topics=' + s.topics.join(','));
     return q.join('&');
   };
 

@@ -4,7 +4,9 @@
 (function () {
   const ROUNDS = 8;
   const EXTRA_FROM = 4;
-  const words = LG.words(LG.lang, { maxLength: 5 });
+  // Short words first; a small topic may need longer ones to have enough.
+  let words = LG.words(LG.lang, { maxLength: 5 });
+  if (words.length < 3) words = LG.words(LG.lang, { maxLength: 7, min: 3 });
   const alphabet = LG.ALPHABET[LG.lang];
   let queue = [];
 
@@ -14,7 +16,7 @@
     pic: 'sun',
     rounds: ROUNDS,
     onStart() {
-      queue = LG.sample(words, ROUNDS).sort((a, b) => a.letters.length - b.letters.length);
+      queue = LG.deal(words, ROUNDS).sort((a, b) => a.letters.length - b.letters.length);
     },
     round(i, ctx) {
       const w = queue[i];

@@ -10,8 +10,9 @@ internet connection beyond loading the page, and no build step.
 - **Build the Word** (`games/build-word/`): tap letters to spell the pictured word. Words get longer as the game goes on, and from round 5 there is an extra letter that doesn't belong.
 - **Picture Hunt** (`games/picture-hunt/`): read a list of 10 words and find each one's picture among 20 tiles within 3 minutes. Found words are crossed out; tapping a word reads it aloud. Stars depend on the time left.
 - **Word Book** (`words.html`): every picture and word; tap one to hear it.
-- **Teacher settings** (`settings.html`, the gear on the game list): reading
-  fonts, coloured letters for b, d, p, q and g, and wider letter spacing.
+- **Teacher settings** (`settings.html`, the gear on the game list): word
+  topics (only animals, only fruit…), reading fonts, coloured letters for
+  b, d, p, q and g, and wider letter spacing.
   A quick sum keeps children from changing them by accident.
 
 The round-based games have 8 rounds drawn at random from a bank of 200 pictured words
@@ -55,6 +56,13 @@ URL options:
 | `font` | `andika`, `opendyslexic`, `lexend`, `atkinson` | Reading font. |
 | `colors` | any of `bdpqg`, e.g. `bdpq` | Gives these letters their own colour. |
 | `spacing` | `1` | Wider spacing between letters. |
+| `topics` | comma-separated topic ids, e.g. `fruit,vegetables` | Only words from these topics. |
+
+Topic ids: `farm`, `wild`, `water`, `bugs`, `fruit`, `vegetables`, `food`,
+`clothes`, `body`, `home`, `household`, `toys`, `school`, `transport`,
+`nature`, `other`. With small topics the games repeat words; when a topic
+is too small for a game (for example under 4 words for Picture Hunt), that
+game also uses words from other topics.
 
 URL options win over the teacher settings saved on the device. The settings
 page shows the exact options for the current settings, ready to copy.
@@ -88,7 +96,8 @@ note on the start screen says so. Every game can be played without sound.
 
 1. Draw the picture in `shared/pictures.js` (`P.name = '...svg shapes...'`, 100×100 viewBox).
 2. Add a row to the table in `shared/words.js`:
-   `name | word | beseda | Wort | mot | palabra` (en, sl, de, fr, es).
+   `name | word | beseda | Wort | mot | palabra` (en, sl, de, fr, es),
+   and add the picture name to its topic in `TOPIC_WORDS`.
 
 The First Letter game automatically skips words whose first letter doesn't
 match their first sound (*sheep*, *Schaf*, *chat*, *huevo*…), using the rules

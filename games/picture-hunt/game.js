@@ -18,8 +18,13 @@
       stopTimer();
     },
     round(_, ctx) {
-      const picked = LG.sample(LG.words(LG.lang), TILES);
-      const targets = picked.slice(0, WORDS);
+      // Targets come from the chosen topics. Decoys are other words from
+      // those topics first, then words from the rest of the bank.
+      const pool = LG.words(LG.lang, { min: 4 });
+      const targets = LG.sample(pool, WORDS);
+      const others = LG.words(LG.lang, { allTopics: true }).filter((w) => !pool.some((p) => p.pic === w.pic));
+      const decoys = LG.shuffle(pool.filter((w) => !targets.includes(w))).concat(LG.shuffle(others));
+      const picked = targets.concat(decoys.slice(0, TILES - targets.length));
       const found = new Set();
       let over = false;
 
@@ -83,7 +88,7 @@
         chips[w.pic].classList.add('found');
         LG.sfx.good();
         LG.speak(w.word);
-        if (found.size === WORDS) win();
+        if (found.size === targets.length) win();
       }
 
       function win() {
@@ -106,7 +111,7 @@
           won: false,
           stars: 0,
           title: LG.t('timeUp'),
-          text: LG.t('huntFoundSome', { n: found.size, total: WORDS }),
+          text: LG.t('huntFoundSome', { n: found.size, total: targets.length }),
         }), 2400);
       }
 
