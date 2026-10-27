@@ -198,8 +198,8 @@ svg { display: block; }
   font-size: clamp(2.2rem, 10vw, 3.4rem);
   background: var(--tile);
 }
-.choices.letters { gap: 10px; }
-.tile.small { width: clamp(48px, 13vw, 80px); height: clamp(58px, 16vw, 88px); font-size: clamp(1.9rem, 8vw, 2.9rem); }
+.choices.letters { gap: 8px; }
+.tile.small { width: clamp(44px, 13vw, 80px); height: clamp(58px, 16vw, 88px); font-size: clamp(1.9rem, 8vw, 2.9rem); }
 
 .word-btn {
   min-width: min(260px, 100%);
