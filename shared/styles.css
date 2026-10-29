@@ -963,6 +963,7 @@ span.slot { display: inline-grid; place-items: center; }
 .spot-pair { display: flex; justify-content: center; gap: 14px; }
 .spot-pair.stacked { flex-direction: column; align-items: center; }
 .spot-pic { position: relative; flex: none; overflow: hidden; border: 4px solid var(--ink); border-radius: 18px; background: #fff; cursor: pointer; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+.spot-pic > svg { display: block; width: 100%; height: 100%; }
 .spot-pic img { display: block; width: 100%; height: 100%; pointer-events: none; -webkit-user-drag: none; }
 .spot-marks { position: absolute; inset: 0; pointer-events: none; }
 .spot-ring { position: absolute; border: 5px solid #e03131; border-radius: 50%; box-shadow: 0 0 0 3px #fff, inset 0 0 0 2px #fff; animation: pop 0.35s ease; }
