@@ -7,7 +7,8 @@ and **Romanian**.
 
 **Play online:** https://urosdrnovsek.github.io/languagegames/
 
-Every picture is a hand-drawn SVG, so the games need no image files, no
+The pictures are hand-drawn SVGs (except the Spot the Difference scenes,
+which are JPEG images in `games/spot-difference/img/`), so the games need no
 accounts and no build step. They run in any modern browser on tablets,
 phones, computers and interactive whiteboards.
 
@@ -49,6 +50,7 @@ phones, computers and interactive whiteboards.
 | **Left to Right** (`games/scan-hunt/`) | Find the shown picture in every row, from left to right and row by row, like reading a page. Only the current row is lit; a picture further right waits until the ones before it are found. |
 | **Find It** (`games/crowd/`) | Find one picture among others. Each round has more pictures, closer together and more alike. |
 | **Same or Different?** (`games/same-different/`) | Two pictures, or later letter-like shapes: the same, or mirrored, flipped or turned. The warm-up for telling b, d, p and q apart. |
+| **Spot the Difference** (`games/spot-difference/`) | Two pictures, almost the same (bedroom, snow, jungle, farm, beach). Tap a difference on either picture and it is circled on both. Every real difference counts (5 to 12 per scene); a tap elsewhere only shows a small ripple. The Hint button flashes one that is still hidden. |
 | **Copy the Shape** (`games/copy-shape/`) | Join the dots to copy a shape, in the order children learn to draw: lines, cross, diagonal, square, X, triangle, then a house, an arrow and a zigzag. Drag between dots or tap one and then the other; a line that isn't in the shape fades away. |
 
 The three tracing games share `shared/trace.js`: each shape is a list of
