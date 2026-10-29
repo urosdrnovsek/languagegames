@@ -13,8 +13,9 @@ phones, computers and interactive whiteboards.
 
 ## At a glance
 
-- **6 pre-reading activities** for the eyes and hands: following, scanning
-  left to right, finding a picture in a crowd, seeing flips, copying shapes.
+- **9 pre-reading activities** for the eyes and hands: following, tracing 40
+  letter shapes, scanning left to right, finding a picture in a crowd, seeing
+  flips, copying shapes.
 - **20 games** for learning letters and words, practising, racing the clock
   and playing as a class, including moving games with rockets, frogs, fish,
   moles, trains and bubbles.
@@ -41,11 +42,21 @@ phones, computers and interactive whiteboards.
 | Activity | What children do |
 |---|---|
 | **Follow the Path** (`games/follow-path/`) | Drag the car (bee, rabbit, boat…) along a winding road to its goal. It only moves while the finger stays on the road. Roads run left to right and get narrower and curvier. |
+| **Lines & Mountains** (`games/trace-lines/`) | Trace letter shapes made of straight lines on writing lines: L, T, t, H, F, E, V, v, A, N, M, K, k, Z, z. |
+| **Moons & Snakes** (`games/trace-curves/`) | Trace round and curvy shapes: c, C, o, O, e, U, u, J, j, S, s, G. Round shapes start at the top and go anticlockwise. |
+| **Sticks & Bellies** (`games/trace-bellies/`) | Trace a stick and a belly: P, D, B, R, r, n, m, p, a, b, g, d, f (b, d and p kept apart). |
 | **Follow the Butterfly** (`games/follow-butterfly/`) | Keep a finger (or the mouse) on a butterfly as it floats around; while you do, the bar fills. When you lose it, it slows down and waits. |
 | **Left to Right** (`games/scan-hunt/`) | Find the shown picture in every row, from left to right and row by row, like reading a page. Only the current row is lit; a picture further right waits until the ones before it are found. |
 | **Find It** (`games/crowd/`) | Find one picture among others. Each round has more pictures, closer together and more alike. |
 | **Same or Different?** (`games/same-different/`) | Two pictures, or later letter-like shapes: the same, or mirrored, flipped or turned. The warm-up for telling b, d, p and q apart. |
 | **Copy the Shape** (`games/copy-shape/`) | Join the dots to copy a shape, in the order children learn to draw: lines, cross, diagonal, square, X, triangle, then a house, an arrow and a zigzag. Drag between dots or tap one and then the other; a line that isn't in the shape fades away. |
+
+The three tracing games share `shared/trace.js`: each shape is a list of
+strokes (SVG paths) with a numbered green start dot and an arrow, and the
+watercolour brush only paints while the finger stays on the dashed line.
+Shapes follow the usual print handwriting: strokes top to bottom and left to
+right, round letters anticlockwise from the top. When a shape is finished the
+voice names the letter ("Capital A!"), a first gentle step towards letters.
 
 These train the eye and hand skills used in reading and writing: following a
 moving target, moving the eyes from left to right, picking out one shape
@@ -431,6 +442,7 @@ shared/engine.js      language, text, speech, sounds, players, scores,
 shared/pictures.js    all pictures (SVG)
 shared/words.js       word bank (all eight languages)
 shared/styles.css     shared styles
+shared/trace.js       tracing engine for the three tracing games
 shared/fonts/         bundled reading fonts and their licenses
 shared/vendor/        bundled QR code libraries and their licenses
 ```
