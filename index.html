@@ -27,6 +27,7 @@
     .card .art svg { width: 100%; height: 100%; }
     .card h3 { margin: 8px 0 4px; font-size: 1.3rem; }
     .card p { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+    .card.pre { background: #fff0f6; }
     .card.race { background: #fff4e6; }
     .card.together { background: #e7f5ff; }
     .card.me { background: #ebfbee; }
@@ -77,6 +78,14 @@
 
       const g = (id, title, pic, extra) => Object.assign({ path: 'games/' + id + '/index.html', title: title, desc: title + 'Desc', pic: pic }, extra || {});
       const sections = [
+        ['sectionPre', 'pre', [
+          g('follow-path', 'followPath', 'car'),
+          g('follow-butterfly', 'butterfly', 'butterfly'),
+          g('scan-hunt', 'scanHunt', 'eye'),
+          g('crowd', 'crowd', 'ladybug'),
+          g('same-different', 'sameDiff', 'mirror'),
+          g('copy-shape', 'copyShape', 'pencil'),
+        ]],
         ['sectionLearn', '', [
           g('letter-sounds', 'letterSounds', 'apple'),
           g('picture-word', 'pictureWord', 'cat'),
