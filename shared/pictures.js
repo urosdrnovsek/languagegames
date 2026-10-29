@@ -58,7 +58,7 @@
     '<ellipse cx="50" cy="52" rx="27" ry="28" fill="#d39b62"/>' +
     '<ellipse cx="25" cy="50" rx="10" ry="21" fill="#7a4a26" transform="rotate(18 25 50)"/>' +
     '<ellipse cx="75" cy="50" rx="10" ry="21" fill="#7a4a26" transform="rotate(-18 75 50)"/>' +
-    '<ellipse cx="60" cy="42" rx="8" ry="7" fill="#b07a45" stroke="none"/>' +
+    '<ellipse cx="60.5" cy="44.5" rx="9.5" ry="9" fill="#b07a45" stroke="none"/>' +
     eye(40, 45) + eye(60, 45) +
     '<ellipse cx="50" cy="66" rx="16" ry="12" fill="#f3dcb8"/>' +
     '<path d="M54 74 q0 9 -4 9 q-4 0 -4 -9 z" fill="#ff6b8a"/>' +

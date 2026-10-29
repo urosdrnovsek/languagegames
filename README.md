@@ -51,7 +51,7 @@ phones, computers and interactive whiteboards.
 | **Find It** (`games/crowd/`) | Find one picture among others. Each round has more pictures, closer together and more alike. |
 | **Same or Different?** (`games/same-different/`) | Two pictures, or later letter-like shapes: the same, or mirrored, flipped or turned. The warm-up for telling b, d, p and q apart. |
 | **Spot the Difference** (`games/spot-difference/`) | Two pictures, almost the same (bedroom, snow, jungle, farm, beach). Tap a difference on either picture and it is circled on both. Every real difference counts (5 to 12 per scene); a tap elsewhere only shows a small ripple. The Hint button flashes one that is still hidden. |
-| **Spot It!** (`games/spot-scenes/`) | A new drawn scene every round (meadow, beach, bedroom, snow) filled with the word pictures. The game makes the differences itself (something gone, recoloured, turned round, swapped or added), from 3 up to 7, and says the word for each one found. Backgrounds are in `scenes.js`; only pictures that look clearly different when mirrored or recoloured are used for those changes. |
+| **Spot It!** (`games/spot-scenes/`) | A new drawn scene every round (meadow, farm, savanna, beach, under the sea, snow, bedroom, kitchen) with full-body animals (`bodies.js`) and the word pictures, each standing on the ground at a size that fits. The game makes the differences itself (something gone, recoloured, turned round, swapped or added), from 3 up to 7, and says the word for each one found. Backgrounds are in `scenes.js`; only pictures that look clearly different when mirrored or recoloured are used for those changes. |
 | **Copy the Shape** (`games/copy-shape/`) | Join the dots to copy a shape, in the order children learn to draw: lines, cross, diagonal, square, X, triangle, then a house, an arrow and a zigzag. Drag between dots or tap one and then the other; a line that isn't in the shape fades away. |
 
 The three tracing games share `shared/trace.js`: each shape is a list of
@@ -336,6 +336,11 @@ check on the devices themselves.
 Upload the whole folder as-is (any static host works: GitHub Pages, Netlify,
 or a normal web server). Keep the folder structure: the games load their
 shared files from `shared/`.
+
+Every page loads its scripts and styles with `?v=…` on the end (for example
+`engine.js?v=20261029`). When you release a change, give them all a new number
+(search and replace the old one in every `.html` file), so that browsers fetch
+the new files at once instead of mixing them with copies they kept from before.
 
 ### Embedding one game on another site
 

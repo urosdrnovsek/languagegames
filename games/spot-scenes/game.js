@@ -29,34 +29,85 @@
   const words = {};
   LG.words(LG.lang, { allTopics: true }).forEach((w) => (words[w.pic] = words[w.pic] || w.word));
 
+  // ---- Pictures and their real size ----
+
+  // Full-body animals where there is one, else the picture from the word games.
+  const art = (pic) => LG.BODIES[pic] || LG.picture(pic);
+  const exists = (pic) => !!(LG.BODIES[pic] || LG.PICTURES[pic]);
+  // The part of the 100 x 100 box each picture really fills, measured once in
+  // the page, so things stand on the ground and boxes fit what is drawn.
+  const boxes = {};
+  function bounds(pic) {
+    if (boxes[pic]) return boxes[pic];
+    let b = { x: 0, y: 0, w: 100, h: 100 };
+    try {
+      const div = document.body.appendChild(LG.el('div'));
+      div.style.cssText = 'position:fixed;left:-500px;top:0;width:100px;height:100px;visibility:hidden';
+      div.innerHTML = art(pic);
+      const svg = div.firstElementChild;
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      while (svg.firstChild) g.appendChild(svg.firstChild);
+      svg.appendChild(g);
+      const r = g.getBBox();
+      div.remove();
+      if (r.width > 1 && r.height > 1) b = { x: r.x - 1.5, y: r.y - 1.5, w: r.width + 3, h: r.height + 3 };
+    } catch (e) {
+      // keep the whole box
+    }
+    return (boxes[pic] = b);
+  }
+
+  // A picture of height about H, bottom middle at (cx, base). Wide things are
+  // held back a little so a whale is not as long as a field.
+  function sized(pic, H, cx, base, fit) {
+    const b = bounds(pic);
+    const k = fit ? Math.min(H / b.h, fit / b.w) : H / Math.max(b.h, b.w * 0.75);
+    return { pic: pic, k: k, cx: cx, base: base, w: b.w * k, h: b.h * k };
+  }
+  const rect = (o) => ({ x: o.cx - o.w / 2, y: o.base - o.h, w: o.w, h: o.h });
+
   // ---- Building a scene ----
 
-  function box(o) {
-    return { x: o.x, y: o.y - o.s * 0.94, w: o.s, h: o.s };
-  }
-  function overlaps(a, b, keep) {
-    const p = Math.min(a.w, b.w) * (keep || 0.18);
+  function overlaps(a, b) {
+    const p = Math.min(a.w, b.w, a.h, b.h) * 0.16;
     return a.x + p < b.x + b.w - p && b.x + p < a.x + a.w - p && a.y + p < b.y + b.h - p && b.y + p < a.y + a.h - p;
   }
 
   // Finds a free place for pic in a zone, or null.
   function place(zone, pic, taken) {
-    const size = LG.SCENE_SIZE[pic] || 1;
-    if (zone.slots) {
-      const free = zone.slots.filter(([x, y]) => !taken.some((o) => o.zone === zone && o.slot === x + ',' + y));
-      if (!free.length) return null;
-      const [x, y] = LG.pick(free);
-      const s = zone.size * Math.min(1, size);
-      return { zone: zone, slot: x + ',' + y, x: x + (zone.size - s) / 2, y: y, s: s };
+    const H = LG.SCENE_SIZE[pic] || 70;
+    const clear = (o) => !taken.some((q) => overlaps(rect(o), rect(q)));
+    if (zone.type === 'slots') {
+      const free = LG.shuffle(zone.slots.filter((sl) => !taken.some((o) => o.slot === sl)));
+      for (const sl of free) {
+        const gap = zone.slots.length > 1 ? Math.min(...zone.slots.filter((t) => t !== sl && t[1] === sl[1]).map((t) => Math.abs(t[0] - sl[0])), 999) : 999;
+        const o = sized(pic, zone.h, sl[0], sl[1], Math.min(zone.h * 1.3, gap - 8));
+        o.zone = zone;
+        o.slot = sl;
+        if (clear(o)) return o;
+      }
+      return null;
     }
-    for (let tries = 0; tries < 120; tries++) {
-      const y = rnd(zone.y0, zone.y1);
-      const t = (y - zone.y0) / (zone.y1 - zone.y0);
-      const s = zone.base * (zone.scale[0] + (zone.scale[1] - zone.scale[0]) * t) * size;
-      const x = rnd(zone.x0, zone.x1 - s);
-      const o = { zone: zone, x: x, y: y, s: s };
-      if (y - s * 0.94 < 8) continue;
-      if (!taken.some((q) => overlaps(box(o), box(q)))) return o;
+    for (let tries = 0; tries < 150; tries++) {
+      let o;
+      if (zone.type === 'float') {
+        o = sized(pic, H, 0, 0);
+        const cy = rnd(zone.y0, zone.y1);
+        o.base = cy + o.h / 2;
+      } else {
+        const y = rnd(zone.y0, zone.y1);
+        const t = zone.y1 > zone.y0 ? (y - zone.y0) / (zone.y1 - zone.y0) : 0.5;
+        o = sized(pic, H * (zone.depth[0] + (zone.depth[1] - zone.depth[0]) * t), 0, y);
+        o.depth = zone.depth[0] + (zone.depth[1] - zone.depth[0]) * t;
+      }
+      if (o.w > zone.x1 - zone.x0) continue;
+      o.cx = rnd(zone.x0 + o.w / 2, zone.x1 - o.w / 2);
+      o.zone = zone;
+      if (o.base - o.h < 6 || o.base > BH - 4) continue;
+      // Keep out of ponds, tables and the like: the lower part must not touch them.
+      const low = { x: o.cx - o.w * 0.4, y: o.base - o.h * 0.4, w: o.w * 0.8, h: o.h * 0.4 };
+      if (zone.avoid && zone.avoid.some(([x0, y0, x1, y1]) => low.x < x1 && low.x + low.w > x0 && low.y < y1 && low.y + low.h > y0)) continue;
+      if (clear(o)) return o;
     }
     return null;
   }
@@ -65,35 +116,34 @@
     const theme = LG.SCENES[themeId];
     const objs = [];
     const used = new Set();
-    const pickPic = (zone) => {
-      const free = zone.items.split(' ').filter((p) => !used.has(p) && LG.PICTURES[p]);
+    const pickPic = (zone, ok) => {
+      const free = zone.items.split(' ').filter((p) => !used.has(p) && exists(p) && (!ok || ok(p)));
       return free.length ? LG.pick(free) : null;
     };
     theme.zones.forEach((zone) => {
       const n = zone.fixed || Math.max(1, Math.round(count * zone.share));
-      for (let k = 0; k < n; k++) {
+      for (let k = 0, got = 0; got < n && k < n * 3; k++) {
         const pic = pickPic(zone);
         if (!pic) break;
         const o = place(zone, pic, objs);
         if (!o) continue;
-        o.pic = pic;
         used.add(pic);
         objs.push(o);
+        got++;
       }
     });
 
     // Differences, each on a different picture, with a mix of kinds.
     const diffs = [];
     const order = LG.shuffle(objs.slice());
-    let kinds = LG.shuffle(['gone', 'color', 'flip', 'swap', 'add', 'color', 'gone', 'swap', 'flip', 'add']);
-    for (let k = 0; diffs.length < diffCount && k < 40; k++) {
+    const kinds = LG.shuffle(['gone', 'color', 'flip', 'swap', 'add', 'color', 'gone', 'swap', 'flip', 'add']);
+    for (let k = 0; diffs.length < diffCount && k < 60; k++) {
       const kind = kinds[k % kinds.length];
       if (kind === 'add') {
         const zone = LG.pick(theme.zones.filter((z) => !z.fixed));
         const pic = pickPic(zone);
-        const o = pic && place(zone, pic, objs.concat(diffs.filter((d) => d.add).map((d) => d.add)));
+        const o = pic && place(zone, pic, objs.concat(diffs.map((d) => d.add || d.alt).filter(Boolean)));
         if (!o) continue;
-        o.pic = pic;
         used.add(pic);
         diffs.push({ kind: 'add', add: o, word: pic });
         continue;
@@ -102,10 +152,16 @@
       if (!o) continue;
       const d = { kind: kind, obj: o, word: o.pic };
       if (kind === 'swap') {
-        const pic = pickPic(o.zone);
+        // Something else of about the same size, in the same place.
+        const size = (p) => LG.SCENE_SIZE[p] || 70;
+        const pic = pickPic(o.zone, (p) => o.slot || o.zone.type === 'float' || (size(p) / size(o.pic) < 1.6 && size(o.pic) / size(p) < 1.6));
         if (!pic) continue;
+        const alt = o.slot ? sized(pic, o.zone.h, o.cx, o.base, o.w * 1.15) : sized(pic, size(pic) * (o.depth || 1), o.cx, o.base);
+        if (o.zone.type === 'float') alt.base = o.base - o.h / 2 + alt.h / 2;
+        alt.zone = o.zone;
         used.add(pic);
         d.swap = pic;
+        d.alt = alt;
       }
       diffs.push(d);
     }
@@ -115,12 +171,15 @@
   // ---- Drawing ----
 
   function picture(o, extra) {
-    const inner = LG.picture(extra && extra.pic ? extra.pic : o.pic).replace('<svg ', '<svg x="' + o.x.toFixed(1) + '" y="' + (o.y - o.s * 0.94).toFixed(1) + '" width="' + o.s.toFixed(1) + '" height="' + o.s.toFixed(1) + '" ');
-    let g = inner;
-    if (extra && extra.flip) g = '<g transform="matrix(-1 0 0 1 ' + (2 * o.x + o.s).toFixed(1) + ' 0)">' + g + '</g>';
+    const b = bounds(o.pic);
+    const x = o.cx - (b.x + b.w / 2) * o.k;
+    const y = o.base - (b.y + b.h) * o.k;
+    let g = art(o.pic).replace('<svg ', '<svg x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + (100 * o.k).toFixed(1) + '" height="' + (100 * o.k).toFixed(1) + '" ');
+    if (extra && extra.flip) g = '<g transform="matrix(-1 0 0 1 ' + (2 * o.cx).toFixed(1) + ' 0)">' + g + '</g>';
     if (extra && extra.hue) g = '<g filter="url(#' + extra.hue + ')">' + g + '</g>';
-    const shadow = o.zone.shadow ? '<ellipse cx="' + (o.x + o.s / 2).toFixed(1) + '" cy="' + (o.y - o.s * 0.04).toFixed(1) + '" rx="' + (o.s * 0.36).toFixed(1) + '" ry="' + (o.s * 0.07).toFixed(1) + '" fill="' + o.zone.shadow + '"/>' : '';
-    return { y: o.y, svg: shadow + g };
+    const z = o.zone;
+    const shadow = z.type !== 'float' && z.shadow && !z.noShadow ? '<ellipse cx="' + o.cx.toFixed(1) + '" cy="' + (o.base - 1).toFixed(1) + '" rx="' + (o.w * 0.44).toFixed(1) + '" ry="' + Math.max(3, o.w * 0.06).toFixed(1) + '" fill="' + z.shadow + '"/>' : '';
+    return { y: z.type === 'float' ? -1 : o.base, svg: shadow + g };
   }
 
   function draw(scene, right) {
@@ -129,10 +188,9 @@
     scene.objs.forEach((o) => {
       const d = scene.diffs.find((x) => x.obj === o);
       if (!right || !d) return parts.push(picture(o));
-      if (d.kind === 'gone') return;
       if (d.kind === 'color') return parts.push(picture(o, { hue: hue }));
       if (d.kind === 'flip') return parts.push(picture(o, { flip: true }));
-      if (d.kind === 'swap') return parts.push(picture(o, { pic: d.swap }));
+      if (d.kind === 'swap') return parts.push(picture(d.alt));
     });
     if (right) scene.diffs.filter((d) => d.kind === 'add').forEach((d) => parts.push(picture(d.add)));
     parts.sort((a, b) => a.y - b.y);
@@ -141,17 +199,19 @@
       LG.SCENES[scene.theme].bg(seeded(scene.seed)) + parts.map((p) => p.svg).join('') + '</svg>';
   }
 
-  // Where each difference is, as fractions of the picture.
+  // Where each difference is, as fractions of the picture. Small things get a
+  // box big enough for a finger.
   function spotsOf(scene) {
     return scene.diffs.map((d) => {
-      const o = d.add || d.obj;
-      let b = box(o);
-      if (d.kind === 'swap') {
-        const s2 = o.s * Math.min(1.6, (LG.SCENE_SIZE[d.swap] || 1) / (LG.SCENE_SIZE[o.pic] || 1));
-        if (s2 > o.s) b = { x: o.x - (s2 - o.s) / 2, y: o.y - s2 * 0.94, w: s2, h: s2 };
+      let b = rect(d.add || d.obj);
+      if (d.alt) {
+        const c = rect(d.alt);
+        const x0 = Math.min(b.x, c.x), y0 = Math.min(b.y, c.y);
+        b = { x: x0, y: y0, w: Math.max(b.x + b.w, c.x + c.w) - x0, h: Math.max(b.y + b.h, c.y + c.h) - y0 };
       }
-      const inset = 0.08;
-      return { word: d.word, r: [(b.x + b.w * inset) / BW, (b.y + b.h * inset) / BH, (b.w * (1 - 2 * inset)) / BW, (b.h * (1 - 2 * inset)) / BH] };
+      const w = Math.max(56, b.w), h = Math.max(56, b.h);
+      const x = Math.min(BW - w, Math.max(0, b.x - (w - b.w) / 2)), y = Math.min(BH - h, Math.max(0, b.y - (h - b.h) / 2));
+      return { word: d.word, r: [x / BW, y / BH, w / BW, h / BH] };
     });
   }
 
@@ -163,8 +223,7 @@
     pic: 'butterfly',
     rounds: ROUNDS,
     onStart() {
-      const ids = Object.keys(LG.SCENES);
-      themes = LG.shuffle(ids).concat(LG.shuffle(ids)).slice(0, ROUNDS);
+      themes = LG.shuffle(Object.keys(LG.SCENES)).slice(0, ROUNDS);
     },
     round(i, ctx) {
       const scene = build(themes[i], OBJECTS[i], DIFFS[i]);
